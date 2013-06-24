@@ -20,8 +20,6 @@ gem "devise-i18n-views", :git => "https://github.com/mcasimir/devise-i18n-views.
 gem "ckeditor"
 gem "carrierwave"
 gem "mini_magick"
-gem "guard-livereload"
-gem "rack-livereload"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
