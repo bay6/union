@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @grade.name
+p
+  strong Description:
+  = @grade.description
+p
+  strong Weights:
+  = @grade.weights
+
+= link_to 'Edit', edit_grade_path(@grade)
+'|
+= link_to 'Back', grades_path

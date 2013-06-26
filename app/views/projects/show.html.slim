@@ -1,0 +1,30 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @project.name
+p
+  strong Website:
+  = @project.website
+p
+  strong Description:
+  = @project.description
+p
+  strong Grade:
+  = @project.grade
+p
+  strong User:
+  = @project.user
+p
+  strong Started at:
+  = @project.started_at
+p
+  strong Finished at:
+  = @project.finished_at
+p
+  strong Status:
+  = @project.status
+
+= link_to 'Edit', edit_project_path(@project)
+'|
+= link_to 'Back', projects_path

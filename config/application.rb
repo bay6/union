@@ -18,10 +18,13 @@ end
 module Union
   class Application < Rails::Application
     {:env=>"development"}
-        config.time_zone = 'Beijing'
+    config.time_zone = 'Beijing'
     config.i18n.default_locale = 'zh-CN'
     config.generators do |g|
       g.fixture_replacement :factory_girl
+      g.stylesheets false
+      g.javascripts false
+      g.helper false
     end
 
     # Settings in config/environments/* take precedence over those specified here.

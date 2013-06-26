@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Project:
+  = @participation.project
+p
+  strong User:
+  = @participation.user
+p
+  strong Role:
+  = @participation.role
+
+= link_to 'Edit', edit_participation_path(@participation)
+'|
+= link_to 'Back', participations_path

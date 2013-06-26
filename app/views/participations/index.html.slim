@@ -1,0 +1,23 @@
+h1 Listing participations
+
+table
+  tr
+    th Project
+    th User
+    th Role
+    th
+    th
+    th
+
+  - @participations.each do |participation|
+    tr
+      td = participation.project
+      td = participation.user
+      td = participation.role
+      td = link_to 'Show', participation
+      td = link_to 'Edit', edit_participation_path(participation)
+      td = link_to 'Destroy', participation, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Participation', new_participation_path
