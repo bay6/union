@@ -39,3 +39,9 @@ zh-CN:
   home:
     index:
       title: "我的主页"
+  grades:
+    index:
+      title: "项目等级"
+  projects:
+    index:
+      title: "项目"

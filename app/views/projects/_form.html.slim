@@ -1,15 +1,13 @@
-= simple_form_for @project, :html => { :class => "form-horizontal"}, :validate => true do |f|
-  .form-inputs
-    = f.input :name
-    = f.input :website
-    = f.association :grade
-    = f.association :user
-    = f.input :started_at
-    = f.input :finished_at
-    = f.input :status
-    = f.input :description, :input_html => {:rows => 12, :class => 'span6'}
-
+= simple_form_for @project, :html => { :class => "form-horizontal" } do |f|
+  = f.input :name
+  = f.input :website
+  = f.input :description
+  = f.input :grade_id
+  = f.input :user_id
+  = f.input :started_at
+  = f.input :finished_at
+  = f.input :status
   .form-actions
-    = f.button :submit, :class => ['btn', 'btn-info']
+    = f.button :submit, :class => 'btn-primary'
     '
-    = link_to t("helpers.links.cancel"), root_path, :class => 'btn'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), projects_path, :class => 'btn'

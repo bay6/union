@@ -1,8 +1,4 @@
-h1 Editing grade
-
-== render 'form'
-
-= link_to 'Show', @grade
-'|
-= link_to 'Back', grades_path
-
+- model_class = Grade
+div class="page-header"
+  h1=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize
+= render :partial => "form"

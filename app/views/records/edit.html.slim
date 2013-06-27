@@ -1,8 +1,4 @@
-h1 Editing record
-
-== render 'form'
-
-= link_to 'Show', @record
-'|
-= link_to 'Back', records_path
-
+- model_class = Record
+div class="page-header"
+  h1=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize
+= render :partial => "form"

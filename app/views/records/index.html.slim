@@ -1,23 +1,27 @@
-h1 Listing records
-
-table
-  tr
-    th Project
-    th User
-    th Category
-    th
-    th
-    th
-
-  - @records.each do |record|
+- model_class = Record
+div class="page-header"
+  h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+table class="table table-striped"
+  thead
     tr
-      td = record.project
-      td = record.user
-      td = record.category
-      td = link_to 'Show', record
-      td = link_to 'Edit', edit_record_path(record)
-      td = link_to 'Destroy', record, :confirm => 'Are you sure?', :method => :delete
+      th= model_class.human_attribute_name(:id)
+      th= model_class.human_attribute_name(:project_id)
+      th= model_class.human_attribute_name(:user_id)
+      th= model_class.human_attribute_name(:category)
+      th= model_class.human_attribute_name(:created_at)
+      th=t '.actions', :default => t("helpers.actions")
+  tbody
+    - @records.each do |record|
+      tr
+        td= link_to record.id, record_path(record)
+        td= record.project_id
+        td= record.user_id
+        td= record.category
+        td=l record.created_at
+        td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_record_path(record), :class => 'btn btn-mini'
+          '
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), record_path(record), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
-br
+= link_to t('.new', :default => t("helpers.links.new")), new_record_path, :class => 'btn btn-primary'
 
-= link_to 'New Record', new_record_path
