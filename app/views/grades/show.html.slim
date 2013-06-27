@@ -1,0 +1,23 @@
+- model_class = Grade
+div class="page-header"
+  h1=t '.title', :default => model_class.model_name.human.titleize
+
+p
+  strong= model_class.human_attribute_name(:name) + ':'
+  br
+  = @grade.name
+p
+  strong= model_class.human_attribute_name(:description) + ':'
+  br
+  = @grade.description
+p
+  strong= model_class.human_attribute_name(:weights) + ':'
+  br
+  = @grade.weights
+
+.form-actions
+  = link_to t('.back', :default => t("helpers.links.back")), grades_path, :class => 'btn'
+  '
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_grade_path(@grade), :class => 'btn'
+  '
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), grade_path(@grade), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

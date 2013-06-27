@@ -18,24 +18,19 @@ html lang="zh"
     /link href="favicon.ico" rel="shortcut icon"
 
   body
-    = render 'common/menu'
+    #wrap
+      #header
+        = render 'common/menu'
 
-    .container-fluid
+      #content.container
+        = bootstrap_flash
+        = yield
 
-      .row-fluid
-        .span3
-          .well.sidebar-nav
-            ul.nav.nav-list
-              li.nav-header Sidebar
-              li= link_to "Link 1", "/path1"
-              li= link_to "Link 2", "/path2"
-              li= link_to "Link 3", "/path3"
-        .span9
-          = bootstrap_flash
-          = yield
-    
-      footer
-        p &copy; Company 2013
+      hr
+      footer.container
+        p.pull-right #{link_to(t('layout.holder'), "https://github.com/bay6")} &copy; #{Date.current.year}
+        p.pull-left.horizontal #{link_to t('layout.opensource'), "https://github.com/bay6"}
+
     /!
       Javascripts
       \==================================================

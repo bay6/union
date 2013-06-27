@@ -1,0 +1,8 @@
+= simple_form_for @grade, :html => { :class => "form-horizontal" } do |f|
+  = f.input :name
+  = f.input :description
+  = f.input :weights
+  .form-actions
+    = f.button :submit, :class => 'btn-primary'
+    '
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), grades_path, :class => 'btn'
