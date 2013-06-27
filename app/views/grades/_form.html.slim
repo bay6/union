@@ -1,10 +1,10 @@
-= simple_form_for(@grade) do |f|
-  = f.error_notification
-
+= simple_form_for @grade, :html => { :class => "form-horizontal"}, :validate => true do |f|
   .form-inputs
     = f.input :name
-    = f.input :description
     = f.input :weights
+    = f.input :description, :input_html => {:rows => 12, :class => 'span6'}
 
   .form-actions
-    = f.button :submit
+    = f.button :submit, :class => ['btn', 'btn-info']
+    '
+    = link_to t("helpers.links.cancel"), root_path, :class => 'btn'
