@@ -38,6 +38,6 @@ p
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), projects_path, :class => 'btn'
   '
-  = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(@project), :class => 'btn'
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(@project), :class => 'btn' if can? :update, @project
   '
-  = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(@project), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(@project), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger' if can? :destroy, @project

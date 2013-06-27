@@ -30,9 +30,9 @@
             td= project.finished_at
             td= project.status
             td
-              = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(project), :class => 'btn btn-mini'
+              = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(project), :class => 'btn btn-mini' if can? :update, project
               '
-              = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(project), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+              = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(project), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger' if can? :destroy, project
 
   .span3
-    = link_to t('.new', :default => t("helpers.links.new")), new_project_path, :class => 'btn btn-primary'
+    = link_to t('.new', :default => t("helpers.links.new")), new_project_path, :class => 'btn btn-primary' if can? :create, Project
