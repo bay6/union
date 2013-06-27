@@ -20,6 +20,7 @@ zh-CN:
         true: "已收藏"
 
   layout:
+    holder: "bey6"
     contact_us: "联系我们"
     opensource: "开源社区"
     search: "搜索"
