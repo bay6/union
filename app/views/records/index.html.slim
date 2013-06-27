@@ -1,0 +1,23 @@
+h1 Listing records
+
+table
+  tr
+    th Project
+    th User
+    th Category
+    th
+    th
+    th
+
+  - @records.each do |record|
+    tr
+      td = record.project
+      td = record.user
+      td = record.category
+      td = link_to 'Show', record
+      td = link_to 'Edit', edit_record_path(record)
+      td = link_to 'Destroy', record, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Record', new_record_path

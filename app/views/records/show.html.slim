@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Project:
+  = @record.project
+p
+  strong User:
+  = @record.user
+p
+  strong Category:
+  = @record.category
+
+= link_to 'Edit', edit_record_path(@record)
+'|
+= link_to 'Back', records_path
