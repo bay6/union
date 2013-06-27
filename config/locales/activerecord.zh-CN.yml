@@ -1,0 +1,40 @@
+zh-CN:
+  activerecord:
+    models:
+      user: "用户"
+      project: "项目"
+      grade: "项目等级"
+      record: "得分记录"
+    attributes:
+      user:
+        login: "登录名"
+        name: "用户名"
+        avatar: "头像"
+        email: "Email"
+        password: "密码"
+        admin: "角色"
+        score: "积分"
+        grant_permission: "权限"
+        password_confirmation: "确认密码"
+        current_password: "当前密码"
+        remember_me: "记住我"
+        created_at: "注册时间"
+        last_sign_in_at: "上次登录时间"
+      project:
+        name: "名称"
+        description: "描述"
+        website: "项目地址"
+        status: "状态"
+        grade: "等级"
+        user: "发起人"
+        started_at: "开始日期"
+        finished_at: "结束日期"
+      grade:
+        name: "名称"
+        description: "描述"
+        weights: "权重"
+      record:
+        project: "项目"
+        user: "用户"
+        category: "类别"
+        created_at: "创建时间"

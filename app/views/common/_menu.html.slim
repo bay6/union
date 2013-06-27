@@ -1,6 +1,6 @@
 .navbar.navbar-fixed-top
   .navbar-inner
-    .container-fluid
+    .container
       a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
         span.icon-bar
         span.icon-bar
@@ -8,11 +8,10 @@
 
       = render 'common/user_nav'
 
-      = link_to t('site_name', default: 'site'), '#', class: 'brand'
+      = link_to t('site_name', default: 'site'), root_path, class: 'brand'
       = render 'common/search_form'
       .container-fluid.nav-collapse
         ul.nav
-          li= link_to "Link 1", "/path1"
-          li= link_to "Link 2", "/path2"
-          li= link_to "Link 3", "/path3"
+          li= link_to "项目", projects_path
+          li= link_to "项目等级", grades_path
 

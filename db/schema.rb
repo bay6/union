@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130624205507) do
+ActiveRecord::Schema.define(:version => 20130627013322) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -29,9 +29,58 @@ ActiveRecord::Schema.define(:version => 20130624205507) do
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
+  create_table "grades", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "weights"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "participations", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.string   "role"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "participations", ["project_id"], :name => "index_participations_on_project_id"
+  add_index "participations", ["user_id"], :name => "index_participations_on_user_id"
+
+  create_table "projects", :force => true do |t|
+    t.string   "name"
+    t.string   "website"
+    t.text     "description"
+    t.integer  "grade_id"
+    t.integer  "user_id"
+    t.date     "started_at"
+    t.date     "finished_at"
+    t.string   "status"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "projects", ["grade_id"], :name => "index_projects_on_grade_id"
+  add_index "projects", ["user_id"], :name => "index_projects_on_user_id"
+
+  create_table "records", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.string   "category"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "records", ["project_id"], :name => "index_records_on_project_id"
+  add_index "records", ["user_id"], :name => "index_records_on_user_id"
+
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "name"
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
+    t.boolean  "admin",                  :default => false
+    t.integer  "score",                  :default => 0
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -40,8 +89,8 @@ ActiveRecord::Schema.define(:version => 20130624205507) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

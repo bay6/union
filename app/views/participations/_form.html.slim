@@ -1,0 +1,8 @@
+= simple_form_for @participation, :html => { :class => "form-horizontal" } do |f|
+  = f.input :project_id
+  = f.input :user_id
+  = f.input :role
+  .form-actions
+    = f.button :submit, :class => 'btn-primary'
+    '
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), participations_path, :class => 'btn'
