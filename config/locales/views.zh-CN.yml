@@ -1,0 +1,41 @@
+zh-CN:
+  flash:
+    actions:
+      create:
+        notice: "追加成功。"
+        alert: "追加失败。"
+      update:
+        notice: "更新成功。"
+      destory:
+        notice: "删除成功。"
+        alert: "删除失败。"
+    users:
+      authorization_success:
+        notice: "授权成功。"
+      authorization_failed:
+        notice: "授权失败。"
+
+  helpers:
+    actions: "操作"
+    links:
+      confirm: "您确定吗？"
+      new: "新建"
+      destroy: "删除"
+      index: "清单"
+      edit: "编辑"
+      show: "显示"
+      back: "后退"
+      cancel: "撤销"
+      detail: "详情"
+      all: "所有"
+      more: "更多..."
+      hyperlink: "链接"
+      grant_permission: "授予权限"
+      add_resource: "追加资源"
+
+  users:
+    show:
+      title: "个人资料"
+  home:
+    index:
+      title: "我的主页"

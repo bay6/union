@@ -1,0 +1,32 @@
+zh-CN:
+  site_name: "工会"
+  date:
+    weekstart: '1'
+    formats:
+      datepicker: 'yyyy-mm-dd'
+      stamp: '%b%d日(%a)'
+      stamp_with_year: '%Y年%b%d日(%a)'
+
+  views:
+    pagination:
+      previous: "前一页"
+      next: "后一页"
+      first: "首页"
+      last: "末页"
+      truncate: "..."
+    follow:
+      state:
+        false: "收藏"
+        true: "已收藏"
+
+  layout:
+    contact_us: "联系我们"
+    opensource: "开源社区"
+    search: "搜索"
+
+  labels:
+    cancel: "取消"
+    close: "关闭"
+
+  unauthorized:
+      default: "你没有权限访问此页面。"
