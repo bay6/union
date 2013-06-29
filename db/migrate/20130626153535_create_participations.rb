@@ -4,6 +4,7 @@ class CreateParticipations < ActiveRecord::Migration
       t.references :project
       t.references :user
       t.string :role
+      t.string :status
 
       t.timestamps
     end

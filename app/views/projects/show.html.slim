@@ -17,11 +17,11 @@ p
 p
   strong= model_class.human_attribute_name(:grade_id) + ':'
   br
-  = @project.grade_id
+  = @project.try(:grade).try(:name)
 p
   strong= model_class.human_attribute_name(:user_id) + ':'
   br
-  = @project.user_id
+  = @project.try(:user).try(:name)
 p
   strong= model_class.human_attribute_name(:started_at) + ':'
   br
