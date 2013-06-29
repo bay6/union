@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20130627013322) do
     t.integer  "project_id"
     t.integer  "user_id"
     t.string   "role"
+    t.string   "status"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
