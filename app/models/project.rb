@@ -6,5 +6,5 @@ class Project < ActiveRecord::Base
   has_many :users, through: :participations
   has_many :participations
 
-  validates :name, :description, :status, :user_id, :grade_id, :presence => true
+  validates :name, :description, :status, :grade_id, :presence => true
 end
