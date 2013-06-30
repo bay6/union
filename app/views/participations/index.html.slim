@@ -20,6 +20,11 @@ table class="table table-striped"
         td= Participation::ROLE[participation.role]
         td= Participation::STATUS[participation.status]
         td=l participation.created_at
+        - if params[:project_id]
+          td= simple_form_for(participation) do |f|
+              = f.input :role, :collection => Participation::ROLE.map {|k, v| [v, k]}, :as => :select, label: false, :input_html => {:class=> 'span1'}
+              td
+                = f.submit '确认', :class => 'btn btn-mini btn-warning'
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_participation_path(participation), :class => 'btn btn-mini' if can? :update, participation
           '

@@ -3,7 +3,7 @@ class ParticipationsController < ApplicationController
   # GET /participations
   # GET /participations.json
   def index
-    @participations = Participation.all
+    @participations = params[:project_id].blank? ? Participation.all : Participation.where(project_id: params[:project_id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -61,7 +61,7 @@ class ParticipationsController < ApplicationController
 
     respond_to do |format|
       if @participation.update_attributes(params[:participation])
-        format.html { redirect_to @participation, notice: 'Participation was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Participation was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
