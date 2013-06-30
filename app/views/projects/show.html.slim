@@ -45,3 +45,6 @@ p 参与者:
   = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(@project), :class => 'btn' if can? :update, @project
   '
   = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(@project), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger' if can? :destroy, @project
+
+= button_to "参与", join_project_path(@project), method: :post
+= button_to "退出", quit_project_path(@project), method: :post

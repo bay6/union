@@ -20,10 +20,7 @@ class Project < ActiveRecord::Base
   validates :name, :description, :status, :presence => true
 
   def create_default_participation
-    Participation.create!(:project_id=> self.id,
-                          :user_id => user_id,
-                          :role => Participation::MEMBER,
-                          :status => Participation::ONGOING
-                         )
+    Participation.create!(:project_id=> id,
+                          :user_id => user_id)
   end
 end

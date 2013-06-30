@@ -20,5 +20,13 @@ class Participation < ActiveRecord::Base
   belongs_to :user
   attr_accessible :role, :status, :project_id, :user_id
 
-  validates :project_id, :user_id, :role, :presence => true
+  validates :project_id, :user_id, :presence => true
+  validates_uniqueness_of :user_id, :scope => [:project_id]
+
+  before_create :set_default_role_and_status
+  def set_default_role_and_status
+    self.role   = MEMBER
+    self.status = ONGOING
+  end
+  private :set_default_role_and_status
 end
