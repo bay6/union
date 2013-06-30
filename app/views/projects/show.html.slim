@@ -15,11 +15,11 @@ p
   br
   = @project.description
 p
-  strong= model_class.human_attribute_name(:grade_id) + ':'
+  strong= model_class.human_attribute_name(:grade) + ':'
   br
   = @project.try(:grade).try(:name)
 p
-  strong= model_class.human_attribute_name(:user_id) + ':'
+  strong= model_class.human_attribute_name(:user) + ':'
   br
   = @project.try(:user).try(:name)
 p
@@ -33,7 +33,11 @@ p
 p
   strong= model_class.human_attribute_name(:status) + ':'
   br
-  = @project.status
+  = Project::STATUS[@project.status]
+
+p 参与者:
+- @project.users.each do |user|
+  = user.name
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), projects_path, :class => 'btn'

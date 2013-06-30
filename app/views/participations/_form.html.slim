@@ -1,7 +1,8 @@
 = simple_form_for @participation, :html => { :class => "form-horizontal" } do |f|
-  = f.input :project_id
-  = f.input :user_id
-  = f.input :role
+  = f.association :project
+  = f.association :user
+  = f.input :role, :collection => Participation::ROLE.map {|k, v| [v, k]}, :as => :select 
+  = f.input :status, :collection => Participation::STATUS.map {|k, v| [v, k]}, :as => :select 
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     '

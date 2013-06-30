@@ -5,23 +5,25 @@ table class="table table-striped"
   thead
     tr
       th= model_class.human_attribute_name(:id)
-      th= model_class.human_attribute_name(:project_id)
-      th= model_class.human_attribute_name(:user_id)
+      th= model_class.human_attribute_name(:project)
+      th= model_class.human_attribute_name(:user)
       th= model_class.human_attribute_name(:role)
+      th= model_class.human_attribute_name(:status)
       th= model_class.human_attribute_name(:created_at)
       th=t '.actions', :default => t("helpers.actions")
   tbody
     - @participations.each do |participation|
       tr
         td= link_to participation.id, participation_path(participation)
-        td= participation.project_id
-        td= participation.user_id
-        td= participation.role
+        td= participation.try(:project).try(:name)
+        td= participation.try(:user).try(:name)
+        td= Participation::ROLE[participation.role]
+        td= Participation::STATUS[participation.status]
         td=l participation.created_at
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_participation_path(participation), :class => 'btn btn-mini' if can? :update, participation
           '
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), participation_path(participation), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger', if can? :destroy, participation
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), participation_path(participation), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger' if can? :destroy, participation
 
--#= link_to t('.new', :default => t("helpers.links.new")), new_participation_path, :class => 'btn btn-primary'
+= link_to t('.new', :default => t("helpers.links.new")), new_participation_path, :class => 'btn btn-primary'
 
