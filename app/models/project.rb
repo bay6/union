@@ -23,4 +23,12 @@ class Project < ActiveRecord::Base
     Participation.create!(:project_id=> id,
                           :user_id => user_id)
   end
+
+  def sponsor
+    try(:user).try(:name)
+  end
+
+  def captain
+    participations.find_by_role(Participation::LEADER).try(:user).try(:name)
+  end
 end

@@ -12,13 +12,20 @@ Union::Application.routes.draw do
     end
   end
 
-  root :to => 'home#index'
-
   get "home/index"
 
   mount Ckeditor::Engine => '/ckeditor'
 
   devise_for :users
+
+  authenticated :user do
+    root to: "home#index"
+  end
+
+  as :user do
+    root :to => 'projects#index'
+    get 'account' => 'registrations#edit', :as => 'account'
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
