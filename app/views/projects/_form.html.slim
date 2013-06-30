@@ -1,12 +1,15 @@
 = simple_form_for @project, :html => { :class => "form-horizontal" } do |f|
   = f.input :name
   = f.input :website
-  = f.input :description
-  = f.association :grade
-  /*= f.input :user_id*/
+  = f.input :description, :input_html => {:rows => 12, :class => 'span6'}
   = f.input :started_at
   = f.input :finished_at
-  = f.input :status
+  - if current_user.admin?
+    = f.association :grade
+    = f.input :status, :collection => Project::STATUS.map {|k, v| [v, k]}, :as => :select 
+  -else
+    = f.input :status, :input_html => {:disabled => true}
+    = f.hidden_field :status, :value => @project.status
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     '

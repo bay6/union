@@ -15,11 +15,11 @@ p
   br
   = @project.description
 p
-  strong= model_class.human_attribute_name(:grade_id) + ':'
+  strong= model_class.human_attribute_name(:grade) + ':'
   br
   = @project.try(:grade).try(:name)
 p
-  strong= model_class.human_attribute_name(:user_id) + ':'
+  strong= model_class.human_attribute_name(:user) + ':'
   br
   = @project.try(:user).try(:name)
 p
@@ -33,7 +33,11 @@ p
 p
   strong= model_class.human_attribute_name(:status) + ':'
   br
-  = @project.status
+  = Project::STATUS[@project.status]
+
+p 参与者:
+- @project.users.each do |user|
+  = user.name
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), projects_path, :class => 'btn'
@@ -41,3 +45,8 @@ p
   = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(@project), :class => 'btn' if can? :update, @project
   '
   = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(@project), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger' if can? :destroy, @project
+  '
+  = link_to '分工', participations_path(project_id: @project), :class => 'btn'
+
+= button_to "参与", join_project_path(@project), method: :post
+= button_to "退出", quit_project_path(@project), method: :post

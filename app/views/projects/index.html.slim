@@ -23,12 +23,12 @@
             td= link_to project.id, project_path(project)
             td= project.name
             td= project.website
-            td= project.description
-            td= project.grade_id
-            td= project.user_id
+            td= truncate project.description
+            td= project.try(:grade).try(:name)
+            td= project.try(:user).try(:name)
             td= project.started_at
             td= project.finished_at
-            td= project.status
+            td= Project::STATUS[project.status]
             td
               = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(project), :class => 'btn btn-mini' if can? :update, project
               '

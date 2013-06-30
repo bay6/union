@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   # GET /projects/new.json
   def new
-    @project = Project.new
+    @project = Project.new(:status => Project::GRADING)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,10 +41,11 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @project = current_user.projects.new(params[:project])
+    @project = Project.new(params[:project])
+    @project.user_id = current_user.id
 
     respond_to do |format|
-      if @project.save
+      if @project.save and @project.create_default_participation
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
       else
@@ -80,5 +81,17 @@ class ProjectsController < ApplicationController
       format.html { redirect_to projects_url }
       format.json { head :no_content }
     end
+  end
+
+  def join
+    @project = Project.find(params[:id])
+    Participation.find_or_create_by_project_id_and_user_id!(@project.id, current_user.id)
+    redirect_to project_path(@project)
+  end
+
+  def quit
+    @project = Project.find(params[:id])
+    @project.participations.where(user_id: current_user.id).destroy_all
+    redirect_to project_path(@project)
   end
 end

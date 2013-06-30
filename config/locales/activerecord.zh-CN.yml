@@ -5,6 +5,7 @@ zh-CN:
       project: "项目"
       grade: "项目等级"
       record: "得分记录"
+      participation: "项目人员关系"
     attributes:
       user:
         login: "登录名"
@@ -37,4 +38,10 @@ zh-CN:
         project: "项目"
         user: "用户"
         category: "类别"
+        created_at: "创建时间"
+      participation:
+        project: "项目"
+        user: "用户"
+        role: "角色"
+        status: "状态"
         created_at: "创建时间"
