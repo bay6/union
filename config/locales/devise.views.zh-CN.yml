@@ -55,6 +55,24 @@ zh-CN:
     unlocks:
       new:
         resend_unlock_instructions: 重发解锁指示
+    views:
+      links:
+        sign_in: 登录
+        sign_up: 注册
+        forget_pass: 忘记密码?
+        resend_confirmation: 没有收到确认指令？
+        resend_unlock: 没有收到解锁指令？
+        omni_auth: 用%{provider}登录
+      registrations:
+        edit:
+          title: 个人资料设置
+          password: 修改密码
+          submit: 修改
+          change_pass_tip: 如果你不想改变,留下空白
+          change_pass_confirm: 需要输入现在的密码确认
+          cancel_account: 删除帐号
+          cancel_account_warning: 删除帐号会删除所有关联的个人资料，并且操作无法恢复
+          cancel_account_confirm: 确认删除帐号吗？
     navigation:
       home: 我的主页
       sign_in: 登录
