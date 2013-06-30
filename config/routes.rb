@@ -1,15 +1,16 @@
 Union::Application.routes.draw do
   resources :records
 
-
   resources :participations
-
 
   resources :grades
 
-
-  resources :projects
-
+  resources :projects do
+    member do
+      post 'join'
+      post 'quit'
+    end
+  end
 
   root :to => 'home#index'
 

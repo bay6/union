@@ -3,17 +3,21 @@ div class="page-header"
   h1=t '.title', :default => model_class.model_name.human.titleize
 
 p
-  strong= model_class.human_attribute_name(:project_id) + ':'
+  strong= model_class.human_attribute_name(:project) + ':'
   br
-  = @participation.project_id
+  = @participation.project.name
 p
-  strong= model_class.human_attribute_name(:user_id) + ':'
+  strong= model_class.human_attribute_name(:user) + ':'
   br
-  = @participation.user_id
+  = @participation.user.name
 p
   strong= model_class.human_attribute_name(:role) + ':'
   br
   = @participation.role
+p
+  strong= model_class.human_attribute_name(:status) + ':'
+  br
+  = @participation.status
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), participations_path, :class => 'btn'
