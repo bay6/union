@@ -1,0 +1,28 @@
+defaults: &defaults
+  adapter: mysql2
+  host: localhost
+  encoding: utf8
+  reconnect: false
+  pool: 5
+  username: root
+  password:
+
+development:
+  <<: *defaults
+  database: union_development
+
+test:
+  <<: *defaults
+  database: union_test
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: test-postgres_production
+  host: localhost
+  pool: 5
+  username: postgres
+  password: postgres
+#production:
+  #<<: *defaults
+  #database: union

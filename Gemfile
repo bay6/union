@@ -1,8 +1,7 @@
-#source 'https://rubygems.org'
-source 'http://ruby.taobao.org'
+source 'https://rubygems.org'
+#source 'http://ruby.taobao.org'
 
 gem 'rails', '3.2.13'
-gem 'mysql2'
 gem "slim-rails"
 gem "kaminari"
 gem "less-rails"
@@ -18,6 +17,7 @@ gem "devise-i18n-views", :git => "https://github.com/mcasimir/devise-i18n-views.
 gem "ckeditor"
 gem "carrierwave"
 gem "mini_magick"
+gem 'omniauth-github'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -29,8 +29,9 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'mysql2'
   gem "thin"
-  gem 'pry'
+  gem 'pry-debugger'
   gem "awesome_print"
   gem "quiet_assets"
   gem "better_errors"
@@ -50,6 +51,7 @@ group :test do
 end
 
 group :production do
+  gem 'pg'
   gem 'exception_notification'
   gem 'unicorn', :platforms => :ruby
 end
