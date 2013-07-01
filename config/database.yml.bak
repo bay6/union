@@ -18,3 +18,13 @@ test:
 production:
   <<: *defaults
   database: union
+
+# for heroku
+#production:
+  #adapter: postgresql
+  #encoding: unicode
+  #database: test-postgres_production
+  #host: localhost
+  #pool: 5
+  #username: postgres
+  #password: postgres

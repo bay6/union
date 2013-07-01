@@ -94,4 +94,11 @@ class ProjectsController < ApplicationController
     @project.participations.where(user_id: current_user.id).destroy_all
     redirect_to project_path(@project)
   end
+
+  def finish
+    @project = Project.find(params[:id])
+    @projects = @project.participations.where(user_id: current_user.id)
+    @projects.each {|p| p.update_attributes(:status => Participation::FINISHED) }
+    redirect_to project_path(@project)
+  end
 end

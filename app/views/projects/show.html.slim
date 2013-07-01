@@ -31,10 +31,17 @@
             i.icon-remove
             '
             = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(@project), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
-      - if joined?(current_user.id, @project.id)
-        = button_to "退出", quit_project_path(@project), method: :post, class: "btn btn-warning"
-      - else
-        = button_to "参与", join_project_path(@project), method: :post, class: "btn btn-success"
+        - if can? :manage, @project
+          li
+            i.icon-edit
+            '
+            = link_to "分工", participations_path(:project_id => @project.id)
+      - if current_user and current_user.unfinished_project?(@project.id)
+        - if joined?(current_user.id, @project.id)
+          = button_to "退出", quit_project_path(@project), method: :post, class: "btn btn-warning"
+          = button_to "结束", finish_project_path(@project), method: :post, class: "btn btn-danger", :data => { :confirm => "Are you sure?" }
+        - else
+          = button_to "参与", join_project_path(@project), method: :post, class: "btn btn-success"
       hr
       p
         span.label.label-important 发起人
@@ -51,5 +58,11 @@
           |#{@project.users.size}
       - @project.users.each do |user|
         p= user.name
-
+      hr
+      h4
+        |已完成的成员
+        span.label.amount
+          |#{@project.completers.size}
+      - @project.completers.each do |user|
+        p= user.name
 

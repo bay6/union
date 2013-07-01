@@ -29,4 +29,26 @@ class Participation < ActiveRecord::Base
     self.status = ONGOING
   end
   private :set_default_role_and_status
+
+  before_update :create_record_when_finished
+  def create_record_when_finished
+    if self.changed? && self.changed.include?('status') && finished?
+      response = RestClient.get "https://api.github.com/repos/#{user.name}/#{project.name}/contributors"
+      contributors = JSON.parse response.body
+      contributions = contributors.select {|c| c['login'] == user.name }.last['contributions']
+      Record.create!(:project_id => project_id,
+                     :project_name => project.name,
+                     :user_id => user_id,
+                     :user_name => user.name,
+                     :weights => project.try(:grade).try(:weights),
+                     :value => project.try(:grade).try(:weights) * contributions,
+                     :category => "project"
+                    )
+    end
+  end
+  private :create_record_when_finished
+
+  def finished?
+    status == FINISHED
+  end
 end

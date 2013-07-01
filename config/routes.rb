@@ -9,6 +9,7 @@ Union::Application.routes.draw do
     member do
       post 'join'
       post 'quit'
+      post 'finish'
     end
   end
 
