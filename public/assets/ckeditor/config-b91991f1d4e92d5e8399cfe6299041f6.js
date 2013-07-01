@@ -1,0 +1,1 @@
+CKEDITOR.config.language="zh-CN",CKEDITOR.config.toolbarGroups=[{name:"basicstyles",groups:["basicstyles","cleanup"]},{name:"paragraph",groups:["list","indent","blocks","align"]},{name:"mode"},{name:"undo"},{name:"tools"},"/",{name:"styles"},{name:"colors"},{name:"links"},{name:"insert"},{name:"others"}];
