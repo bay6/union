@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20130630145907) do
-=======
 ActiveRecord::Schema.define(:version => 20130701013644) do
->>>>>>> 99b923004c64f8b071d3f2bd5e3f960a39051f0b
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
