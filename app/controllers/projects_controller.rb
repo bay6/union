@@ -94,4 +94,8 @@ class ProjectsController < ApplicationController
     @project.participations.where(user_id: current_user.id).destroy_all
     redirect_to project_path(@project)
   end
+
+  def finish
+    
+  end
 end

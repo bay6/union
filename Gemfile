@@ -18,6 +18,8 @@ gem "ckeditor"
 gem "carrierwave"
 gem "mini_magick"
 gem 'omniauth-github'
+gem 'octokit'
+gem 'rest-client'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
