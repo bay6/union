@@ -18,6 +18,7 @@ gem "devise-i18n-views", :git => "https://github.com/mcasimir/devise-i18n-views.
 gem "ckeditor"
 gem "carrierwave"
 gem "mini_magick"
+gem 'omniauth-github'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -30,7 +31,7 @@ end
 
 group :development, :test do
   gem "thin"
-  gem 'pry'
+  gem 'pry-debugger'
   gem "awesome_print"
   gem "quiet_assets"
   gem "better_errors"
