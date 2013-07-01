@@ -36,7 +36,7 @@
             i.icon-edit
             '
             = link_to "分工", participations_path(:project_id => @project.id)
-      - if current_user
+      - if current_user and current_user.unfinished_project?(@project.id)
         - if joined?(current_user.id, @project.id)
           = button_to "退出", quit_project_path(@project), method: :post, class: "btn btn-warning"
           = button_to "结束", finish_project_path(@project), method: :post, class: "btn btn-danger", :data => { :confirm => "Are you sure?" }

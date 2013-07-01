@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   has_many :projects, through: :participations
   has_many :records, dependent: :destroy
 
+  validates :name, uniqueness: true
+
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
@@ -45,5 +47,7 @@ class User < ActiveRecord::Base
     end
   end
 
-
+  def unfinished_project?(project_id)
+    Participation.where(user_id: id, project_id: project_id).last.status != Participation::FINISHED
+  end
 end
