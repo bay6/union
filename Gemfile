@@ -2,7 +2,6 @@
 source 'http://ruby.taobao.org'
 
 gem 'rails', '3.2.13'
-gem 'mysql2'
 gem "slim-rails"
 gem "kaminari"
 gem "less-rails"
@@ -30,6 +29,7 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'mysql2'
   gem "thin"
   gem 'pry-debugger'
   gem "awesome_print"
@@ -51,6 +51,7 @@ group :test do
 end
 
 group :production do
+  gem 'pg'
   gem 'exception_notification'
   gem 'unicorn', :platforms => :ruby
 end
