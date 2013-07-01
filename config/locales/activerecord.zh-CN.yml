@@ -37,6 +37,8 @@ zh-CN:
       record:
         project: "项目"
         user: "用户"
+        weights: "权重"
+        value: "得分"
         category: "类别"
         created_at: "创建时间"
       participation:

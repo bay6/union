@@ -16,6 +16,7 @@ class Project < ActiveRecord::Base
   belongs_to :user
   has_many :participations
   has_many :users, through: :participations
+  has_many :completers, through: :participations, source: :user, conditions: ["participations.status = ?", Participation::FINISHED]
 
   validates :name, :description, :status, :presence => true
 
