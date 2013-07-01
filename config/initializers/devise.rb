@@ -244,8 +244,8 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = "/my_engine/users/auth"
   if Rails.env.production?
-    config.omniauth :github, '2ff9a048b45c5a22f5de', 'a6c18f5b19e6aa6cffc5ccf89191afaa24d08f45'#ENV['TWITTER_KEY'], ENV['TWITTER_SECRET']
+    config.omniauth :github, '7faa16c462171a531cd8', '33f2e6a51e4ff1040a14aad29dbf57f9bf4c16af'#ENV['TWITTER_KEY'], ENV['TWITTER_SECRET']
   elsif Rails.env.development?
-    config.omniauth :github, '6d7b4f715d4b81baedd3', 'c01e5c3688080c31cbc0205b87ca48eb98ae1d85'#ENV['TWITTER_KEY'], ENV['TWITTER_SECRET']
+    config.omniauth :github, 'aba3f4a733d0f57f8c54', 'eab0b789e692af442db20f6a7a2ee2ed2b9d49f2'#ENV['TWITTER_KEY'], ENV['TWITTER_SECRET']
   end
 end
