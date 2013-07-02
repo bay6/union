@@ -6,6 +6,7 @@ ul.nav.pills.pull-right
         span.caret
 
       ul.dropdown-menu
+        li= link_to t('devise.navigation.home'), user_path(current_user)
         li= link_to t('devise.navigation.edit_info'), account_path
         li= link_to t('devise.navigation.sign_out'), destroy_user_session_path, method: :delete
 

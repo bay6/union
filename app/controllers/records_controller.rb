@@ -3,7 +3,8 @@ class RecordsController < ApplicationController
   # GET /records
   # GET /records.json
   def index
-    @records = Record.all
+    @records = params[:user_id].blank? ? Record : Record.where(user_id: params[:user_id]).order("created_at DESC")
+    @records = @records.page params[:page]
 
     respond_to do |format|
       format.html # index.html.erb
