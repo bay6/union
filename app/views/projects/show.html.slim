@@ -57,12 +57,12 @@
         span.label.amount
           |#{@project.users.size}
       - @project.users.each do |user|
-        p= user.name
+        p=link_to user.name, user
       hr
       h4
         |已完成的成员
         span.label.amount
           |#{@project.completers.size}
       - @project.completers.each do |user|
-        p= user.name
+        p=link_to user.name, user
 
