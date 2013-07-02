@@ -21,4 +21,4 @@
       ul.user-info.unstyled.muted
         li = "姓名: #{@user.name}"
         li = "邮箱: #{@user.email}"
-        li = "积分: #{@user.score}"
+        li 积分: #{link_to @user.score, records_path(user_id: @user.id)}

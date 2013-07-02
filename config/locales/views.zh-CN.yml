@@ -45,3 +45,9 @@ zh-CN:
   projects:
     index:
       title: "项目"
+  records:
+    index:
+      title: "得分记录"
+  participations:
+    index:
+      title: "参与项目人员"

@@ -3,7 +3,8 @@ class ParticipationsController < ApplicationController
   # GET /participations
   # GET /participations.json
   def index
-    @participations = params[:project_id].blank? ? Participation.all : Participation.where(project_id: params[:project_id])
+    @participations = params[:project_id].blank? ? Participation : Participation.where(project_id: params[:project_id]).order("created_at DESC")
+    @participations = @participations.page params[:page]
 
     respond_to do |format|
       format.html # index.html.erb
