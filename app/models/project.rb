@@ -20,6 +20,19 @@ class Project < ActiveRecord::Base
 
   validates :name, :description, :status, :presence => true
 
+  after_save :finish_participation
+  def finish_participation
+    if self.changed? && self.changed.include?('status') && finished?
+      participations.each do |p|
+        if p.unfinished?
+          p.status = Participation::FINISHED
+          p.save!
+        end
+      end
+    end
+  end
+  private :finish_participation
+
   def create_default_participation
     Participation.create!(:project_id=> id,
                           :user_id => user_id)
@@ -31,5 +44,9 @@ class Project < ActiveRecord::Base
 
   def captain
     participations.find_by_role(Participation::LEADER).try(:user).try(:name)
+  end
+
+  def finished?
+    status == FINISHED
   end
 end
