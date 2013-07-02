@@ -1,0 +1,24 @@
+.row
+  .span9
+    h2 正进行中的项目
+    .row-fluid
+      - @user.ongoing_projects.each do |project|
+        .span4
+          h3= link_to project.name, project
+          p= project.description
+    hr
+    h2 已完成的项目
+    .row-fluid
+      - @user.finished_projects.each do |project|
+        .span4
+          h3= link_to project.name, project
+          p= project.description
+  .span3
+    = link_to "新建项目", new_project_path, :class => 'btn btn-primary' if can? :create, Project
+    hr
+    .well
+      p 个人信息
+      ul.user-info.unstyled.muted
+        li = "姓名: #{@user.name}"
+        li = "邮箱: #{@user.email}"
+        li = "积分: #{@user.score}"

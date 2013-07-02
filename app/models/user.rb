@@ -12,8 +12,10 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   has_many :participations
-  has_many :projects, through: :participations
   has_many :records, dependent: :destroy
+  has_many :projects, through: :participations
+  has_many :finished_projects, through: :participations, source: :project, conditions: ["participations.status = ?", Participation::FINISHED]
+  has_many :ongoing_projects, through: :participations, source: :project, conditions: ["participations.status = ?", Participation::ONGOING]
 
   validates :name, uniqueness: true
 
