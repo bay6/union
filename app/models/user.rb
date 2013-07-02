@@ -48,6 +48,6 @@ class User < ActiveRecord::Base
   end
 
   def unfinished_project?(project_id)
-    Participation.where(user_id: id, project_id: project_id).last.status != Participation::FINISHED
+    Participation.where(user_id: id, project_id: project_id).last.try(:status) != Participation::FINISHED
   end
 end
