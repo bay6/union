@@ -52,4 +52,14 @@ class User < ActiveRecord::Base
   def unfinished_project?(project_id)
     Participation.where(user_id: id, project_id: project_id).last.try(:status) != Participation::FINISHED
   end
+
+  # create record and update score by commits everyday
+  def update_score_by_commits
+    self.ongoing_projects.each do |project|
+      user_and_project = project.website.split('/').last(2).join('/')
+      response = RestClient.get "https://api.github.com/repos/#{user_and_project}/commits?author=#{name}"
+      commits = JSON.parse response.body
+      binding.pry
+    end
+  end
 end
