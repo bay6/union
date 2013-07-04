@@ -33,13 +33,11 @@ class Participation < ActiveRecord::Base
   before_update :create_record_when_finished
   def create_record_when_finished
     begin
-      # "user/repo"
-      user_and_project = project.website.split('/').last(2).join('/')
+      user_name, project_name = project.website.split('/').last(2)
       if self.changed? && self.changed.include?('status') && finished?
-        #response = RestClient.get "https://api.github.com/repos/#{user.name}/#{project.name}/contributors"
-        response = RestClient.get "https://api.github.com/repos/#{user_and_project}/contributors"
-        contributors = JSON.parse response.body
-        contributions = contributors.select {|c| c['login'] == user.name }.last['contributions']
+        @client = Octokit::Client.new(:login => "ken0", :password => "password9")
+        contributors = @client.contributors("#{user_name}/#{project_name}", true)
+        contributions = contributors.select {|c| c.login == user.name }.last.contributions
         Record.create!(:project_id => project_id,
                        :project_name => project.name,
                        :user_id => user_id,
