@@ -56,11 +56,20 @@ class User < ActiveRecord::Base
   # create record and update score by commits everyday
   def update_score_by_commits
     self.ongoing_projects.each do |project|
-      user_and_project = project.website.split('/').last(2).join('/')
-      response = RestClient.get "https://api.github.com/repos/#{user_and_project}/commits?author=#{name}"
-      commits = JSON.parse response.body
-      commits.select {|c| c['commit']['author']['date'].to_time.between?(Time.now.beginning_of_day, Time.now.end_of_day) }
-      commits_count = commits.size
+      user_name, project_name = project.website.split('/').last(2)
+      @client = Octokit::Client.new(:login => "ken0", :password => "password9")
+
+      all_commits = []
+      commits = Array.new(100)
+      last_commit = @client.commits_on("#{user_name}/#{project_name}", Date.yesterday.to_s).first
+      return if last_commit.blank?
+      begin
+        commits = @client.commits_on("#{user_name}/#{project_name}", Date.yesterday.to_s, 'master', {per_page: 100, sha: last_commit.sha}).select {|c| c.author.login == name}
+        last_commit = commits.last
+        all_commits += commits
+      end until commits.count < 100
+      commits_count = all_commits.size
+      return if commits_count == 0
       Record.create!(:project_id => project.id,
                      :project_name => project.name,
                      :user_id => id,
