@@ -59,7 +59,16 @@ class User < ActiveRecord::Base
       user_and_project = project.website.split('/').last(2).join('/')
       response = RestClient.get "https://api.github.com/repos/#{user_and_project}/commits?author=#{name}"
       commits = JSON.parse response.body
-      binding.pry
+      commits.select {|c| c['commit']['author']['date'].to_time.between?(Time.now.beginning_of_day, Time.now.end_of_day) }
+      commits_count = commits.size
+      Record.create!(:project_id => project.id,
+                     :project_name => project.name,
+                     :user_id => id,
+                     :user_name => name,
+                     :weights => project.try(:grade).try(:weights),
+                     :value => project.try(:grade).try(:weights) * commits_count,
+                     :category => "project"
+                    )
     end
   end
 end
