@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
                      :user_name => name,
                      :weights => project.try(:grade).try(:weights),
                      :value => project.try(:grade).try(:weights) * commits_count,
-                     :category => "project"
+                     :category => "commit"
                     )
     end
   end
