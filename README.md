@@ -11,7 +11,13 @@ http://gunion.herokuapp.com<br/>
 
 ###项目进展
 
-7/14/2013 alpha 版本release<br/>
+7/14/2013 Alpha 版本release<br/>
+
+7/8/2013 强行发布pre alpha 
+
+7/4/2013 核心开发团队，进行小迭代
+  1. 部署vps
+  2. 寻找突破口，制作可以运行的工会系统
 
 从bay6出发，统计bay6的所有项目 ＝> 可以给项目分级（此步骤可省略，默认都是一级就好）＝>扫瞄bay6项目的commit，分到人头上，按时间一分，就是commit
 
