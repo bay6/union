@@ -1,3 +1,9 @@
+### start server
+
+```ruby
+bundle exec unicorn_rails -c config/unicorn.rb -D -E production
+```
+
 ### 相关的考虑
 
 当然，成员还要有经验值，工会有总经验值，代表工会成长情况，经验值反正要调整，有个积分就可以，所以，两个页面，1个，成员list，有任务完成情况，成员状态（新人，初级，高级），参与任务， 2. 项目list，项目名，项目状态，参与成员。当然，成员要可以登录了
