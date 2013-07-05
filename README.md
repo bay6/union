@@ -6,8 +6,9 @@ union
 
 ###演示地址
 
-http://gunion.herokuapp.com<br/>
+heroku: http://gunion.herokuapp.com<br/>
 
+vps: http://198.199.86.44:8080 <br/>
 
 ###项目进展
 
