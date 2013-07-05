@@ -1,5 +1,7 @@
 #encoding:utf-8
 class Participation < ActiveRecord::Base
+  extend OctokitExtention
+
   ONGOING  = 'ongoing'
   FINISHED = 'finished'
 
@@ -23,6 +25,8 @@ class Participation < ActiveRecord::Base
   validates :project_id, :user_id, :presence => true
   validates_uniqueness_of :user_id, :scope => [:project_id]
 
+
+
   before_create :set_default_role_and_status
   def set_default_role_and_status
     self.role   = MEMBER
@@ -35,7 +39,7 @@ class Participation < ActiveRecord::Base
     begin
       user_name, project_name = project.website.split('/').last(2)
       if self.changed? && self.changed.include?('status') && finished?
-        @client = Octokit::Client.new(:login => "ken0", :password => "password9")
+        @client = authenticated_api
         contributors = @client.contributors("#{user_name}/#{project_name}", true)
         contributions = contributors.select {|c| c.login == user.name }.last.contributions
         Record.create!(:project_id => project_id,

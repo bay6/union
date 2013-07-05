@@ -34,6 +34,7 @@ group :development, :test do
   gem 'mysql2'
   gem "thin"
   gem 'pry-debugger'
+  gem 'pry-rails'
   gem "awesome_print"
   gem "quiet_assets"
   gem "better_errors"
