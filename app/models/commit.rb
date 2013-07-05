@@ -5,11 +5,11 @@ class Commit < ActiveRecord::Base
   class << self
     #also would like a average grow
     def month_exp
-      where('commit_date > :month', month: 30.days.ago).count.to_s
+      where('commit_date >= :month', month: Date.today.at_beginning_of_month).count.to_s
     end
 
     def week_exp
-      where('commit_date > :week', week: 7.days.ago).count.to_s
+      where('commit_date >= :week', week: Date.today.at_beginning_of_week).count.to_s
     end
 
     def all_exp

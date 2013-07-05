@@ -76,8 +76,16 @@ class User < ActiveRecord::Base
                      :user_name => name,
                      :weights => project.try(:grade).try(:weights),
                      :value => project.try(:grade).try(:weights) * commits_count,
-                     :category => "project"
+                     :category => "commit"
                     )
     end
+  end
+
+  def month_exp
+    @month_exp ||= records.where('created_at >= :month', month: Date.today.at_beginning_of_month).sum(&:value)
+  end
+
+  def week_exp
+    @week_exp ||= records.where('created_at >= :week', week: Date.today.at_beginning_of_week).sum(&:value)
   end
 end
