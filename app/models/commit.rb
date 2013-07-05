@@ -2,6 +2,21 @@ class Commit < ActiveRecord::Base
   attr_accessible :author_date, :author_email, :author_name, :commit_date, :committer_email, :committer_name, :html_url, :repository_id, :sha, :repository
   belongs_to :repository
 
+  class << self
+    #also would like a average grow
+    def month_exp
+      where('commit_date > :month', month: 30.days.ago).count.to_s
+    end
+
+    def week_exp
+      where('commit_date > :week', week: 7.days.ago).count.to_s
+    end
+
+    def all_exp
+      count.to_s
+    end
+  end
+
   def self.get_commit_from repo
     @client = Octokit::Client.new(:login => "ken0", :password => "password9")
     all_commits = []

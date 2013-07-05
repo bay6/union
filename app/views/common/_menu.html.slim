@@ -16,4 +16,6 @@
           li= link_to "项目等级", grades_path
           li= link_to "参与关系", participations_path
           li= link_to "得分记录", records_path
+          li= '工会总成长值:' + Commit.all_exp + '本周成长:' + Commit.week_exp
+          li= link_to '工会成长情况'
 
