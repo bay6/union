@@ -2,6 +2,8 @@ class Commit < ActiveRecord::Base
   attr_accessible :author_date, :author_email, :author_name, :commit_date, :committer_email, :committer_name, :html_url, :repository_id, :sha, :repository
   belongs_to :repository
 
+  extend OctokitExtention
+
   class << self
     #also would like a average grow
     def month_exp
@@ -18,7 +20,7 @@ class Commit < ActiveRecord::Base
   end
 
   def self.get_commit_from repo
-    @client = Octokit::Client.new(:login => "ken0", :password => "password9")
+    @client = authenticated_api 
     all_commits = []
     commits = Array.new(100)
     last_commit =  @client.commits("#{repo.owner.login}/#{repo.name}").first

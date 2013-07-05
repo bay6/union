@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  extend OctokitExtention
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -57,7 +58,7 @@ class User < ActiveRecord::Base
   def update_score_by_commits
     self.ongoing_projects.each do |project|
       user_name, project_name = project.website.split('/').last(2)
-      @client = Octokit::Client.new(:login => "ken0", :password => "password9")
+      @client = authenticated_api
 
       all_commits = []
       commits = Array.new(100)
