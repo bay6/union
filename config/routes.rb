@@ -1,4 +1,7 @@
 Union::Application.routes.draw do
+  resources :commits
+
+
   resources :repositories
 
 

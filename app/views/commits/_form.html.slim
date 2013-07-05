@@ -1,0 +1,16 @@
+= simple_form_for(@commit) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :commit_date
+    = f.input :committer_email
+    = f.input :committer_name
+    = f.input :html_url
+    = f.input :repository_id
+    = f.input :sha
+    = f.input :author_date
+    = f.input :author_name
+    = f.input :author_email
+
+  .form-actions
+    = f.button :submit
