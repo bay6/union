@@ -20,6 +20,7 @@ Union::Application.routes.draw do
   end
 
   get "home/index"
+  get :union_report, to: 'home#union_report', as: 'union'
 
   mount Ckeditor::Engine => '/ckeditor'
 
