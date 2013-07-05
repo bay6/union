@@ -6,6 +6,9 @@ en:
       confirmed: "Your account was successfully confirmed. You are now signed in."
       send_instructions: "You will receive an email with instructions about how to confirm your account in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions about how to confirm your account in a few minutes."
+    omniauth_callbacks:
+      user:
+        inactive_signed_up: 'Failed to login via github, Check your github email setting'
     failure:
       already_authenticated: "You are already signed in."
       inactive: "Your account was not activated yet."

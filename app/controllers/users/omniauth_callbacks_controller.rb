@@ -8,6 +8,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       set_flash_message(:notice, :success, :kind => "Github") if is_navigational_format?
     else
       session["devise.github_data"] = request.env["omniauth.auth"]
+      set_flash_message :notice, :inactive_signed_up, :reason => "Please check your github account, make sure you have email setup"
       redirect_to new_user_registration_url
     end
   end
