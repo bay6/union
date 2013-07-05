@@ -46,6 +46,7 @@ class Participation < ActiveRecord::Base
                        :value => project.try(:grade).try(:weights) * contributions,
                        :category => "project"
                       )
+        create_record_today_when_finished_by_commits
       end
     rescue => err
       #todo 异常处理(没有该github账户和项目)
@@ -54,6 +55,31 @@ class Participation < ActiveRecord::Base
     end
   end
   private :create_record_when_finished
+
+  def create_record_today_when_finished_by_commits
+    user_name, project_name = project.website.split('/').last(2)
+    @client = Octokit::Client.new(:login => "ken0", :password => "password9")
+
+    all_commits = []
+    commits = Array.new(100)
+    last_commit = @client.commits_on("#{user_name}/#{project_name}", Date.today.to_s).first
+    return if last_commit.blank?
+    begin
+      commits = @client.commits_on("#{user_name}/#{project_name}", Date.today.to_s, 'master', {per_page: 100, sha: last_commit.sha}).select {|c| c.author.login == user.name}
+      last_commit = commits.last
+      all_commits += commits
+    end until commits.count < 100
+    commits_count = all_commits.size
+    return if commits_count == 0
+    Record.create!(:project_id => project_id,
+                   :project_name => project.name,
+                   :user_id => user_id,
+                   :user_name => user.name,
+                   :weights => project.try(:grade).try(:weights),
+                   :value => project.try(:grade).try(:weights) * commits_count,
+                   :category => "commit"
+                  )
+  end
 
   def finished?
     status == FINISHED
