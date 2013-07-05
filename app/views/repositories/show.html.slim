@@ -1,0 +1,24 @@
+p#notice = notice
+
+p
+  strong Avatar url:
+  = @repository.avatar_url
+p
+  strong Description:
+  = @repository.description
+p
+  strong Html url:
+  = @repository.html_url
+p
+  strong Name:
+  = @repository.name
+p
+  strong Starred url:
+  = @repository.starred_url
+p
+  strong Uid:
+  = @repository.uid
+
+= link_to 'Edit', edit_repository_path(@repository)
+'|
+= link_to 'Back', repositories_path

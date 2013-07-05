@@ -1,0 +1,13 @@
+= simple_form_for(@repository) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :avatar_url
+    = f.input :description
+    = f.input :html_url
+    = f.input :name
+    = f.input :starred_url
+    = f.input :uid
+
+  .form-actions
+    = f.button :submit

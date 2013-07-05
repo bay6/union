@@ -1,0 +1,29 @@
+h1 Listing repositories
+
+table
+  tr
+    th Avatar url
+    th Description
+    th Html url
+    th Name
+    th Starred url
+    th Uid
+    th
+    th
+    th
+
+  - @repositories.each do |repository|
+    tr
+      td = repository.avatar_url
+      td = repository.description
+      td = repository.html_url
+      td = repository.name
+      td = repository.starred_url
+      td = repository.uid
+      td = link_to 'Show', repository
+      td = link_to 'Edit', edit_repository_path(repository)
+      td = link_to 'Destroy', repository, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Repository', new_repository_path
