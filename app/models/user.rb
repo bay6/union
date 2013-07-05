@@ -80,4 +80,12 @@ class User < ActiveRecord::Base
                     )
     end
   end
+
+  def month_exp
+    @month_exp ||= records.where('created_at >= :month', month: Date.today.at_beginning_of_month).sum(&:value)
+  end
+
+  def week_exp
+    @week_exp ||= records.where('created_at >= :week', week: Date.today.at_beginning_of_week).sum(&:value)
+  end
 end

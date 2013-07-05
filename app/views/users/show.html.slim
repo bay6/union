@@ -21,4 +21,9 @@
       ul.user-info.unstyled.muted
         li = "姓名: #{@user.name}"
         li = "邮箱: #{@user.email}"
-        li 积分: #{link_to @user.score, records_path(user_id: @user.id)}
+    .well
+      p 个人成长情况
+      ul.user-info.unstyled.muted
+        li 总成长值: #{link_to @user.score, records_path(user_id: @user.id)}
+        li = "本月成长值: #{@user.month_exp}"
+        li = "本周成长值: #{@user.week_exp}"
