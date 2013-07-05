@@ -1,6 +1,8 @@
-### start server
+### start & stop server
 
 ```ruby
+ps aux | grep unicorn | grep -v grep | awk '{print $2}' | xargs kill -9
+
 bundle exec unicorn_rails -c config/unicorn.rb -D -E production
 ```
 
