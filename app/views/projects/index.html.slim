@@ -17,18 +17,19 @@ table class="table table-striped"
       th=t '.actions', :default => t("helpers.actions")
   tbody
     - @projects.each do |project|
-      tr
-        td= link_to project.id, project_path(project)
-        td= project.name
-        td= project.website
-        td= truncate project.description
-        td= project.try(:grade).try(:name)
-        td= project.try(:user).try(:name)
-        td= project.started_at
-        td= project.finished_at
-        td= Project::STATUS[project.status]
-        td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(project), :class => 'btn btn-mini' if can? :update, project
-          '
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(project), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger' if can? :destroy, project
+      - if ongoing?(project.id)
+        tr
+          td= link_to project.id, project_path(project)
+          td= project.name
+          td= project.website
+          td= truncate project.description
+          td= project.try(:grade).try(:name)
+          td= project.try(:user).try(:name)
+          td= project.started_at
+          td= project.finished_at
+          td= Project::STATUS[project.status]
+          td
+            = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(project), :class => 'btn btn-mini' if can? :update, project
+            '
+            = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(project), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger' if can? :destroy, project
 

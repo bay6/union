@@ -39,7 +39,7 @@ class Participation < ActiveRecord::Base
     begin
       user_name, project_name = project.website.split('/').last(2)
       if self.changed? && self.changed.include?('status') && finished?
-        @client = authenticated_api
+        @client = User.authenticated_api
         contributors = @client.contributors("#{user_name}/#{project_name}", true)
         contributions = contributors.select {|c| c.login == user.name }.last.contributions
         Record.create!(:project_id => project_id,
@@ -62,7 +62,7 @@ class Participation < ActiveRecord::Base
 
   def create_record_today_when_finished_by_commits
     user_name, project_name = project.website.split('/').last(2)
-    @client = Octokit::Client.new(:login => "ken0", :password => "password9")
+    @client = User.authenticated_api
 
     all_commits = []
     commits = Array.new(100)
