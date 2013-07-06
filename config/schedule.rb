@@ -18,3 +18,10 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+set :output, 'log/cron.log'
+set :rbenv_version, ENV['RBENV_VERSION'] || "jruby-1.6.7.2"
+set :job_template, "env RBENV_VERSION=#{rbenv_version} bash -l -c ':job'"
+
+every 1.day, :at => '9:00 am' do
+  runner "User.update_all_scores"
+end
