@@ -13,6 +13,4 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, alert: I18n.t("unauthorized.default")
   end
 
-  def ongoing?
-  end
 end
