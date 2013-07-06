@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.where("status = 'ongoing'")
+    @projects = Project.where(status: Project::ONGOING)
 
     respond_to do |format|
       format.html # index.html.erb
