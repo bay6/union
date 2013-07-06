@@ -1,9 +1,17 @@
 class ProjectsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:ongoing]
   # GET /projects
   # GET /projects.json
   def index
     @projects = Project.all
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @projects }
+    end
+  end
+
+  def ongoing
+    @projects = Project.where(status: Project::ONGOING)
 
     respond_to do |format|
       format.html # index.html.erb

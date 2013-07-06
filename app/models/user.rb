@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   def update_score_by_commits
     self.ongoing_projects.each do |project|
       user_name, project_name = project.website.split('/').last(2)
-      @client = authenticated_api
+      @client = User.authenticated_api
 
       all_commits = []
       commits = Array.new(100)

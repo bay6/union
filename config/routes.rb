@@ -21,21 +21,22 @@ Union::Application.routes.draw do
 
   get "home/index"
   get :union_report, to: 'home#union_report', as: 'union'
+  get 'ongoing', to: 'projects#ongoing', as: 'ongoing'
 
   mount Ckeditor::Engine => '/ckeditor'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
-  authenticated :user do
-    root to: "home#index"
-  end
-
   as :user do
-    root :to => 'projects#index'
+    root :to => 'projects#ongoing'
     get 'account' => 'registrations#edit', :as => 'account'
   end
 
   get "/users" => "users#index", as: "users"
   get "/user/:id/edit" => "users#edit", as: "edit_user"
   resources :users, :path => '', :only => [:show, :update]
+
+  # authenticated :user do
+  #   root to: "home#index"
+  # end
 end
