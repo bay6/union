@@ -8,7 +8,8 @@ table class="table table-striped"
       th= model_class.human_attribute_name(:name)
       th= model_class.human_attribute_name(:description)
       th= model_class.human_attribute_name(:weights)
-      th=t '.actions', :default => t("helpers.actions")
+      - if can? :update, Grade
+        th=t '.actions', :default => t("helpers.actions")
   tbody
     - @grades.each do |grade|
       tr
@@ -16,9 +17,10 @@ table class="table table-striped"
         td= grade.name
         td= grade.description
         td= grade.weights
-        td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_grade_path(grade), :class => 'btn btn-mini' if can? :update, grade
-          '
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), grade_path(grade), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger' if can? :destroy, grade
+        - if can? :update, Grade
+          td
+            = link_to t('.edit', :default => t("helpers.links.edit")), edit_grade_path(grade), :class => 'btn btn-mini' if can? :update, grade
+            '
+            = link_to t('.destroy', :default => t("helpers.links.destroy")), grade_path(grade), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger' if can? :destroy, grade
 
 = link_to t('.new', :default => t("helpers.links.new")), new_grade_path, :class => 'btn btn-primary' if can? :create, Grade

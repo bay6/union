@@ -15,3 +15,4 @@
         li = "姓名: #{current_user.name}"
         li = "邮箱: #{current_user.email}"
         li = "积分: #{current_user.score}"
+        li = "等级: #{current_user.grade.try(:name) || '无业游民'}"

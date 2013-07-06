@@ -40,7 +40,7 @@
         - if joined?(current_user.id, @project.id)
           = button_to "退出", quit_project_path(@project), method: :post, class: "btn btn-warning"
           = button_to "结束", finish_project_path(@project), method: :post, class: "btn btn-danger", :data => { :confirm => "Are you sure?" }
-        - else
+        - elsif current_user.join_project @project.id
           = button_to "参与", join_project_path(@project), method: :post, class: "btn btn-success"
       hr
       p

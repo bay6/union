@@ -1,15 +1,12 @@
+# coding: utf-8
+
 class User < ActiveRecord::Base
   extend OctokitExtention
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:login], omniauth_providers: [:github]
 
-
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :login, :name, :provider, :uid
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :login, :name, :provider, :uid, :grade_id, :admin
   attr_accessor :login
 
   has_many :participations
@@ -17,8 +14,11 @@ class User < ActiveRecord::Base
   has_many :projects, through: :participations
   has_many :finished_projects, through: :participations, source: :project, conditions: ["participations.status = ?", Participation::FINISHED]
   has_many :ongoing_projects, through: :participations, source: :project, conditions: ["participations.status = ?", Participation::ONGOING]
+  belongs_to :grade
 
   validates :name, uniqueness: true
+
+  scope :without_user, lambda{|user| user ? {:conditions => ["id != ?", user.id]} : {} }
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
@@ -89,4 +89,14 @@ class User < ActiveRecord::Base
   def week_exp
     @week_exp ||= records.where('created_at >= :week', week: Date.today.at_beginning_of_week).sum(&:value)
   end
+
+  def join_project project_id
+    project_grade = Project.find(project_id).grade
+    if grade
+      grade.weights >= project_grade.weights
+    else
+      false
+    end
+  end
+
 end
