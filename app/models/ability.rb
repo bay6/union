@@ -11,4 +11,5 @@ class Ability
     end
     can :manage, :all if user.admin?
   end
+
 end
