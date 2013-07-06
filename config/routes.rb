@@ -35,5 +35,7 @@ Union::Application.routes.draw do
     get 'account' => 'registrations#edit', :as => 'account'
   end
 
-  resources :users, :path => '', :only => [:show]
+  get "/users" => "users#index", as: "users"
+  get "/user/:id/edit" => "users#edit", as: "edit_user"
+  resources :users, :path => '', :only => [:show, :update]
 end

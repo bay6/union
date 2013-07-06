@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:login], omniauth_providers: [:github]
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :login, :name, :provider, :uid
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :login, :name, :provider, :uid, :grade_id, :admin
   attr_accessor :login
 
   has_many :participations
@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   belongs_to :grade
 
   validates :name, uniqueness: true
+
+  scope :without_user, lambda{|user| user ? {:conditions => ["id != ?", user.id]} : {} }
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup

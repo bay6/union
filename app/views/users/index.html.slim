@@ -1,0 +1,25 @@
+table class="table table-striped"
+  thead
+    tr
+      th= User.human_attribute_name(:id)
+      th= User.human_attribute_name(:name)
+      th= User.human_attribute_name(:email)
+      th= User.human_attribute_name(:admin)
+      th= User.human_attribute_name(:grade)
+      th= User.human_attribute_name(:created_at)
+      th= User.human_attribute_name(:updated_at)
+      th=t '.actions', :default => t("helpers.actions")
+  tbody
+    - @users.each do |user|
+      tr
+        td = user.id
+        td = user.name
+        td = user.email
+        td = user.admin
+        td = user.grade.try(:name) || "无业游民"
+        td = user.created_at
+        td = user.updated_at
+        td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_user_path(user), :class => 'btn btn-mini' if can? :update, user
+center
+  = paginate @users

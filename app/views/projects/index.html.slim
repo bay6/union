@@ -19,7 +19,7 @@ table class="table table-striped"
     - @projects.each do |project|
       tr
         td= link_to project.id, project_path(project)
-        td= project.name, project_path(project)
+        td= project.name
         td= project.website
         td= truncate project.description
         td= project.try(:grade).try(:name)
