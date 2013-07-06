@@ -17,3 +17,16 @@ user.save(validate:false)
 Grade.find_or_create_by_name("初级", :weights => 2)
 Grade.find_or_create_by_name("中级", :weights => 4)
 Grade.find_or_create_by_name("高级", :weights => 8)
+
+# project init
+@client = Octokit::Client.new(:login => "ken0", :password => "password9")
+brepos = @client.repos( 'bay6')
+brepos.each do |repo|
+  Project.find_or_create_by_name(repo.name,
+                                 :website => repo.html_url,
+                                 :description => repo.description,
+                                 :grade_id => 1,
+                                 :user_id => 1,
+                                 :status => Project::ONGOING
+                                )
+end
