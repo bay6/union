@@ -62,15 +62,16 @@ class User < ActiveRecord::Base
 
       all_commits = []
       commits = Array.new(100)
-      last_commit = @client.commits_on("#{user_name}/#{project_name}", Date.yesterday.to_s).first
-      return if last_commit.blank?
+      yesterday_commits = @client.commits_on("#{user_name}/#{project_name}", Date.yesterday.to_s)
+      next if yesterday_commits.blank?
+      last_commit = yesterday_commits.first
       begin
         commits = @client.commits_on("#{user_name}/#{project_name}", Date.yesterday.to_s, 'master', {per_page: 100, sha: last_commit.sha}).select {|c| c.author.login == name}
         last_commit = commits.last
         all_commits += commits
       end until commits.count < 100
       commits_count = all_commits.size
-      return if commits_count == 0
+      next if commits_count == 0
       Record.create!(:project_id => project.id,
                      :project_name => project.name,
                      :user_id => id,
@@ -80,6 +81,16 @@ class User < ActiveRecord::Base
                      :category => "commit"
                     )
     end
+  end
+
+  def self.update_all_scores
+    puts "update all scores started at #{Time.current}"
+    User.all.each do |u|
+      u.update_score_by_commits
+      u.reload
+      puts "update #{u.name} #{u.score} at #{Date.today}"
+    end
+    puts "update all score ended at #{Time.current}"
   end
 
   def month_exp
