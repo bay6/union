@@ -1,9 +1,7 @@
 Union::Application.routes.draw do
   resources :commits
 
-
   resources :repositories
-
 
   resources :records
 
@@ -25,6 +23,10 @@ Union::Application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
+  authenticated :user do
+    root to: "home#index"
+  end
+
   as :user do
     root :to => 'projects#ongoing'
     get 'account' => 'registrations#edit', :as => 'account'
@@ -33,8 +35,4 @@ Union::Application.routes.draw do
   get "/users" => "users#index", as: "users"
   get "/user/:id/edit" => "users#edit", as: "edit_user"
   resources :users, :path => '', :only => [:show, :update]
-
-  # authenticated :user do
-  #   root to: "home#index"
-  # end
 end
