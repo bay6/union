@@ -33,11 +33,11 @@ class Project < ActiveRecord::Base
   end
 
   def self.cached_ongoing_projects
-    Rails.cache.fetch(self) { self.where(status: Project::ONGOING).includes(:grade, :user) }
+    Rails.cache.fetch(["ongoing", self]) { Project.where(status: Project::ONGOING).includes(:grade, :user) }
   end
 
   def self.cached_all_projects
-    Rails.cache.fetch(self) { self.all.includes(:grade, :user) }
+    Rails.cache.fetch(["all", self]) { Project.includes(:grade, :user) } 
   end
 
   private :finish_participation
