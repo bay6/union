@@ -58,12 +58,6 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    carrierwave (0.8.0)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-    ckeditor (4.0.4)
-      mime-types
-      orm_adapter
     client_side_validations (3.2.5)
     client_side_validations-simple_form (2.1.0)
       client_side_validations (~> 3.2.5)
@@ -309,8 +303,6 @@ DEPENDENCIES
   cancan
   capistrano
   capybara
-  carrierwave
-  ckeditor
   client_side_validations
   client_side_validations-simple_form
   coffee-rails (~> 3.2.1)

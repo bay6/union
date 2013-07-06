@@ -23,8 +23,6 @@ Union::Application.routes.draw do
   get :union_report, to: 'home#union_report', as: 'union'
   get 'ongoing', to: 'projects#ongoing', as: 'ongoing'
 
-  mount Ckeditor::Engine => '/ckeditor'
-
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   as :user do
