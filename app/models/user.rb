@@ -17,7 +17,6 @@ class User < ActiveRecord::Base
   belongs_to :grade
 
   validates :name, uniqueness: true
-  before_save :default_user_grade
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
@@ -96,12 +95,6 @@ class User < ActiveRecord::Base
     else
       false
     end
-  end
-
-  private
-
-  def default_user_grade
-    self.grade = Grade.find_by_name "初级"
   end
 
 end
