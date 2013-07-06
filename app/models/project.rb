@@ -37,7 +37,7 @@ class Project < ActiveRecord::Base
   end
 
   def self.cached_all_projects
-    Rails.cache.fetch(self) { self.all.includes(:grade, :user) }
+    Rails.cache.fetch(self) { self.includes(:grade, :user) }
   end
 
   private :finish_participation
