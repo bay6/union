@@ -1,3 +1,5 @@
+# coding: utf-8
+
 class User < ActiveRecord::Base
   extend OctokitExtention
   devise :database_authenticatable, :registerable,
@@ -94,6 +96,12 @@ class User < ActiveRecord::Base
     else
       false
     end
+  end
+
+  private
+
+  def default_user_grade
+    self.grade = Grade.find_by_name "初级"
   end
 
 end
