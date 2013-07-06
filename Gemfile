@@ -5,7 +5,6 @@ gem 'rails', '3.2.13'
 gem "slim-rails"
 gem "kaminari"
 gem "less-rails"
-gem "twitter-bootstrap-rails"
 gem "devise"
 gem "cancan"
 gem "simple_form"
@@ -22,6 +21,7 @@ gem 'octokit'
 gem 'rest-client'
 
 group :assets do
+  gem "twitter-bootstrap-rails"
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
@@ -41,9 +41,6 @@ group :development, :test do
   gem "binding_of_caller"
   gem "meta_request"
   gem "capistrano"
-end
-
-group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
 end
