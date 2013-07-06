@@ -7,7 +7,6 @@ table class="table table-striped"
     tr
       th= model_class.human_attribute_name(:id)
       th= model_class.human_attribute_name(:name)
-      th= model_class.human_attribute_name(:website)
       th= model_class.human_attribute_name(:description)
       th= model_class.human_attribute_name(:grade)
       th= model_class.human_attribute_name(:user)
@@ -18,9 +17,8 @@ table class="table table-striped"
   tbody
     - @projects.each do |project|
       tr
-        td= link_to project.id, project_path(project)
-        td= project.name
-        td= project.website
+        td= project.id
+        td= link_to project.name, project_path(project)
         td= truncate project.description
         td= project.try(:grade).try(:name)
         td= project.try(:user).try(:name)
