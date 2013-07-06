@@ -17,4 +17,4 @@
           li= link_to "参与关系", participations_path
           li= link_to "得分记录", records_path
           li= link_to '工会成长情况', union_path
-
+          li= link_to '公会成员', users_path if can? :manage, User

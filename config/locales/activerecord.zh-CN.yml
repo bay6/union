@@ -20,7 +20,9 @@ zh-CN:
         current_password: "当前密码"
         remember_me: "记住我"
         created_at: "注册时间"
+        updated_at: "更新时间"
         last_sign_in_at: "上次登录时间"
+        grade: "等级"
       project:
         name: "名称"
         description: "描述"
