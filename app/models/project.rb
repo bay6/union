@@ -36,7 +36,7 @@ class Project < ActiveRecord::Base
     Rails.cache.fetch(self) { self.where(status: Project::ONGOING) }
   end
 
-    def self.cached_all_projects
+  def self.cached_all_projects
     Rails.cache.fetch(self) { self.all }
   end
 
