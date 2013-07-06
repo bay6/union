@@ -31,6 +31,15 @@ class Project < ActiveRecord::Base
       end
     end
   end
+
+  def self.cached_ongoing_projects
+    Rails.cache.fetch(self) { self.where(status: Project::ONGOING) }
+  end
+
+    def self.cached_all_projects
+    Rails.cache.fetch(self) { self.all }
+  end
+
   private :finish_participation
 
   def create_default_participation
