@@ -24,7 +24,7 @@ Union::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   authenticated :user do
-    root to: "projects#index"
+    root to: "projects#ongoing"
   end
 
   as :user do
