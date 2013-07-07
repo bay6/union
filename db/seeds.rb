@@ -14,6 +14,7 @@ user.admin = true
 user.save(validate:false)
 
 # grade
+Grade.find_or_create_by_name("无业游民", :weights => 1)
 Grade.find_or_create_by_name("初级", :weights => 2)
 Grade.find_or_create_by_name("中级", :weights => 4)
 Grade.find_or_create_by_name("高级", :weights => 8)

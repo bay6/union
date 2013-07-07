@@ -4,10 +4,10 @@ require 'spec_helper'
 
 describe User do
   
-  it "should create user not grade" do
+  it "should create user default grade with weights value is 1 " do
     grade = FactoryGirl.create :primary_grade
     user = FactoryGirl.create :user
-    expect(user.grade.try(:name)).to eq(nil)
+    expect(user.grade.try(:weights)).to eq(1)
   end
 
   it "user with 初级 grade not add 高级 grade project " do
