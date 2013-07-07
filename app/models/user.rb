@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
   end
 
   # create record and update score by commits everyday
-  def update_score_by_commits
+  def update_score_by_commits_old
     self.ongoing_projects.each do |project|
       user_name, project_name = project.website.split('/').last(2)
       @client = User.authenticated_api
@@ -80,6 +80,14 @@ class User < ActiveRecord::Base
                      :value => project.try(:grade).try(:weights) * commits_count,
                      :category => "commit"
                     )
+    end
+  end
+
+  def update_score_by_commits
+    self.ongoing_projects.each do |project|
+      user_join_date = Participation.find_by_user_id_and_project_id(self.id, project.id).created_at
+      commits_date_hash = project.repository.commits.where('commit_date >= :user_join_date and user_uid = :user_uid', user_join_date: user_join_date,  user_uid: self.uid).group('date(commit_date)').count
+      commits_date_hash.each{|date, commits_count| Record.generate_or_update(self, date, commits_count, project)}
     end
   end
 
