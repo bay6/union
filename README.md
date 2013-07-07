@@ -46,6 +46,15 @@ union将划分为不同等级小任务，反复练习重构后会重写到主uni
   5. 生成成员，总经验值排名
   6. 生成成员，成长值排名，月份，周，迭代周期排名
 
+### 说明
 
+whenever<br/>
+  1.生成定时处理 whenever -w
+  2.更新定时处理 whenever -i
+  3.清理定时处理 whenever -c
+
+deplayed_job<br/>
+  1.RAILS_ENV=production script/delayed_job start
+  2.RAILS_ENV=production script/delayed_job stop
 
 
