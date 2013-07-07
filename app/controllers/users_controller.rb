@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @chart = LazyHighCharts::HighChart.new('graph') do |f|
       f.title({ :text=>"个人成长变化曲线图"})
       f.xAxis(:categories => last_7_days)
-      f.series(:type=> 'column', :name=> 'Value',:data=> last_7_days_commit)
+      f.series(:type=> 'column', :name=> '得分',:data=> last_7_days_commit)
     end
   end
 
