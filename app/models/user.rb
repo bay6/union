@@ -55,22 +55,23 @@ class User < ActiveRecord::Base
   end
 
   # create record and update score by commits everyday
-  def update_score_by_commits
+  def update_score_by_commits_old
     self.ongoing_projects.each do |project|
       user_name, project_name = project.website.split('/').last(2)
       @client = User.authenticated_api
 
       all_commits = []
       commits = Array.new(100)
-      last_commit = @client.commits_on("#{user_name}/#{project_name}", Date.yesterday.to_s).first
-      return if last_commit.blank?
+      yesterday_commits = @client.commits_on("#{user_name}/#{project_name}", Date.yesterday.to_s)
+      next if yesterday_commits.blank?
+      last_commit = yesterday_commits.first
       begin
         commits = @client.commits_on("#{user_name}/#{project_name}", Date.yesterday.to_s, 'master', {per_page: 100, sha: last_commit.sha}).select {|c| c.author.login == name}
         last_commit = commits.last
         all_commits += commits
       end until commits.count < 100
       commits_count = all_commits.size
-      return if commits_count == 0
+      next if commits_count == 0
       Record.create!(:project_id => project.id,
                      :project_name => project.name,
                      :user_id => id,
@@ -80,6 +81,24 @@ class User < ActiveRecord::Base
                      :category => "commit"
                     )
     end
+  end
+
+  def update_score_by_commits
+    self.ongoing_projects.each do |project|
+      user_join_date = Participation.find_by_user_id_and_project_id(self.id, project.id).created_at
+      commits_date_hash = project.repository.commits.where('commit_date >= :user_join_date and user_uid = :user_uid', user_join_date: user_join_date,  user_uid: self.uid).group('date(commit_date)').count
+      commits_date_hash.each{|date, commits_count| Record.generate_or_update(self, date, commits_count, project)}
+    end
+  end
+
+  def self.update_all_scores
+    puts "update all scores started at #{Time.current}"
+    User.all.each do |u|
+      u.update_score_by_commits
+      u.reload
+      puts "update #{u.name} #{u.score} at #{Date.today}"
+    end
+    puts "update all score ended at #{Time.current}"
   end
 
   def month_exp

@@ -19,7 +19,7 @@ gem 'octokit'
 gem 'rest-client'
 gem 'rack-mini-profiler'
 gem 'dalli'
-
+gem 'whenever', :require => false
 
 group :assets do
   gem "twitter-bootstrap-rails"

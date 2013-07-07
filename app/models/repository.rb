@@ -1,6 +1,7 @@
 class Repository < ActiveRecord::Base
-  attr_accessible :avatar_url, :description, :html_url, :name, :starred_url, :uid
-  #has_many :commits
+  attr_accessible :avatar_url, :description, :html_url, :name, :starred_url, :uid, :project_id
+  has_many :commits
+  belongs_to :project
 
   extend OctokitExtention
 

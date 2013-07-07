@@ -1,5 +1,5 @@
 class Commit < ActiveRecord::Base
-  attr_accessible :author_date, :author_email, :author_name, :commit_date, :committer_email, :committer_name, :html_url, :repository_id, :sha, :repository
+  attr_accessible :author_date, :author_email, :author_name, :commit_date, :committer_email, :committer_name, :html_url, :repository_id, :sha, :repository, :user_uid
   belongs_to :repository
 
   extend OctokitExtention
@@ -35,7 +35,9 @@ class Commit < ActiveRecord::Base
   protected
   def self.create_or_update commit, repo
     local_commit = Commit.find_or_create_by_sha commit.sha
+    user_uid = commit.author.try(:id) || commit.committer.try(:id)
     local_commit.update_attributes(
+      user_uid: user_uid,
       author_date: commit.commit.author.date,
       author_email: commit.commit.author.email,
       author_name: commit.commit.author.name,
