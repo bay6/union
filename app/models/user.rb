@@ -104,11 +104,13 @@ class User < ActiveRecord::Base
   end
 
   def month_exp
-    @month_exp ||= records.where('created_at >= :month', month: Date.today.at_beginning_of_month).sum(&:value)
+    @month_exp ||= records.where('commit_date >= :month', month: Date.today.at_beginning_of_month).sum(&:value)
+                 + records.where('commit_date is null and created_at >= :month', month: Date.today.at_beginning_of_month).sum(&:value)
   end
 
   def week_exp
-    @week_exp ||= records.where('created_at >= :week', week: Date.today.at_beginning_of_week).sum(&:value)
+    @week_exp ||= records.where('commit_date >= :week', week: Date.today.at_beginning_of_week).sum(&:value)
+                + records.where('commit_date is null and created_at >= :week', week: Date.today.at_beginning_of_week).sum(&:value)
   end
 
   def join_project project_id
