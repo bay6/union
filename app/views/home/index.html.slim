@@ -1,4 +1,4 @@
-.row
+.row-fluid
   .span9
     h2 最新项目
     .row-fluid
@@ -7,12 +7,10 @@
           h3= link_to project.name, project
           p= project.description
   .span3
-    = link_to "新建项目", new_project_path, :class => 'btn btn-primary' if can? :create, Project
-    hr
     .well
       p 个人信息
       ul.user-info.unstyled.muted
         li = "姓名: #{current_user.name}"
         li = "邮箱: #{current_user.email}"
         li = "积分: #{current_user.score}"
-        li = "等级: #{current_user.grade.try(:name) || '无业游民'}"
+        li = "等级: #{current_user.grade.try(:name)}"
