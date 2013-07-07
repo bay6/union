@@ -17,21 +17,21 @@ class Record < ActiveRecord::Base
     )
   end
 
-  after_save :increase_score
-  def increase_score
-    if self.changed? && self.changed.include?('value')
-      value_array = self.previous_changes["value"]
-      value = value_array.last.to_i - value_array.first.to_i
-      user.score += value
-      user.save
-    end
-  end
-  private :increase_score
+  #after_save :increase_score
+  #def increase_score
+    #if self.changed? && self.changed.include?('value')
+      #value_array = self.previous_changes["value"]
+      #value = value_array.last.to_i - value_array.first.to_i
+      #user.score += value
+      #user.save
+    #end
+  #end
+  #private :increase_score
 
-  after_destroy :decrease_score
-  def decrease_score
-    user.score -= value
-    user.save
-  end
-  private :decrease_score
+  #after_destroy :decrease_score
+  #def decrease_score
+    #user.score -= value
+    #user.save
+  #end
+  #private :decrease_score
 end
