@@ -17,6 +17,7 @@ class Project < ActiveRecord::Base
   has_many :participations
   has_many :users, through: :participations
   has_many :completers, through: :participations, source: :user, conditions: ["participations.status = ?", Participation::FINISHED]
+  has_one :repository
 
   validates :name, :description, :status, :presence => true
 
@@ -39,6 +40,7 @@ class Project < ActiveRecord::Base
   def self.cached_all_projects
     Rails.cache.fetch(self) { self.includes(:grade, :user) }
   end
+
 
   private :finish_participation
 
