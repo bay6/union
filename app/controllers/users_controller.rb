@@ -40,7 +40,6 @@ class UsersController < ApplicationController
     a = {}
 
     if records.count == 0
-      binding.pry
       @last_7_days_commit = Array.new(7) {|index| index = 0}
     else
       records.each do |record|
