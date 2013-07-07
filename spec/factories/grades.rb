@@ -1,5 +1,4 @@
-# encoding:utf-8
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# coding: utf-8
 
 FactoryGirl.define do
   factory :grade do
