@@ -10,7 +10,7 @@
     .well
       p 个人信息
       ul.user-info.unstyled.muted
-        li = "姓名: #{current_user.name}"
-        li = "邮箱: #{current_user.email}"
-        li = "积分: #{current_user.score}"
-        li = "等级: #{current_user.grade.try(:name)}"
+        li = "姓名: #{@user.name}"
+        li = "邮箱: #{@user.email}"
+        li = "积分: #{@user.score}"
+        li = "等级: #{@user.grade.try(:name)}"
