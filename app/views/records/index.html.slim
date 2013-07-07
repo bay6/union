@@ -10,7 +10,7 @@ table class="table table-striped"
       th= model_class.human_attribute_name(:weights)
       th= model_class.human_attribute_name(:value)
       th= model_class.human_attribute_name(:category)
-      th= model_class.human_attribute_name(:created_at)
+      th= model_class.human_attribute_name(:commit_date)
       th=t '.actions', :default => t("helpers.actions")
   tbody
     - @records.each do |record|
@@ -21,7 +21,7 @@ table class="table table-striped"
         td= record.weights
         td= record.value
         td= record.category
-        td=l record.created_at
+        td=l record.commit_date
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_record_path(record), :class => 'btn btn-mini' if can? :update, record
           '
