@@ -6,6 +6,12 @@ ps aux | grep unicorn | grep -v grep | awk '{print $2}' | xargs kill -9
 bundle exec unicorn_rails -c config/unicorn.rb -D -E production
 ```
 
+### sync project and repository
+
+```ruby
+Project.all.each{|p| Repository.find_by_name(p.name).update_column('project_id', p.id)}
+```
+
 ### 工会的核心流程
 
 工会的主要工作流是，领任务，做任务，完成任务。跟踪，和激励作用吧

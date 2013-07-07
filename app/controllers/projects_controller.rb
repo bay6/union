@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.cached_all_projects
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @projects }
@@ -11,7 +11,7 @@ class ProjectsController < ApplicationController
   end
 
   def ongoing
-    @projects = Project.where(status: Project::ONGOING)
+    @projects = Project.cached_ongoing_projects
 
     respond_to do |format|
       format.html # index.html.erb

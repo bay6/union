@@ -13,12 +13,13 @@ gem "client_side_validations-simple_form"
 gem "rails-i18n"
 gem "devise-i18n"
 gem "devise-i18n-views", :git => "https://github.com/mcasimir/devise-i18n-views.git"
-gem "ckeditor"
-gem "carrierwave"
 gem "mini_magick"
 gem 'omniauth-github'
 gem 'octokit'
 gem 'rest-client'
+gem 'rack-mini-profiler'
+gem 'dalli'
+gem 'whenever', :require => false
 
 group :assets do
   gem "twitter-bootstrap-rails"
