@@ -10,7 +10,6 @@ table class="table table-striped"
       th= model_class.human_attribute_name(:description)
       th= model_class.human_attribute_name(:grade)
       th= model_class.human_attribute_name(:user)
-      th= model_class.human_attribute_name(:started_at)
       th= model_class.human_attribute_name(:finished_at)
       th= model_class.human_attribute_name(:status)
       th=t '.actions', :default => t("helpers.actions")
@@ -19,10 +18,9 @@ table class="table table-striped"
       tr
         td= project.id
         td= link_to project.name, project_path(project)
-        td= truncate project.description
+        td.proj_description= project.description
         td= project.try(:grade).try(:name)
         td= project.try(:user).try(:name)
-        td= project.started_at
         td= project.finished_at
         td= Project::STATUS[project.status]
         td
