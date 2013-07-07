@@ -20,6 +20,7 @@ gem 'rest-client'
 gem 'rack-mini-profiler'
 gem 'dalli'
 gem 'whenever', :require => false
+gem 'delayed_job_active_record'
 
 group :assets do
   gem "twitter-bootstrap-rails"
