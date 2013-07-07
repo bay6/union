@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   belongs_to :grade
 
   validates :name, uniqueness: true
-  
+
   before_save :default_user_grade
 
   scope :without_user, lambda{|user| user ? {:conditions => ["id != ?", user.id]} : {} }
@@ -126,6 +126,4 @@ class User < ActiveRecord::Base
     grade = Grade.find_by_weights 1
     self.grade = grade
   end
-
-
 end
