@@ -37,17 +37,19 @@ class UsersController < ApplicationController
   def last_7_days_commit
     records = @user.records.where(commit_date: Date.today-8..Date.today-1)
     @last_7_days_commit = []
+    a = {}
 
     if records.count == 0
         @last_7_days_commit = Array.new(7) {|index| index = 0}
     else
-      last_7_days.each do |date|
-        records.each do |record|
-          if date != record.commit_date
-            @last_7_days_commit << 0
-          else
-            @last_7_days_commit << record.value
-          end
+      records.each do |record|
+        a.merge! record.commit_date => record.value
+      end
+      last_7_days.each do |day|
+        if a.has_key? day
+          @last_7_days_commit << a[day]
+        else
+          @last_7_days_commit << 0
         end
       end
     end
