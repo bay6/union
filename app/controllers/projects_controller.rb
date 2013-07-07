@@ -94,19 +94,19 @@ class ProjectsController < ApplicationController
   def join
     @project = Project.find(params[:id])
     Participation.find_or_create_by_project_id_and_user_id!(@project.id, current_user.id)
-    redirect_to project_path(@project)
+    redirect_to :back
   end
 
   def quit
     @project = Project.find(params[:id])
     @project.participations.where(user_id: current_user.id).destroy_all
-    redirect_to project_path(@project)
+    redirect_to :back
   end
 
   def finish
     @project = Project.find(params[:id])
     @projects = @project.participations.where(user_id: current_user.id)
     @projects.each {|p| p.update_attributes(:status => Participation::FINISHED) }
-    redirect_to project_path(@project)
+    redirect_to :back
   end
 end
