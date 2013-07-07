@@ -50,7 +50,7 @@ union将划分为不同等级小任务，反复练习重构后会重写到主uni
 
 如何给成员手动跑分
 
-[见这里](score.markdown)
+[见这里](doc/score.markdown)
 
 whenever<br/>
   1.生成定时处理 whenever -w<br/>
