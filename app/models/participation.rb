@@ -65,28 +65,9 @@ class Participation < ActiveRecord::Base
   handle_asynchronously :create_record_when_finished
 
   def create_record_today_when_finished_by_commits
-    user_name, project_name = project.website.split('/').last(2)
-    @client = User.authenticated_api
-
-    all_commits = []
-    commits = Array.new(100)
-    last_commit = @client.commits_on("#{user_name}/#{project_name}", Date.today.to_s).first
-    return if last_commit.blank?
-    begin
-      commits = @client.commits_on("#{user_name}/#{project_name}", Date.today.to_s, 'master', {per_page: 100, sha: last_commit.sha}).select {|c| c.author.login == user.name}
-      last_commit = commits.last
-      all_commits += commits
-    end until commits.count < 100
-    commits_count = all_commits.size
-    return if commits_count == 0
-    Record.create!(:project_id => project_id,
-                   :project_name => project.name,
-                   :user_id => user_id,
-                   :user_name => user.name,
-                   :weights => project.try(:grade).try(:weights),
-                   :value => project.try(:grade).try(:weights) * commits_count,
-                   :category => "commit"
-                  )
+    user_join_date = Participation.find_by_user_id_and_project_id(user_id, project_id).created_at
+    commits_date_hash = project.repository.commits.where('commit_date >= :user_join_date and user_uid = :user_uid', user_join_date: user_join_date,  user_uid: user.uid).group('date(commit_date)').count
+    commits_date_hash.each{|date, commits_count| Record.generate_or_update(user_id, date, commits_count, project_id)}
   end
   private :create_record_today_when_finished_by_commits
 
