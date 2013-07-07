@@ -40,10 +40,11 @@ class UsersController < ApplicationController
     a = {}
 
     if records.count == 0
-        @last_7_days_commit = Array.new(7) {|index| index = 0}
+      binding.pry
+      @last_7_days_commit = Array.new(7) {|index| index = 0}
     else
       records.each do |record|
-        a.merge! record.commit_date => record.value
+        a.merge! record.commit_date.strftime("%m/%d/%Y") => record.value
       end
       last_7_days.each do |day|
         if a.has_key? day
@@ -53,5 +54,6 @@ class UsersController < ApplicationController
         end
       end
     end
+    @last_7_days_commit
   end
 end
