@@ -109,6 +109,7 @@ GEM
       multipart-post (~> 1.1)
     faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
+    hash-deep-merge (0.1.1)
     hashie (2.0.5)
     highline (1.6.19)
     hike (1.2.3)
@@ -125,6 +126,9 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.8.0)
+    lazy_high_charts (1.4.2)
+      bundler (>= 1.0)
+      hash-deep-merge
     less (2.3.2)
       commonjs (~> 0.2.6)
     less-rails (2.3.3)
@@ -324,6 +328,7 @@ DEPENDENCIES
   factory_girl_rails
   jquery-rails
   kaminari
+  lazy_high_charts
   less-rails
   meta_request
   mini_magick
