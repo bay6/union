@@ -48,6 +48,10 @@ union将划分为不同等级小任务，反复练习重构后会重写到主uni
 
 ### 说明
 
+如何给成员手动跑分
+
+[见这里](score.markdown)
+
 whenever<br/>
   1.生成定时处理 whenever -w<br/>
   2.更新定时处理 whenever -i<br/>
@@ -55,7 +59,7 @@ whenever<br/>
 
 deplayed_job<br/>
 ```ruby
-    RAILS_ENV=production script/delayed_job start
-    RAILS_ENV=production script/delayed_job stop
+RAILS_ENV=production script/delayed_job start
+RAILS_ENV=production script/delayed_job stop
 ```
 
