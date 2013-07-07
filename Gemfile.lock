@@ -82,6 +82,11 @@ GEM
       debugger-ruby_core_source (~> 1.2.1)
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.3)
+    delayed_job (3.0.4)
+      activesupport (~> 3.0)
+    delayed_job_active_record (0.3.3)
+      activerecord (>= 2.1.0, < 4)
+      delayed_job (~> 3.0)
     devise (2.2.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -311,6 +316,7 @@ DEPENDENCIES
   client_side_validations-simple_form
   coffee-rails (~> 3.2.1)
   dalli
+  delayed_job_active_record
   devise
   devise-i18n
   devise-i18n-views!

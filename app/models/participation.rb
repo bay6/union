@@ -25,8 +25,6 @@ class Participation < ActiveRecord::Base
   validates :project_id, :user_id, :presence => true
   validates_uniqueness_of :user_id, :scope => [:project_id]
 
-
-
   before_create :set_default_role_and_status
   def set_default_role_and_status
     self.role   = MEMBER
@@ -34,24 +32,29 @@ class Participation < ActiveRecord::Base
   end
   private :set_default_role_and_status
 
-  before_update :create_record_when_finished
+  before_update :update_score_by_project
+  def update_score_by_project
+    if self.changed? && self.changed.include?('status') && finished?
+      create_record_when_finished
+    end
+  end
+  private :update_score_by_project
+
   def create_record_when_finished
     begin
       user_name, project_name = project.website.split('/').last(2)
-      if self.changed? && self.changed.include?('status') && finished?
-        @client = User.authenticated_api
-        contributors = @client.contributors("#{user_name}/#{project_name}", true)
-        contributions = contributors.select {|c| c.login == user.name }.last.contributions
-        Record.create!(:project_id => project_id,
-                       :project_name => project.name,
-                       :user_id => user_id,
-                       :user_name => user.name,
-                       :weights => project.try(:grade).try(:weights),
-                       :value => project.try(:grade).try(:weights) * contributions,
-                       :category => "project"
-                      )
-        create_record_today_when_finished_by_commits
-      end
+      @client = User.authenticated_api
+      contributors = @client.contributors("#{user_name}/#{project_name}", true)
+      contributions = contributors.select {|c| c.login == user.name }.last.contributions
+      Record.create!(:project_id => project_id,
+                     :project_name => project.name,
+                     :user_id => user_id,
+                     :user_name => user.name,
+                     :weights => project.try(:grade).try(:weights),
+                     :value => project.try(:grade).try(:weights) * contributions,
+                     :category => "project"
+                    )
+      create_record_today_when_finished_by_commits
     rescue => err
       #todo 异常处理(没有该github账户和项目)
       logger.error(err)
@@ -59,6 +62,7 @@ class Participation < ActiveRecord::Base
     end
   end
   private :create_record_when_finished
+  handle_asynchronously :create_record_when_finished
 
   def create_record_today_when_finished_by_commits
     user_name, project_name = project.website.split('/').last(2)
@@ -84,6 +88,7 @@ class Participation < ActiveRecord::Base
                    :category => "commit"
                   )
   end
+  private :create_record_today_when_finished_by_commits
 
   def finished?
     status == FINISHED
