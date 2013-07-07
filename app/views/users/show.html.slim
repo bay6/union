@@ -13,6 +13,7 @@
         .span4
           h3= link_to project.name, project
           p= project.description
+
   .span3
     .well
       p 个人信息
@@ -26,3 +27,6 @@
         li 总成长值: #{link_to @user.score, records_path(user_id: @user.id)}
         li = "本月成长值: #{@user.month_exp}"
         li = "本周成长值: #{@user.week_exp}"
+
+  .span12
+    = high_chart("my_id4", @chart)
