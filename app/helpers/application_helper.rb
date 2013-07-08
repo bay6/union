@@ -32,4 +32,21 @@ module ApplicationHelper
     end
     flash_messages.join("\n").html_safe
   end
+
+  def date_merge(project)
+    start = project.started_at
+    finish = project.finished_at
+    return '' if start.blank? || finish.blank?
+    text = I18n.localize(start, :format => format_year(start))
+    if start == finish
+      text
+    else
+      text + " - #{I18n.localize(finish, :format => format_year(finish))}" unless finish.nil?
+    end
+  end
+
+  private
+  def format_year(time)
+    (time.year == Time.zone.now.year) ? :stamp : :stamp_with_year
+  end
 end

@@ -11,7 +11,8 @@ class ProjectsController < ApplicationController
   end
 
   def ongoing
-    @projects = Project.cached_ongoing_projects
+    #@projects = Project.cached_ongoing_projects
+    @projects = Project.where(status: Project::ONGOING).includes(:grade, :user).order("Grade_id ASC")
 
     respond_to do |format|
       format.html # index.html.erb
