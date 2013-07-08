@@ -22,6 +22,7 @@ gem 'dalli'
 gem 'whenever', :require => false
 gem 'delayed_job_active_record'
 gem 'lazy_high_charts'
+gem 'newrelic_rpm'
 
 group :assets do
   gem "twitter-bootstrap-rails"
@@ -36,6 +37,7 @@ end
 group :development, :test do
   gem 'mysql2'
   gem "thin"
+  gem 'pry-nav'
   gem 'pry-debugger'
   gem 'pry-rails'
   gem "awesome_print"

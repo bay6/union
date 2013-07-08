@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:login], omniauth_providers: [:github]
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :login, :name, :provider, :uid, :grade_id, :admin
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :login, :name, :provider, :uid, :grade_id, :admin, :grade
   attr_accessor :login
 
   has_many :participations
@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   validates :name, uniqueness: true
 
-  before_save :default_user_grade
+  before_create :default_user_grade
 
   scope :without_user, lambda{|user| user ? {:conditions => ["id != ?", user.id]} : {} }
 
@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
 
   def update_records_by_commits
     self.ongoing_projects.each do |project|
-      user_join_date = Participation.find_by_user_id_and_project_id(self.id, project.id).created_at
+      user_join_date = Participation.find_by_user_id_and_project_id(self.id, project.id).created_at - 20.days #dirty fixed to added those scores before project 
       commits_date_hash = project.repository.commits.where('commit_date >= :user_join_date and user_uid = :user_uid', user_join_date: user_join_date,  user_uid: self.uid).group('date(commit_date)').count
       commits_date_hash.each{|date, commits_count| Record.generate_or_update(self, date, commits_count, project)}
     end
@@ -100,7 +100,7 @@ class User < ActiveRecord::Base
   private
 
   def default_user_grade
-    grade = Grade.find_by_weights 1
-    self.grade = grade
+    self.grade = Grade.find_by_weights(1)
   end
+
 end
