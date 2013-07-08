@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:login], omniauth_providers: [:github]
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :login, :name, :provider, :uid, :grade_id, :admin
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :login, :name, :provider, :uid, :grade_id, :admin, :grade
   attr_accessor :login
 
   has_many :participations
@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   validates :name, uniqueness: true
 
-  before_save :default_user_grade
+  before_create :default_user_grade
 
   scope :without_user, lambda{|user| user ? {:conditions => ["id != ?", user.id]} : {} }
 
@@ -100,7 +100,7 @@ class User < ActiveRecord::Base
   private
 
   def default_user_grade
-    grade = Grade.find_by_weights 1
-    self.grade = grade
+    self.grade = Grade.find_by_weights(1)
   end
+
 end
