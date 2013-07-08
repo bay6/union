@@ -1,8 +1,9 @@
+#encoding: utf-8
 class UsersController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @users = User.without_user(current_user).page(params[:page])
+    @users = User.page params[:page]
   end
 
   def edit

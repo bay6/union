@@ -56,36 +56,7 @@ class User < ActiveRecord::Base
     Participation.where(user_id: id, project_id: project_id).last.try(:status) != Participation::FINISHED
   end
 
-  # create record and update score by commits everyday
-  def update_score_by_commits_old
-    self.ongoing_projects.each do |project|
-      user_name, project_name = project.website.split('/').last(2)
-      @client = User.authenticated_api
-
-      all_commits = []
-      commits = Array.new(100)
-      yesterday_commits = @client.commits_on("#{user_name}/#{project_name}", Date.yesterday.to_s)
-      next if yesterday_commits.blank?
-      last_commit = yesterday_commits.first
-      begin
-        commits = @client.commits_on("#{user_name}/#{project_name}", Date.yesterday.to_s, 'master', {per_page: 100, sha: last_commit.sha}).select {|c| c.author.login == name}
-        last_commit = commits.last
-        all_commits += commits
-      end until commits.count < 100
-      commits_count = all_commits.size
-      next if commits_count == 0
-      Record.create!(:project_id => project.id,
-                     :project_name => project.name,
-                     :user_id => id,
-                     :user_name => name,
-                     :weights => project.try(:grade).try(:weights),
-                     :value => project.try(:grade).try(:weights) * commits_count,
-                     :category => "commit"
-                    )
-    end
-  end
-
-  def update_score_by_commits
+  def update_records_by_commits
     self.ongoing_projects.each do |project|
       user_join_date = Participation.find_by_user_id_and_project_id(self.id, project.id).created_at
       commits_date_hash = project.repository.commits.where('commit_date >= :user_join_date and user_uid = :user_uid', user_join_date: user_join_date,  user_uid: self.uid).group('date(commit_date)').count
@@ -96,21 +67,25 @@ class User < ActiveRecord::Base
   def self.update_all_scores
     puts "update all scores started at #{Time.current}"
     User.all.each do |u|
-      u.update_score_by_commits
+      u.update_records_by_commits
+      u.update_score_by_records
       u.reload
       puts "update #{u.name} #{u.score} at #{Date.today}"
     end
     puts "update all score ended at #{Time.current}"
   end
 
+  def update_score_by_records
+    self.score = Record.where(user_id: self.id).sum(&:value)
+    self.save
+  end
+
   def month_exp
-    @month_exp ||= records.where('commit_date >= :month', month: Date.today.at_beginning_of_month).sum(&:value)
-                 + records.where('commit_date is null and created_at >= :month', month: Date.today.at_beginning_of_month).sum(&:value)
+    @month_exp ||= records.where('commit_date >= :month', month: Date.today.at_beginning_of_month).sum(&:value) + records.where('commit_date is null and created_at >= :month', month: Date.today.at_beginning_of_month).sum(&:value)
   end
 
   def week_exp
-    @week_exp ||= records.where('commit_date >= :week', week: Date.today.at_beginning_of_week).sum(&:value)
-                + records.where('commit_date is null and created_at >= :week', week: Date.today.at_beginning_of_week).sum(&:value)
+    @week_exp ||= records.where('commit_date >= :week', week: Date.today.at_beginning_of_week).sum(&:value) + records.where('commit_date is null and created_at >= :week', week: Date.today.at_beginning_of_week).sum(&:value)
   end
 
   def join_project project_id
