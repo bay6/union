@@ -37,6 +37,7 @@ end
 group :development, :test do
   gem 'mysql2'
   gem "thin"
+  gem 'pry-nav'
   gem 'pry-debugger'
   gem 'pry-rails'
   gem "awesome_print"
