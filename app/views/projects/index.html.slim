@@ -23,11 +23,12 @@ table class="table table-striped"
         td= project.try(:user).try(:name)
         td= project.finished_at
         td= Project::STATUS[project.status]
-        - if current_user and current_user.unfinished_project?(project.id)
-          - if joined?(current_user.id, project.id)
-            td= button_to "退出", quit_project_path(project), method: :post, class: "btn btn-mini btn-warning"
-          - elsif current_user.join_project project.id
-            td= button_to "参与", join_project_path(project), class: 'btn btn-mini btn-success' 
-          - else
-            td 无法参与
+        td
+          - if current_user and current_user.unfinished_project?(project.id)
+            - if joined?(current_user.id, project.id)
+              = button_to "退出", quit_project_path(project), method: :post, class: "btn btn-mini btn-warning"
+            - elsif current_user.join_project project.id
+              = button_to "参与", join_project_path(project), class: 'btn btn-mini btn-success' 
+            - else
+              无法参与
 

@@ -1,4 +1,4 @@
-.row
+.row-fluid
   .span9
     h2 正进行中的项目
     .row-fluid
@@ -13,18 +13,20 @@
         .span4
           h3= link_to project.name, project
           p= project.description
+
   .span3
-    = link_to "新建项目", new_project_path, :class => 'btn btn-primary' if can? :create, Project
-    hr
     .well
       p 个人信息
       ul.user-info.unstyled.muted
         li = "姓名: #{@user.name}"
         li = "邮箱: #{@user.email}"
-        li = "等级: #{@user.grade.try(:name) || '无业游民'}"
+        li = "等级: #{@user.grade.try(:name)}"
     .well
       p 个人成长情况
       ul.user-info.unstyled.muted
         li 总成长值: #{link_to @user.score, records_path(user_id: @user.id)}
         li = "本月成长值: #{@user.month_exp}"
         li = "本周成长值: #{@user.week_exp}"
+
+  .span12
+    = high_chart("my_id4", @chart)

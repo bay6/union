@@ -13,7 +13,7 @@ zh-CN:
         avatar: "头像"
         email: "Email"
         password: "密码"
-        admin: "角色"
+        admin: "管理员"
         score: "积分"
         grant_permission: "权限"
         password_confirmation: "确认密码"
@@ -42,6 +42,7 @@ zh-CN:
         weights: "权重"
         value: "得分"
         category: "类别"
+        commit_date: "得分日期"
         created_at: "创建时间"
       participation:
         project: "项目"

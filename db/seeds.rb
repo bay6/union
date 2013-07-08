@@ -31,3 +31,9 @@ brepos.each do |repo|
                                  :status => Project::ONGOING
                                 )
 end
+
+Repository.get_bay6_repos
+
+Project.all.each{|p| Repository.find_by_name(p.name).update_column('project_id', p.id)}
+
+Participation.all.each{|p|p.update_column('created_at', 30.days.ago)} 
