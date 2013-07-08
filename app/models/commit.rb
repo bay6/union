@@ -19,6 +19,11 @@ class Commit < ActiveRecord::Base
     end
   end
 
+  def self.fetch_bay6
+    @client = authenticated_api 
+    @client.repos('bay6').each{|x| Commit.get_commit_from x}
+  end
+
   def self.get_commit_from repo
     @client = authenticated_api 
     all_commits = []
