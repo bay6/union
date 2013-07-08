@@ -8,7 +8,7 @@ union
 
 heroku: http://gunion.herokuapp.com<br/>
 
-vps: http://198.199.86.44:8080 <br/>
+vps: http://rubyunion.com <br/>
 
 ###项目进展
 
