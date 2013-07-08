@@ -2,6 +2,9 @@
  worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
  timeout 240
  preload_app true
+ 
+ listen 8080, :tcp_nopush => false
+ listen "/tmp/unicorn.union.sock"
 
  before_fork do |server, worker|
 
