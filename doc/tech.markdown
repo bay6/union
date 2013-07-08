@@ -1,5 +1,4 @@
 
-
 https://gist.github.com/shapeshed/1276230#file-nginx_rails_3_1
 
 https://gist.github.com/brobertsaz/4330509
@@ -17,3 +16,5 @@ http://tomkersten.com/articles/nginx-unicorn-rvm-server-setup/
 
 
 https://github.com/hlee/ruby-china/blob/master/config/unicorn.rb
+
+http://sleekd.com/general/configuring-nginx-and-unicorn/
