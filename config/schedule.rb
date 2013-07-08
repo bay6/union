@@ -23,5 +23,6 @@ set :rbenv_version, ENV['RBENV_VERSION'] || "jruby-1.6.7.2"
 set :job_template, "env RBENV_VERSION=#{rbenv_version} bash -l -c ':job'"
 
 every :hour do
+  runner "Commit.fetch_bay6"
   runner "User.update_all_scores"
 end
