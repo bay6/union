@@ -1,2 +1,2 @@
-= form_tag '/search', class: 'navbar-search' do
+= form_tag '/search', class: 'navbar-search', method: "get" do
   = text_field_tag 'q', @q, class: 'input-medium search-query', placeholder: @q || 'Search'
