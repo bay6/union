@@ -5,7 +5,7 @@ class Record < ActiveRecord::Base
 
   validates :project_id, :user_id, :presence => true
 
-  default_scope order("commit_date")
+  default_scope order("commit_date desc")
 
   def self.generate_or_update(user, date, commits_count, project)
     #record = Record.where(user_id: user.id, commit_date: date, project_id: project.id).first_or_create # rails4
