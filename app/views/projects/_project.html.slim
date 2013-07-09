@@ -1,0 +1,11 @@
+a.dark.no-decor
+  p.meta= date_merge(project)
+  h3= link_to project.name, project
+  span.desc= project.description
+  - if current_user and current_user.unfinished_project?(project.id)
+    - if joined?(current_user.id, project.id)
+      = button_to "退出该项目", quit_project_path(project), method: :post, class: "btn btn-warning", :data => { :confirm => "你确定吗?" }
+    - elsif current_user.join_project project.id
+      = button_to "参与该项目", join_project_path(project), class: 'btn btn-success', :data => { :confirm => "你确定吗?" }
+    - else
+      a.btn.btn-inverse.disabled href="#" 无法参与
