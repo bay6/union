@@ -3,7 +3,10 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.cached_all_projects
+    #@projects = Project.cached_all_projects
+    @projects = params[:grade_id] ? Project.where(grade_id: params[:grade_id]) : Project
+    @projects = @projects.includes(:grade, :user).order("grade_id ASC, status DESC")
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @projects }
@@ -11,7 +14,8 @@ class ProjectsController < ApplicationController
   end
 
   def ongoing
-    @projects = Project.cached_ongoing_projects
+    #@projects = Project.cached_ongoing_projects
+    @projects = Project.where(status: Project::ONGOING).includes(:grade, :user).order("grade_id ASC")
 
     respond_to do |format|
       format.html # index.html.erb
