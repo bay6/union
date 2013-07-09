@@ -31,6 +31,7 @@ class Commit < ActiveRecord::Base
     last_commit =  @client.commits("#{repo.owner.login}/#{repo.name}").first
     begin
       commits = @client.commits("#{repo.owner.login}/#{repo.name}", 'master', {per_page: 100, sha: last_commit.sha})
+      binding.pry
       last_commit = commits.last
       all_commits += commits
     end until commits.count < 100

@@ -1,5 +1,5 @@
 class RecordsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:ranking]
   # GET /records
   # GET /records.json
   def index
@@ -9,6 +9,12 @@ class RecordsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @records }
+    end
+  end
+
+  def ranking
+    User.all.each do |user|
+      user.records
     end
   end
 
