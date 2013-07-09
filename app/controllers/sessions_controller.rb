@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_filter :authenticate_user!
   def create_github
     #raise env['omniauth.auth'].to_yaml
     user = User.from_omniauth(auth_hash)

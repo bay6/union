@@ -1,16 +1,23 @@
 .row-fluid
   .span9
-    h2 最新项目
+    h2 正进行中的项目
     .row-fluid
-      -@projects.each do |project|
+      -@my_ongoing_projects.each do |project|
         .span4
-          h3= link_to project.name, project
+          h4= link_to project.name, project
+          p= project.description
+    hr
+    h2 推荐项目
+    .row-fluid
+      -@recommend_projects.each do |project|
+        .span4
+          h4= link_to project.name, project
           p= project.description
   .span3
     .well
       p 个人信息
       ul.user-info.unstyled.muted
-        li = "姓名: #{current_user.name}"
-        li = "邮箱: #{current_user.email}"
-        li = "积分: #{current_user.score}"
-        li = "等级: #{current_user.grade.try(:name)}"
+        li 姓名: #{link_to @user.name, @user}
+        li = "邮箱: #{@user.email}"
+        li = "积分: #{@user.score}"
+        li = "等级: #{@user.grade.try(:name)}"
