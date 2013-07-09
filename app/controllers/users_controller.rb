@@ -28,32 +28,15 @@ class UsersController < ApplicationController
   private
 
   def last_7_days
-    @last_7_days = []
-    7.times do |n|
-      @last_7_days << (Date.today - n -1 ).strftime("%m/%d/%Y")
-    end
-    @last_7_days.reverse
+    min = Date.today - 8
+    (min..(min+7)).to_a
   end
 
   def last_7_days_commit
     records = @user.records.where(commit_date: Date.today-8..Date.today-1)
-    @last_7_days_commit = []
     a = {}
 
-    if records.count == 0
-      @last_7_days_commit = Array.new(7) {|index| index = 0}
-    else
-      records.each do |record|
-        a.merge! record.commit_date.strftime("%m/%d/%Y") => record.value
-      end
-      last_7_days.each do |day|
-        if a.has_key? day
-          @last_7_days_commit << a[day]
-        else
-          @last_7_days_commit << 0
-        end
-      end
-    end
-    @last_7_days_commit
+    records.each {|record| a.merge! record.commit_date => record.value }
+    last_7_days.map {|d| a[d] || 0}
   end
 end
