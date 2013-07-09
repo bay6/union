@@ -45,6 +45,8 @@ zh-CN:
   projects:
     index:
       title: "项目"
+    ongoing:
+      title: "进行中的项目"
   records:
     index:
       title: "得分记录"
