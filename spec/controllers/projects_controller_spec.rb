@@ -20,15 +20,21 @@ require 'spec_helper'
 
 describe ProjectsController do
 
+  include Devise::TestHelpers
   # This should return the minimal set of attributes required to create a valid
   # Project. As you add validations to Project, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "name" => "MyString" } }
+  let(:valid_attributes) { { "name" => "MyString", description: "test", status: "Mystatus" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # ProjectsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
+
+  before :each do
+    @user = FactoryGirl.create :admin_user
+    sign_in @user
+  end
 
   describe "GET index" do
     it "assigns all projects as @projects" do
@@ -154,6 +160,15 @@ describe ProjectsController do
       project = Project.create! valid_attributes
       delete :destroy, {:id => project.to_param}, valid_session
       response.should redirect_to(projects_url)
+    end
+  end
+
+  describe "Get search" do
+    it "should return the search vals" do
+      project = FactoryGirl.create :project, status: Project::ONGOING
+      get :ongoing, q: "My"
+      response.should be_success
+      assigns(:projects).should eq([project])
     end
   end
 
