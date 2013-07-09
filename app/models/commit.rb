@@ -21,7 +21,9 @@ class Commit < ActiveRecord::Base
 
   def self.fetch_bay6
     @client = authenticated_api 
-    @client.repos('bay6').each{|x| Commit.get_commit_from x}
+    @client.repos('bay6').each do |repo| 
+      Commit.get_commit_from repo if Project.live? repo
+    end
   end
 
   def self.get_commit_from repo

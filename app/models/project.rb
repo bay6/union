@@ -32,6 +32,11 @@ class Project < ActiveRecord::Base
       end
     end
   end
+
+  def self.live? repo
+    Project.cached_ongoing_projects.pluck(:name).include? repo.name
+  end
+
   private :finish_participation
 
   def self.cached_ongoing_projects
