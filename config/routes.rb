@@ -34,5 +34,6 @@ Union::Application.routes.draw do
 
   get "/users" => "users#index", as: "users"
   get "/user/:id/edit" => "users#edit", as: "edit_user"
+  get "search" => "projects#ongoing"
   resources :users, :path => '', :only => [:show, :update]
 end
