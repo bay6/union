@@ -6,7 +6,6 @@ union
 
 ###演示地址
 
-heroku: http://gunion.herokuapp.com<br/>
 
 vps: http://rubyunion.com <br/>
 
