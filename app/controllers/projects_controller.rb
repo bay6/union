@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
   def ongoing
     #@projects = Project.cached_ongoing_projects
     @projects = Project.where(status: Project::ONGOING).
-      where("name like :query", query: "%#{ params[:q] }%").includes(:grade, :user).order("grade_id ASC")
+      where("projects.name like :query", query: "%#{ params[:q] }%").includes(:grade, :user).order("grades.weights ASC")
 
     respond_to do |format|
       format.html # index.html.erb

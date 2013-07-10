@@ -8,11 +8,13 @@
           p= project.description
     hr
     h2 推荐项目
-    .row-fluid
+    ul.thumbnails
       -@recommend_projects.each do |project|
-        .span4
-          h4= link_to project.name, project
-          p= project.description
+        li.span4
+          .thumbnail
+            .caption
+              h4= link_to project.name, project
+              p= project.description
   .span3
     .well
       p 个人信息
@@ -21,3 +23,4 @@
         li = "邮箱: #{@user.email}"
         li = "积分: #{@user.score}"
         li = "等级: #{@user.grade.try(:name)}"
+
