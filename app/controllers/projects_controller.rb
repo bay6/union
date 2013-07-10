@@ -110,9 +110,14 @@ class ProjectsController < ApplicationController
 
   def finish
     @project = Project.find(params[:id])
-    @projects = @project.participations.where(user_id: current_user.id)
     # Attention projects is participations
-    @projects.each {|p| p.update_attributes(:status => Participation::REQUESTED) }
+    @projects = @project.participations.where(user_id: current_user.id)
+    #TODO change weights to method should not hard code for weights here
+    if @project.grade.weights == 1
+      current_user.auto_graduate @projects 
+    else
+      @projects.each {|p| p.update_attributes(:status => Participation::REQUESTED) }
+    end
     redirect_to :back
   end
 end
