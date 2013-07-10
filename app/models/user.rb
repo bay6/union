@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
     records.where(project_id: project.id).sum(&:value)
   end
 
+  def requested_finish?(project)
+    participations.where(project_id: project.id).first.status == Participation::REQUESTED
+  end
+
   def self.find_for_github_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
