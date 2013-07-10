@@ -39,8 +39,11 @@
       - if current_user and current_user.unfinished_project?(@project.id)
         - if joined?(current_user.id, @project.id)
           = button_to "退出", quit_project_path(@project), method: :post, class: "btn btn-warning btn-large btn-block"
-          - disable = current_user.score_for(@project) == 0 ? true : false
-          = button_to "申请完成该项目", finish_project_path(@project), method: :post, class: "btn btn-danger btn-large btn-block", :data => { :confirm => "Are you sure?" }, :disabled => disable
+          - if current_user.requested_finish?(@project)
+            = button_to "等待审核中", finish_project_path(@project), method: :post, class: "btn btn-danger btn-large btn-block", :disabled => true
+          - else
+            - disable = current_user.score_for(@project) == 0 ? true : false
+            = button_to "申请完成该项目", finish_project_path(@project), method: :post, class: "btn btn-danger btn-large btn-block", :data => { :confirm => "Are you sure?" }, :disabled => disable
         - elsif current_user.join_project @project.id
           = button_to "参与", join_project_path(@project), method: :post, class: "btn btn-success"
       hr
