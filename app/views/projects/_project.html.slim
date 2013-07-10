@@ -4,8 +4,9 @@ a.dark.no-decor
   span.desc= project.description
   - if current_user and current_user.unfinished_project?(project.id)
     - if joined?(current_user.id, project.id)
-      = button_to "退出该项目", quit_project_path(project), method: :post, class: "btn btn-warning", :data => { :confirm => "你确定吗?" }
+      - disable = current_user.score_for(project) == 0
+      = button_to "申请完成该项目", finish_project_path(project), method: :post, class: "btn btn-danger", :data => { :confirm => "Are you sure?" }, :disabled => disable
     - elsif current_user.join_project project.id
-      = button_to "参与该项目", join_project_path(project), class: 'btn btn-success', :data => { :confirm => "你确定吗?" }
+      = button_to "申请参与该项目", join_project_path(project), class: 'btn btn-success', :data => { :confirm => "你确定吗?" }
     - else
       a.btn.btn-inverse.disabled href="#" 无法参与

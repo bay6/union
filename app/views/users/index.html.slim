@@ -5,6 +5,9 @@ table class="table table-striped"
       th= User.human_attribute_name(:name)
       th= User.human_attribute_name(:email)
       th= User.human_attribute_name(:grade)
+      th= User.human_attribute_name(:score)
+      th= User.human_attribute_name(:month_exp)
+      th= User.human_attribute_name(:week_exp)
       th= User.human_attribute_name(:created_at)
       th=t '.actions', :default => t("helpers.actions")
   tbody
@@ -14,6 +17,9 @@ table class="table table-striped"
         td = link_to user.name, user
         td = user.email
         td = user.grade.try(:name)
+        td = user.score
+        td = user.month_exp
+        td = user.week_exp
         td = format_date user.created_at
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_user_path(user), :class => 'btn btn-mini' if can? :update, user
