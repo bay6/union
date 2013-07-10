@@ -24,7 +24,7 @@ html lang="zh"
 
       ga('create', 'UA-42274982-1', 'rubyunion.com');
       ga('send', 'pageview');
-      
+
   body
     #wrap
       #header
@@ -33,6 +33,9 @@ html lang="zh"
       #content.main
         = bootstrap_flash
         = yield
+
+      a.go_top href="#" style="display: none;"
+        i.icon.icon-arrow-up
 
       hr
       footer.container

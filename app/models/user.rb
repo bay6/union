@@ -31,6 +31,20 @@ class User < ActiveRecord::Base
     end
   end
 
+  def score_for project
+    records.where(project_id: project.id).sum(&:value)
+  end
+
+  def requested_finish?(project)
+    participations.where(project_id: project.id).first.status == Participation::REQUESTED
+  end
+
+  def auto_graduate participations 
+    self.grade = Grade.beginner
+    self.save
+    participations.each {|p| p.update_attributes(:status => Participation::FINISHED ) }
+  end
+
   def self.find_for_github_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user

@@ -21,3 +21,19 @@ body {padding-top: 60px;}
 .proj_description {
   max-width: 400px;
 }
+
+.go_top {
+  background: #fff;
+  background-repeat: no-repeat;
+  background-position: 4px 4px;
+  text-align: center;
+  border:1px solid #eee;
+  display:block;
+  height:20px; width:24px;
+  padding-top:2px; overflow:hidden;
+  padding-bottom:2px; overflow:hidden;
+  border-radius:6px;
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+}

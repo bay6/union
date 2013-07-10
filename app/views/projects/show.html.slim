@@ -3,16 +3,16 @@
   .span8
     .project-body
       h2=link_to @project.name, @project.website, target: "_blank"
-      h4 #{@project.started_at} - #{@project.finished_at}
       .well
         = @project.description
   .span4
     .project-sidebar.well
       ul.unstyled
-        li
-          i.icon-calendar
-          '
-          = @project.started_at
+        - if @project.finished_at
+          li
+            i.icon-calendar
+            '
+            = date_merge @project
         li
           i.icon-asterisk
           '
@@ -33,13 +33,17 @@
             = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(@project), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }
         - if can? :manage, @project
           li
-            i.icon-edit
+            i.icon-user
             '
             = link_to "分工", participations_path(:project_id => @project.id)
       - if current_user and current_user.unfinished_project?(@project.id)
         - if joined?(current_user.id, @project.id)
-          = button_to "退出", quit_project_path(@project), method: :post, class: "btn btn-warning"
-          = button_to "结束", finish_project_path(@project), method: :post, class: "btn btn-danger", :data => { :confirm => "Are you sure?" }
+          = button_to "退出", quit_project_path(@project), method: :post, class: "btn btn-warning btn-large btn-block" if current_user.score_for(@project) == 0
+          - if current_user.requested_finish?(@project)
+            = button_to "等待审核中", finish_project_path(@project), method: :post, class: "btn btn-danger btn-large btn-block", :disabled => true
+          - else
+            - disable = current_user.score_for(@project) == 0
+            = button_to "申请完成该项目", finish_project_path(@project), method: :post, class: "btn btn-danger btn-large btn-block", :data => { :confirm => "Are you sure?" }, :disabled => disable
         - elsif current_user.join_project @project.id
           = button_to "参与", join_project_path(@project), method: :post, class: "btn btn-success"
       hr
@@ -47,10 +51,11 @@
         span.label.label-important 发起人
         span
           = @project.sponsor
-      p
-        span.label.label-important 队长
-        span
-          = @project.captain
+      - if @project.captain
+        p
+          span.label.label-important 队长
+          span
+            = @project.captain
       hr
       h4
         |已参加成员
