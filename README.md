@@ -13,7 +13,7 @@ vps: http://rubyunion.com <br/>
 
 7/14/2013 Alpha 版本release<br/>
 
-7/8/2013 强行发布pre alpha 
+7/8/2013 内测<br/>
 
 7/4/2013 核心开发团队，进行小迭代
   1. 部署vps
