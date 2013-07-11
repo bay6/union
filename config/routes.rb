@@ -18,6 +18,7 @@ Union::Application.routes.draw do
   end
 
   get "home/index"
+  get :instruction, to: 'home#instruction', as: 'instruction' 
   get :union_report, to: 'home#union_report', as: 'union'
   get 'ongoing', to: 'projects#ongoing', as: 'ongoing'
 

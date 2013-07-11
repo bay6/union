@@ -7,4 +7,7 @@ class HomeController < ApplicationController
 
   def union_report
   end
+
+  def instruction
+  end
 end
