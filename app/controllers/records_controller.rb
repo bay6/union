@@ -14,7 +14,7 @@ class RecordsController < ApplicationController
   end
 
   def ranking
-    @records = Record.where("commit_date = ?", Date.today - 1).order('value DESC')
+    @records = Record.select("user_name, category, sum(value) sum_score").group('user_id').where("commit_date = ?", Date.today - 2)
   end
 
   # GET /records/1
