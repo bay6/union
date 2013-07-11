@@ -14,9 +14,7 @@ class RecordsController < ApplicationController
   end
 
   def ranking
-    User.all.each do |user|
-      user.records
-    end
+    @records = Record.where("commit_date = ?", Date.today - 1).order('value DESC')
   end
 
   # GET /records/1
