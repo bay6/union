@@ -1,0 +1,17 @@
+- model_class = Record
+div class="page-header"
+  h1= I18n.l(Date.today - 1, format: :long) + "得分榜"
+div.ranking
+  table class="table table-striped"
+    thead
+      tr
+        th= model_class.human_attribute_name(:user_name)
+        th= model_class.human_attribute_name(:category)
+        th= model_class.human_attribute_name(:value)
+    tbody
+      - @records.each do |record|
+        tr
+          td= record.user_name
+          td= record.category
+          td= record.value
+      

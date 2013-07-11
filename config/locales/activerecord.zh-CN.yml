@@ -40,6 +40,7 @@ zh-CN:
       record:
         project: "项目"
         user: "用户"
+        user_name: "用户"
         weights: "权重"
         value: "得分"
         category: "类别"

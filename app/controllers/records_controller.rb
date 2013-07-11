@@ -1,5 +1,5 @@
 class RecordsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:ranking]
   helper_method :sort_column,:sort_direction
   # GET /records
   # GET /records.json
@@ -11,6 +11,10 @@ class RecordsController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @records }
     end
+  end
+
+  def ranking
+    @records = Record.where("commit_date = ?", Date.today - 1).order('value DESC')
   end
 
   # GET /records/1
