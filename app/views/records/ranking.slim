@@ -7,13 +7,11 @@ div.ranking
       tr
         th 排名
         th= model_class.human_attribute_name(:user_name)
-        th= model_class.human_attribute_name(:category)
         th= model_class.human_attribute_name(:value)
     tbody
       - @records.each_with_index do |record, index|
-        tr 
+        tr
           td= index + 1
           td= record.user_name
-          td= record.category
           td= record.sum_score.to_i
-      
+
