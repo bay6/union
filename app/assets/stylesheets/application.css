@@ -37,3 +37,16 @@ body {padding-top: 60px;}
   bottom: 15px;
   right: 15px;
 }
+
+.asc_sortable {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-image: url(up.gif);
+}
+.desc_sortable {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-image: url(down.gif);
+}
