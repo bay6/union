@@ -20,3 +20,4 @@ pickle-email-*.html
 /public/uploads
 **/.DS_Store
 .DS_Store
+tags
