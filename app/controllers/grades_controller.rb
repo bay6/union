@@ -82,7 +82,9 @@ class GradesController < ApplicationController
       format.json { head :no_content }
     end
   end
-    
+  
+  private 
+
   def sort_column
     Grade.column_names.include?(params[:sort]) ? params[:sort] : "id"
   end

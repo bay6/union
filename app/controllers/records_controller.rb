@@ -1,9 +1,10 @@
 class RecordsController < ApplicationController
   load_and_authorize_resource
+  helper_method :sort_column,:sort_direction
   # GET /records
   # GET /records.json
   def index
-    @records = params[:user_id].blank? ? Record : Record.where(user_id: params[:user_id]).order("created_at DESC")
+    @records = params[:user_id].blank? ? Record : Record.where(user_id: params[:user_id]).order(sort_column + " " + sort_direction)
     @records = @records.page params[:page]
 
     respond_to do |format|
@@ -82,4 +83,15 @@ class RecordsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+   private 
+
+  def sort_column
+    Record.column_names.include?(params[:sort]) ? params[:sort] : "id"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
 end
