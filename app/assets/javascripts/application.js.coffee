@@ -4,6 +4,8 @@
 #= require rails.validations
 #= require rails.validations.simple_form
 #= require highcharts
+#= require jquery.qtip.min
+#= require projects
 #= require_self
 
 $ ->

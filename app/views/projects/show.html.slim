@@ -43,7 +43,7 @@
             = button_to "等待审核中", finish_project_path(@project), method: :post, class: "btn btn-danger btn-large btn-block", :disabled => true
           - else
             - disable = current_user.score_for(@project) == 0
-            = button_to "申请完成该项目", finish_project_path(@project), method: :post, class: "btn btn-danger btn-large btn-block", :data => { :confirm => "Are you sure?" }, :disabled => disable
+            = button_to "申请完成该项目", finish_project_path(@project), method: :post, class: "btn #{'disabled' if disable} request_finish_project btn-danger btn-large btn-block", :data => { :confirm => "Are you sure?" }, :disabled => false
         - elsif current_user.join_project @project.id
           = button_to "参与", join_project_path(@project), method: :post, class: "btn btn-success"
       hr
