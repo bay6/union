@@ -13,5 +13,5 @@ div.ranking
         tr
           td= index + 1
           td= record.user_name
-          td= record.sum_score.to_i
+          td= link_to record.sum_score.to_i, records_path
 
