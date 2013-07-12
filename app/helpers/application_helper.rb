@@ -46,20 +46,14 @@ module ApplicationHelper
   end
 
   def sortable(column, title = nil)
-    
       title ||= column.titleize
       css_class = column == sort_column ? "#{sort_direction + "_sortable"}" : nil
       direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
       link_to title, {:sort => column, :direction => direction}, {:class => css_class}
   end
 
-  def avatar_url(user)
-    gravatar_id = Digest::MD5::hexdigest(user.email).downcase
-    "http://gravatar.com/avatar/#{gravatar_id}.png?s=100"
-  end
   private
   def format_year(time)
     (time.year == Time.zone.now.year) ? :stamp : :stamp_with_year
   end
-
-  end
+end
