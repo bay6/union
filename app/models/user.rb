@@ -111,8 +111,12 @@ class User < ActiveRecord::Base
     end
   end
 
-  private
+  def avatar_url
+    gravatar_id = Digest::MD5::hexdigest(email).downcase
+    "http://gravatar.com/avatar/#{gravatar_id}.png?s=100"
+  end
 
+  private
   def default_user_grade
     self.grade = Grade.find_by_weights(1)
   end
