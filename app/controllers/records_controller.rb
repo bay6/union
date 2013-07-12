@@ -5,6 +5,7 @@ class RecordsController < ApplicationController
   # GET /records.json
   def index
     @records = params[:user_id].blank? ? Record: Record.where(user_id: params[:user_id])
+    @records = params[:commit_date].blank? ? @records: @records.where(commit_date: params[:commit_date])
     @records = @records.order(sort_column + " " + sort_direction).page params[:page]
 
     respond_to do |format|
@@ -14,7 +15,7 @@ class RecordsController < ApplicationController
   end
 
   def ranking
-    @records = Record.select("user_name, category, sum(value) sum_score").group('user_id').where("commit_date = ?", Date.today - 1).order('sum_score DESC')
+    @records = Record.select("user_id, user_name, sum(value) sum_score, commit_date").group('user_id, commit_date').where("commit_date = ?", Date.today - 1.day).order('sum_score DESC')
   end
 
   # GET /records/1
