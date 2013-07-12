@@ -18,6 +18,8 @@
     .well
       p 个人信息
       ul.user-info.unstyled.muted
+        li
+          image src = avatar_url(@user)
         li = "姓名: #{@user.name}"
         li = "邮箱: #{@user.email}"
         li = "等级: #{@user.grade.try(:name)}"

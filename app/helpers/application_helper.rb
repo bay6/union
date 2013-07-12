@@ -53,6 +53,10 @@ module ApplicationHelper
       link_to title, {:sort => column, :direction => direction}, {:class => css_class}
   end
 
+  def avatar_url(user)
+    gravatar_id = Digest::MD5::hexdigest(user.email).downcase
+    "http://gravatar.com/avatar/#{gravatar_id}.png?s=100"
+  end
   private
   def format_year(time)
     (time.year == Time.zone.now.year) ? :stamp : :stamp_with_year

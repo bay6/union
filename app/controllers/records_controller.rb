@@ -4,8 +4,8 @@ class RecordsController < ApplicationController
   # GET /records
   # GET /records.json
   def index
-    @records = params[:user_id].blank? ? Record : Record.where(user_id: params[:user_id]).order(sort_column + " " + sort_direction)
-    @records = @records.page params[:page]
+    @records = params[:user_id].blank? ? Record: Record.where(user_id: params[:user_id])
+    @records = @records.order(sort_column + " " + sort_direction).page params[:page]
 
     respond_to do |format|
       format.html # index.html.erb
