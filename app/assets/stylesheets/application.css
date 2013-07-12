@@ -1,7 +1,7 @@
 /*
  *= require style
- *= require_self
  *= require_tree .
+ *= require_self
  */
 body {padding-top: 60px;}
 .main {
@@ -42,4 +42,13 @@ body {padding-top: 60px;}
   background-image: url(down.gif);
 }
 
+.avatar_box {
+  text-align:center;
+  padding-bottom: 10px;
+}
 
+.avatar_box img {
+  border-radius: 20px;
+  box-shadow: 0px 0px 6px hsla(0, 27%, 42%, 0.5);
+  width: 100px;
+}
