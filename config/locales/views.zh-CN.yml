@@ -53,3 +53,16 @@ zh-CN:
   participations:
     index:
       title: "参与项目人员"
+  menu:
+    ranking_list: "得分排行榜"
+    rank: "排名"
+    email: "邮箱"
+    name: "用户"
+    grade: "级别"
+    total_score: "总得分"
+    month_score: "月得分"
+    week_score: "周得分"
+    email: "邮箱"
+    name: "用户"
+    grade: "级别"
+    latest_commit_date: "最近一次提交时间"
