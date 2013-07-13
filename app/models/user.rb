@@ -111,6 +111,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  def scores(period = nil)
+    case period
+    when 'month'
+      records.where("commit_date between ? and ?", Date.today.at_beginning_of_month, Date.today).sum(&:value)
+    when 'week'
+      records.where("commit_date between ? and ?", Date.today.at_beginning_of_week, Date.today).sum(&:value)
+    else
+      records.sum(&:value)
+    end
+  end
+
   def avatar_url
     gravatar_id = Digest::MD5::hexdigest(email).downcase
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=100"
