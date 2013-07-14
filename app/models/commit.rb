@@ -17,17 +17,27 @@ class Commit < ActiveRecord::Base
     def all_exp
       count.to_s
     end
+
+    def this_month_commit_details
+      this_month_dates = (Date.today.at_beginning_of_month..Date.today).map(&:to_s)
+      everyday_commits = Array.new(this_month_dates.size,0)
+      select(:id).where('commit_date >= :month', month: Date.today.at_beginning_of_month).group('commit_date').count.each do |k,v|
+        everyday_commits[k.day-1] = v
+      end
+      return this_month_dates,everyday_commits
+    end
+
   end
 
   def self.fetch_bay6
-    @client = authenticated_api 
-    @client.repos('bay6').each do |repo| 
+    @client = authenticated_api
+    @client.repos('bay6').each do |repo|
       Commit.get_commit_from repo if Project.live? repo
     end
   end
 
   def self.get_commit_from repo
-    @client = authenticated_api 
+    @client = authenticated_api
     all_commits = []
     commits = Array.new(100)
     last_commit =  @client.commits("#{repo.owner.login}/#{repo.name}").first

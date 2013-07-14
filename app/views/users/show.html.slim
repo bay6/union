@@ -16,7 +16,7 @@
 
   .span3
     .well
-      .avatar_box= image_tag(@user.avatar_url)
+      .avatar_box= link_to image_tag(@user.avatar_url), "https://github.com/#{@user.try(:nickname)}"
       p 个人信息
       ul.user-info.unstyled.muted
         li
