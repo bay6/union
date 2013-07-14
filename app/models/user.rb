@@ -85,14 +85,14 @@ class User < ActiveRecord::Base
   end
 
   def self.update_all_scores
-    puts "update all scores started at #{Time.current}"
+    logger.info "update all scores started at #{Time.current}"
     User.all.each do |u|
       u.update_records_by_commits
       u.update_score_by_records
       u.reload
-      puts "update #{u.name} #{u.score} at #{Date.today}"
+      logger.info "update #{u.name} #{u.score} at #{Date.today}"
     end
-    puts "update all score ended at #{Time.current}"
+    logger.info "update all score ended at #{Time.current}"
   end
 
   def update_score_by_records
