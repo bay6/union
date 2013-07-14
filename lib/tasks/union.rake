@@ -7,4 +7,9 @@ namespace :union do
     puts 'started unicorn'
   end
 
+  desc "backup database of union server"
+  task :backup_db do
+    `mysqldump -h localhost -u root -p databasepassword database | gzip > mysql-backup.sql.gz`
+  end
+
 end
