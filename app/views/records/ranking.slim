@@ -23,4 +23,4 @@ div.ranking
           td= user.scores
           td= user.scores('month')
           td= user.scores('week')
-          td= user.records.order("commit_date").first.try(:commit_date)
+          td= first_commit_date(user) 
