@@ -1,25 +1,4 @@
 .row
   .span9
-    h3 项目成长情况 
-    ul
-      li = '工会总成长值:' + Commit.all_exp
-      li = '本月成长值:' + Commit.month_exp
-      li = '本周成长:' + Commit.week_exp
-      li = '周平均成长:'
-    h3 总成长历史趋势图
-    h4 周变化趋势
-    h4 日变化趋势
-    -#.row-fluid
-    -#  -@projects.each do |project|
-    -#    .span4
-    -#      h3= link_to project.name, project
-    -#      p= project.description
-  .span3
-    -#= link_to "新建项目", new_project_path, :class => 'btn btn-primary' if can? :create, Project
-    -#hr
-    -#.well
-    -#  p 个人信息
-    -#  ul.user-info.unstyled.muted
-    -#    li = "姓名: #{current_user.name}"
-    -#    li = "邮箱: #{current_user.email}"
-    -#    li = "积分: #{current_user.score}"
+    = high_chart("report_canvas", @this_month_data)
+    = high_chart("report_count", @count_data)
