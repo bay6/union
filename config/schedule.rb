@@ -28,8 +28,6 @@ every :hour do
   rake 'github:fetch_scores'
 end
 
-every :day do
-  #runner "Commit.fetch_bay6"
-  #runner "User.update_all_scores"
-  rake 'rake union:backup_db'
+every 1.day, :at => '4:30 am' do
+  command 'mysqldump --user=root --password="" --databases union_development > db/`date +\%Y-\%m-\%d`_backup_database.sql' 
 end
