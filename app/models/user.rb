@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
     participations.where(project_id: project.id).first.status == Participation::REQUESTED
   end
 
-  def auto_graduate participations 
+  def auto_graduate participations
     self.grade = Grade.beginner
     self.save
     participations.each {|p| p.update_attributes(:status => Participation::FINISHED ) }
