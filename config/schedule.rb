@@ -27,3 +27,9 @@ every :hour do
   #runner "User.update_all_scores"
   rake 'github:fetch_scores'
 end
+
+every :day do
+  #runner "Commit.fetch_bay6"
+  #runner "User.update_all_scores"
+  rake 'rake union:backup_db'
+end
