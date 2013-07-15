@@ -44,6 +44,7 @@ class NoticesController < ApplicationController
 
     respond_to do |format|
       if @notice.save
+        User.all.each { |user| @notice.messages.create(status:Message::UNREAD, user_id:user.id, category: "notice") }
         format.html { redirect_to @notice, notice: 'Notice was successfully created.' }
         format.json { render json: @notice, status: :created, location: @notice }
       else
