@@ -3,8 +3,10 @@
   .span8
     .project-body
       h2=link_to @project.name, @project.website, target: "_blank"
-      .well
-        = @project.description
+      hr
+      h3="任务说明"
+      p=@project.description
+      = markdown @project.content
   .span4
     .project-sidebar.well
       ul.unstyled
