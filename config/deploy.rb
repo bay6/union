@@ -28,5 +28,25 @@ namespace :db do
   end
 end
 
+namespace :deploy do
+  desc "Start Unicorn"
+  task :start, :roles => :app do
+    run [
+      "cd #{deploy_to}/current",
+      "RAILS_ENV=#{rails_env} bundle exec unicorn_rails -c #{current_path}/config/unicorn.rb -D"
+    ].join(" && ")
+  end
+
+  desc "Stop Unicorn"
+  task :stop, :roles => :app do
+    run "[ -f #{current_path}/tmp/pids/unicorn.pid ] && kill -QUIT `cat #{current_path}/tmp/pids/unicorn.pid`; true"
+  end
+
+  desc "Restart Unicorn"
+  task :restart, :roles => :app do
+    run "[ -f #{current_path}/tmp/pids/unicorn.pid ] && kill -USR2 `cat #{current_path}/tmp/pids/unicorn.pid` ;true"
+  end
+end
+
 before "deploy:assets:precompile", "db:create_db_symlink"
 after "deploy", "deploy:cleanup"
