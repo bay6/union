@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 #source 'http://ruby.taobao.org'
 
+gem 'mysql2'
 gem 'rails', '3.2.13'
 gem "slim-rails"
 gem "kaminari"
@@ -35,7 +36,6 @@ group :assets do
 end
 
 group :development, :test do
-  gem 'mysql2'
   gem "thin"
   gem 'pry-nav'
   gem 'pry-debugger'
