@@ -109,12 +109,16 @@ GEM
       multipart-post (~> 1.1)
     faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
+    has_scope (0.5.1)
     hash-deep-merge (0.1.1)
     hashie (2.0.5)
     highline (1.6.19)
     hike (1.2.3)
     httpauth (0.2.0)
     i18n (0.6.1)
+    inherited_resources (1.4.0)
+      has_scope (~> 0.5.0)
+      responders (~> 0.9)
     journey (1.0.4)
     jquery-rails (3.0.1)
       railties (>= 3.0, < 5.0)
@@ -232,6 +236,8 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
+    responders (0.9.3)
+      railties (~> 3.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec-core (2.13.1)
@@ -329,6 +335,7 @@ DEPENDENCIES
   devise-i18n-views!
   exception_notification
   factory_girl_rails
+  inherited_resources
   jquery-rails
   kaminari
   lazy_high_charts

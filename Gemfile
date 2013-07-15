@@ -23,6 +23,7 @@ gem 'whenever', :require => false
 gem 'delayed_job_active_record'
 gem 'lazy_high_charts'
 gem 'newrelic_rpm'
+gem 'inherited_resources'
 
 group :assets do
   gem "twitter-bootstrap-rails"
