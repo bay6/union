@@ -1,0 +1,29 @@
+- model_class = Notice
+div class="page-header"
+  h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+  = link_to t('.new', :default => t("helpers.links.new")), new_notice_path, :class => 'btn btn-primary pull-right' if can? :create, Notice
+table class="table table-striped"
+  thead
+    tr
+      th= model_class.human_attribute_name(:id)
+      th= model_class.human_attribute_name(:title)
+      th= model_class.human_attribute_name(:content)
+      th= model_class.human_attribute_name(:user)
+      th= model_class.human_attribute_name(:created_at)
+      th=t '.actions', :default => t("helpers.actions")
+  tbody
+    - @notices.each do |notice|
+      tr
+        td= link_to notice.id, notice_path(notice)
+        td= notice.title
+        td= truncate notice.content
+        td= notice.try(:user).try(:name)
+        td= format_date notice.created_at
+        td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_notice_path(notice), :class => 'btn btn-mini' if can? :update, notice
+          '
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), notice_path(notice), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger' if can? :destroy, notice
+
+= paginate @notices
+
+

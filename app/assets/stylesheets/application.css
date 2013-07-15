@@ -52,3 +52,41 @@ body {padding-top: 60px;}
   box-shadow: 0px 0px 6px hsla(0, 27%, 42%, 0.5);
   width: 100px;
 }
+
+.message-box {
+  font-size: 12.025px;         
+  font-weight: bold;           
+  white-space: nowrap;         
+  color: #ffffff;
+  background-color: #999999;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  float: left;
+  margin-top: 12px;
+  padding: 0px 6px;
+}
+
+.message-box:hover{
+  color: #ffffff;
+  text-decoration:none;
+}
+
+.message-notice{
+  font-size: 12.025px;
+  font-weight: bold;
+  white-space: nowrap;
+  color: #fff;
+  background-color: #da4f49;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  float: left;
+  margin-top: 12px;
+  padding: 0px 6px;
+}
+
+.message-notice:hover{
+  color: #fff;
+  text-decoration:none;        
+}

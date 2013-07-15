@@ -1,4 +1,12 @@
 Union::Application.routes.draw do
+  resources :messages, :only => [:index, :destroy] do
+    collection do
+      post 'clear'
+    end
+  end
+
+  resources :notices
+
   resources :commits
 
   resources :repositories
@@ -18,7 +26,7 @@ Union::Application.routes.draw do
   end
 
   get "home/index"
-  get :instruction, to: 'home#instruction', as: 'instruction' 
+  get :instruction, to: 'home#instruction', as: 'instruction'
   get :union_report, to: 'home#union_report', as: 'union'
   get 'ongoing', to: 'projects#ongoing', as: 'ongoing'
 
