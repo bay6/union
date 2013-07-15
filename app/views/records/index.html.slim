@@ -4,20 +4,18 @@ div class="page-header"
 table class="table table-striped"
   thead
     tr
-      th= model_class.human_attribute_name(:id)
-      th= model_class.human_attribute_name(:project)
-      th= model_class.human_attribute_name(:user)
-      th= model_class.human_attribute_name(:weights)
-      th= model_class.human_attribute_name(:value)
-      th= model_class.human_attribute_name(:category)
-      th= model_class.human_attribute_name(:commit_date)
+      th= sortable "id", model_class.human_attribute_name(:id)
+      th= sortable "project_name", model_class.human_attribute_name(:project)
+      th= sortable "user_name", model_class.human_attribute_name(:user)
+      th= sortable "value", model_class.human_attribute_name(:value)
+      th= sortable "category", model_class.human_attribute_name(:category)
+      th= sortable "commit_date", model_class.human_attribute_name(:commit_date)
   tbody
     - @records.each do |record|
       tr
         td= link_to record.id, record_path(record)
         td= record.project_name
         td= record.user_name
-        td= record.weights
         td= record.value
         td= record.category
         td= format_date record.commit_date || record.created_at

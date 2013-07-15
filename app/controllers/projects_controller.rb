@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
   def ongoing
     #@projects = Project.cached_ongoing_projects
     @projects = Project.where(status: Project::ONGOING).
-      where("name like :query", query: "%#{ params[:q] }%").includes(:grade, :user).order("grade_id ASC")
+      where("projects.name like :query", query: "%#{ params[:q] }%").includes(:grade, :user).order("grades.weights ASC")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -110,8 +110,13 @@ class ProjectsController < ApplicationController
 
   def finish
     @project = Project.find(params[:id])
-    @projects = @project.participations.where(user_id: current_user.id)
-    @projects.each {|p| p.update_attributes(:status => Participation::FINISHED) }
+    @participations = @project.participations.where(user_id: current_user.id)
+    #TODO change weights to method should not hard code for weights here
+    if @project.grade.weights == 1
+      current_user.auto_graduate @participations
+    else
+      @participations.each {|p| p.update_attributes(:status => Participation::REQUESTED) }
+    end
     redirect_to :back
   end
 end

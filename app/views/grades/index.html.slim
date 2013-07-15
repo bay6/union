@@ -1,13 +1,14 @@
 - model_class = Grade
 div class="page-header"
   h1=t '.title'
+  = link_to t('.new', :default => t("helpers.links.new")), new_grade_path, :class => 'btn btn-primary pull-right' if can? :create, Grade
 table class="table table-striped"
   thead
     tr
-      th= model_class.human_attribute_name(:id)
-      th= model_class.human_attribute_name(:name)
-      th= model_class.human_attribute_name(:description)
-      th= model_class.human_attribute_name(:weights)
+      th= sortable "id", model_class.human_attribute_name(:id)
+      th= sortable "name", model_class.human_attribute_name(:name)
+      th= sortable "description", model_class.human_attribute_name(:description)
+      th= sortable "weights", model_class.human_attribute_name(:weights)
       - if can? :update, Grade
         th=t '.actions', :default => t("helpers.actions")
   tbody
@@ -23,4 +24,3 @@ table class="table table-striped"
             '
             = link_to t('.destroy', :default => t("helpers.links.destroy")), grade_path(grade), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger' if can? :destroy, grade
 
-= link_to t('.new', :default => t("helpers.links.new")), new_grade_path, :class => 'btn btn-primary' if can? :create, Grade

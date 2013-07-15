@@ -5,12 +5,15 @@ class Record < ActiveRecord::Base
 
   validates :project_id, :user_id, :presence => true
 
+  default_scope order("commit_date desc")
+
   def self.generate_or_update(user, date, commits_count, project)
     #record = Record.where(user_id: user.id, commit_date: date, project_id: project.id).first_or_create # rails4
     record = Record.find_or_create_by_user_id_and_commit_date_and_project_id(user.id, date, project.id)
+    user_weight = user.admin?? 0.15 : 1
     record.update_attributes(
       category: 'commit',
-      value: project.try(:grade).try(:weights) * commits_count.to_i,
+      value: project.try(:grade).try(:weights) * commits_count.to_i * user_weight,
       weights: project.try(:grade).try(:weights),
       user_name: user.name,
       project_name: project.name

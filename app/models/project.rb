@@ -1,13 +1,15 @@
 #encoding:utf-8
 class Project < ActiveRecord::Base
-  GRADING  = 'grading'
-  ONGOING  = 'ongoing'
-  FINISHED = 'finished'
+  GRADING   = 'grading'
+  ONGOING   = 'ongoing'
+  FINISHED  = 'finished'
+  REQUESTED = 'requested'
 
   STATUS = {
-    GRADING  => '定级中',
-    ONGOING  => '进行中',
-    FINISHED => '结束'
+    GRADING   => '定级中',
+    ONGOING   => '进行中',
+    FINISHED  => '结束',
+    REQUESTED => '申请完成'
   }
 
   attr_accessible :description, :finished_at, :name, :started_at, :status, :website, :grade_id, :user_id
@@ -32,6 +34,11 @@ class Project < ActiveRecord::Base
       end
     end
   end
+
+  def self.live? repo
+    Project.cached_ongoing_projects.pluck(:name).include? repo.name
+  end
+
   private :finish_participation
 
   def self.cached_ongoing_projects

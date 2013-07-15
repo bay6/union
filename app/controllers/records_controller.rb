@@ -1,15 +1,21 @@
 class RecordsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:ranking]
+  helper_method :sort_column,:sort_direction
   # GET /records
   # GET /records.json
   def index
-    @records = params[:user_id].blank? ? Record : Record.where(user_id: params[:user_id]).order("created_at DESC")
-    @records = @records.page params[:page]
+    @records = params[:user_id].blank? ? Record: Record.where(user_id: params[:user_id])
+    @records = params[:commit_date].blank? ? @records: @records.where(commit_date: params[:commit_date])
+    @records = @records.order(sort_column + " " + sort_direction).page params[:page]
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @records }
     end
+  end
+
+  def ranking
+    @users = User.all.sort_by { |u| u.scores params[:sort] }.reverse
   end
 
   # GET /records/1
@@ -82,4 +88,15 @@ class RecordsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+   private 
+
+  def sort_column
+    Record.column_names.include?(params[:sort]) ? params[:sort] : "id"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
 end

@@ -18,6 +18,7 @@ Union::Application.routes.draw do
   end
 
   get "home/index"
+  get :instruction, to: 'home#instruction', as: 'instruction' 
   get :union_report, to: 'home#union_report', as: 'union'
   get 'ongoing', to: 'projects#ongoing', as: 'ongoing'
 
@@ -32,6 +33,7 @@ Union::Application.routes.draw do
     get 'account' => 'registrations#edit', :as => 'account'
   end
 
+  get "/ranking" => "records#ranking", as: "rankings"
   get "/users" => "users#index", as: "users"
   get "/user/:id/edit" => "users#edit", as: "edit_user"
   get "search" => "projects#ongoing"

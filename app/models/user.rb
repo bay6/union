@@ -6,7 +6,10 @@ class User < ActiveRecord::Base
          :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:login], omniauth_providers: [:github]
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :login, :name, :provider, :uid, :grade_id, :admin, :grade
+  attr_accessible :email, :password, :password_confirmation,
+                  :remember_me, :login, :name, :provider,
+                  :uid, :grade_id, :admin, :grade, :nickname
+
   attr_accessor :login
 
   has_many :participations
@@ -31,14 +34,31 @@ class User < ActiveRecord::Base
     end
   end
 
+  def score_for project
+    records.where(project_id: project.id).sum(&:value)
+  end
+
+  def requested_finish?(project)
+    participations.where(project_id: project.id).first.status == Participation::REQUESTED
+  end
+
+  def auto_graduate participations
+    self.grade = Grade.beginner
+    self.save
+    participations.each {|p| p.update_attributes(:status => Participation::FINISHED ) }
+  end
+
   def self.find_for_github_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
-    unless user
+    if user
+      user.update_attributes(nickname: auth.info.nickname) if user.nickname.nil?
+    else
       user = User.create(name:auth.extra.raw_info.name,
                          provider:auth.provider,
                          uid:auth.uid,
                          email:auth.info.email,
-                         password:Devise.friendly_token[0,20]
+                         password:Devise.friendly_token[0,20],
+                         nickname: auth.info.nickname
                         )
     end
     user
@@ -65,14 +85,14 @@ class User < ActiveRecord::Base
   end
 
   def self.update_all_scores
-    puts "update all scores started at #{Time.current}"
+    logger.info "update all scores started at #{Time.current}"
     User.all.each do |u|
       u.update_records_by_commits
       u.update_score_by_records
       u.reload
-      puts "update #{u.name} #{u.score} at #{Date.today}"
+      logger.info "update #{u.name} #{u.score} at #{Date.today}"
     end
-    puts "update all score ended at #{Time.current}"
+    logger.info "update all score ended at #{Time.current}"
   end
 
   def update_score_by_records
@@ -97,8 +117,23 @@ class User < ActiveRecord::Base
     end
   end
 
-  private
+  def scores(period = nil)
+    case period
+    when 'month'
+      records.where("commit_date between ? and ?", Date.today.at_beginning_of_month, Date.today).sum(&:value)
+    when 'week'
+      records.where("commit_date between ? and ?", Date.today.at_beginning_of_week, Date.today).sum(&:value)
+    else
+      records.sum(&:value)
+    end
+  end
 
+  def avatar_url
+    gravatar_id = Digest::MD5::hexdigest(email).downcase
+    "http://gravatar.com/avatar/#{gravatar_id}.png?s=100"
+  end
+
+  private
   def default_user_grade
     self.grade = Grade.find_by_weights(1)
   end

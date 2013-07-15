@@ -4,10 +4,12 @@ class Participation < ActiveRecord::Base
 
   ONGOING  = 'ongoing'
   FINISHED = 'finished'
+  REQUESTED = 'requested'
 
   STATUS = {
     ONGOING  => '进行中',
-    FINISHED => '结束'
+    FINISHED => '结束',
+    REQUESTED => '申请完成'
   }
 
   LEADER = 'leader'
