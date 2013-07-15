@@ -24,13 +24,14 @@ gem 'delayed_job_active_record'
 gem 'lazy_high_charts'
 gem 'newrelic_rpm'
 gem "twitter-bootstrap-rails"
-
+gem 'jquery-rails'
+ 
 group :assets do
   
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-  gem 'jquery-rails'
+ 
   gem "turbo-sprockets-rails3"
   gem 'therubyracer', :platforms => :ruby
 end
