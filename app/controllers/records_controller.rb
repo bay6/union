@@ -4,16 +4,13 @@ class RecordsController < ApplicationController
   # GET /records
   # GET /records.json
   
-  #before_filter :authorize
-  #protect_from_forgery
+  before_filter :authorize
 
-  #protected
-
- # def authorize
-  #	unless User.find_by_id(session[:user_id])
-  #		redirect_to root_url, :notice => "Please log in"
-  #	end
-  #end
+  def authorize
+  	unless User.find_by_id(session[:user_id]).record.weight > 1
+  		redirect_to root_url, :notice => "Please log in"
+  	end
+  end
   	
   def index
     @records = params[:user_id].blank? ? Record: Record.where(user_id: params[:user_id])
@@ -27,8 +24,6 @@ class RecordsController < ApplicationController
   end
 
   def ranking
-    user ||= User.new
-    can [:read, :create, :join, :quit, :finish], Project if user.id && user.grade.weight > 1
     @records = Record.select("user_id, user_name, sum(value) sum_score, commit_date").group('user_id, commit_date').where("commit_date = ?", Date.today - 1.day).order('sum_score DESC')
   end
 
