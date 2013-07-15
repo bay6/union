@@ -12,11 +12,14 @@ class User < ActiveRecord::Base
 
   attr_accessor :login
 
+  has_many :notices, dependent: :destroy
+  has_many :messages, dependent: :destroy
   has_many :participations
   has_many :records, dependent: :destroy
   has_many :projects, through: :participations
   has_many :finished_projects, through: :participations, source: :project, conditions: ["participations.status = ?", Participation::FINISHED]
   has_many :ongoing_projects, through: :participations, source: :project, conditions: ["participations.status = ?", Participation::ONGOING]
+  has_many :unread_messages, class_name: 'Message', conditions: {status: Message::UNREAD}
   belongs_to :grade
 
   validates :name, uniqueness: true
