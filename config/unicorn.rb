@@ -5,6 +5,7 @@ preload_app true
 
 listen 8080, :tcp_nopush => false
 listen "/tmp/unicorn.union.sock"
+pid "#{RAILS_ROOT}/tmp/pids/unicorn.pid"
 stderr_path "#{RAILS_ROOT}/log/unicorn.err.log"
 stdout_path "#{RAILS_ROOT}/log/unicorn.out.log"
 
