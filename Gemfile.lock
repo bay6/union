@@ -289,11 +289,6 @@ GEM
     turbo-sprockets-rails3 (0.3.6)
       railties (> 3.2.8, < 4.0.0)
       sprockets (>= 2.0.0)
-    twitter-bootstrap-rails (2.2.7)
-      actionpack (>= 3.1)
-      execjs
-      rails (>= 3.1)
-      railties (>= 3.1)
     tzinfo (0.3.37)
     uglifier (2.1.2)
       execjs (>= 0.3.0)
@@ -357,7 +352,6 @@ DEPENDENCIES
   therubyracer
   thin
   turbo-sprockets-rails3
-  twitter-bootstrap-rails
   uglifier (>= 1.0.3)
   unicorn
   whenever
