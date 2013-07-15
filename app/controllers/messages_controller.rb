@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   def index
+    current_user.unread_messages.update_all({status:Message::READ})
     @messages = current_user.messages.all
 
     respond_to do |format|
@@ -25,5 +26,10 @@ class MessagesController < ApplicationController
       format.html { redirect_to messages_url }
       format.json { head :no_content }
     end
+  end
+
+  def clear
+    current_user.messages.destroy_all
+    redirect_to messages_path
   end
 end

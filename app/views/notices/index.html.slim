@@ -1,6 +1,7 @@
 - model_class = Notice
 div class="page-header"
   h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+  = link_to t('.new', :default => t("helpers.links.new")), new_notice_path, :class => 'btn btn-primary pull-right' if can? :create, Notice
 table class="table table-striped"
   thead
     tr
@@ -25,5 +26,4 @@ table class="table table-striped"
 
 = paginate @notices
 
-= link_to t('.new', :default => t("helpers.links.new")), new_notice_path, :class => 'btn btn-primary' if can? :create, Notice
 

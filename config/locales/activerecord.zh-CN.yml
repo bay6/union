@@ -58,3 +58,9 @@ zh-CN:
         content: "内容"
         user: "发布者"
         created_at: "发布时间"
+      message:
+        notice_name: "消息标题"
+        notice_content: "消息内容"
+        status: "状态"
+        category: "类型"
+        created_at: "发布时间"
