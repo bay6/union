@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130713154402) do
+ActiveRecord::Schema.define(:version => 20130714233509) do
 
   create_table "commits", :force => true do |t|
     t.datetime "commit_date"
@@ -51,6 +51,27 @@ ActiveRecord::Schema.define(:version => 20130713154402) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "messages", :force => true do |t|
+    t.integer  "notice_id"
+    t.integer  "user_id"
+    t.string   "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "messages", ["notice_id"], :name => "index_messages_on_notice_id"
+  add_index "messages", ["user_id"], :name => "index_messages_on_user_id"
+
+  create_table "notices", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "notices", ["user_id"], :name => "index_notices_on_user_id"
 
   create_table "participations", :force => true do |t|
     t.integer  "project_id"

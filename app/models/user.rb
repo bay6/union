@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
 
   attr_accessor :login
 
+  has_many :notices, dependent: :destroy
+  has_many :messages, dependent: :destroy
   has_many :participations
   has_many :records, dependent: :destroy
   has_many :projects, through: :participations

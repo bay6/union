@@ -1,4 +1,10 @@
 Union::Application.routes.draw do
+  resources :messages
+
+
+  resources :notices
+
+
   resources :commits
 
   resources :repositories

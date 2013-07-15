@@ -53,6 +53,13 @@ zh-CN:
   participations:
     index:
       title: "参与项目人员"
+  notices:
+    index:
+      title: "系统公告"
+    new:
+      title: "新建系统公告"
+    edit:
+      title: "编辑系统公告"
   menu:
     ranking_list: "得分排行榜"
     rank: "排名"
