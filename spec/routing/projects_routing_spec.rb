@@ -3,6 +3,10 @@ require "spec_helper"
 describe ProjectsController do
   describe "routing" do
 
+    it "routes to ongoing page" do
+      get('ongoing').should route_to('projects#ongoing')
+    end
+
     it "routes to #index" do
       get("/projects").should route_to("projects#index")
     end

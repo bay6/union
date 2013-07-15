@@ -3,6 +3,10 @@ require "spec_helper"
 describe RecordsController do
   describe "routing" do
 
+    it "routes to ranking page" do
+      get('/ranking').should route_to('records#ranking')
+    end
+
     it "routes to #index" do
       get("/records").should route_to("records#index")
     end
