@@ -3,6 +3,15 @@ class RecordsController < ApplicationController
   helper_method :sort_column,:sort_direction
   # GET /records
   # GET /records.json
+  
+  before_filter :authorize
+
+  def authorize
+  	unless User.find_by_id(session[:user_id]).record.weight > 1
+  		redirect_to root_url, :notice => "Please log in"
+  	end
+  end
+  	
   def index
     @records = params[:user_id].blank? ? Record: Record.where(user_id: params[:user_id])
     @records = params[:commit_date].blank? ? @records: @records.where(commit_date: params[:commit_date])
