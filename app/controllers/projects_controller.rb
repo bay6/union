@@ -12,6 +12,15 @@ class ProjectsController < InheritedResources::Base
     end
   end
 
+  def new
+    @project = Project.new(:status => Project::GRADING)
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @project }
+    end
+  end
+
   def ongoing
     #@projects = Project.cached_ongoing_projects
     @projects = Project.where(status: Project::ONGOING).
