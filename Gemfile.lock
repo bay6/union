@@ -235,6 +235,7 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    redcarpet (3.0.0)
     ref (1.0.5)
     responders (0.9.3)
       railties (~> 3.1)
@@ -354,6 +355,7 @@ DEPENDENCIES
   rack-mini-profiler
   rails (= 3.2.13)
   rails-i18n
+  redcarpet
   rest-client
   rspec-rails
   sass-rails (~> 3.2.3)

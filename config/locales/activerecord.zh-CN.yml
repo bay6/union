@@ -5,6 +5,7 @@ zh-CN:
       project: "项目"
       grade: "项目等级"
       record: "得分记录"
+      notice: "系统公告"
       participation: "项目人员关系"
     attributes:
       user:
@@ -33,6 +34,7 @@ zh-CN:
         user: "发起人"
         started_at: "开始日期"
         finished_at: "结束日期"
+        content: '具体任务'
       grade:
         name: "名称"
         description: "描述"
@@ -52,3 +54,14 @@ zh-CN:
         role: "角色"
         status: "状态"
         created_at: "创建时间"
+      notice:
+        title: "标题"
+        content: "内容"
+        user: "发布者"
+        created_at: "发布时间"
+      message:
+        notice_name: "消息标题"
+        notice_content: "消息内容"
+        status: "状态"
+        category: "类型"
+        created_at: "发布时间"

@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 #source 'http://ruby.taobao.org'
 
+gem 'mysql2'
 gem 'rails', '3.2.13'
 gem "slim-rails"
 gem "kaminari"
@@ -24,6 +25,7 @@ gem 'delayed_job_active_record'
 gem 'lazy_high_charts'
 gem 'newrelic_rpm'
 gem 'inherited_resources'
+gem 'redcarpet'
 
 group :assets do
   gem "twitter-bootstrap-rails"
@@ -36,7 +38,6 @@ group :assets do
 end
 
 group :development, :test do
-  gem 'mysql2'
   gem "thin"
   gem 'pry-nav'
   gem 'pry-debugger'

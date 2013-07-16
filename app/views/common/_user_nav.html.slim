@@ -1,5 +1,6 @@
 ul.nav.pills.pull-right
   - if current_user
+    = link_to raw("<span>#{current_user.unread_messages.count}</span>"), messages_path,  :class=>"message-#{current_user.unread_messages.size==0 ? 'box':'notice'}"
     li.dropdown
       =link_to '/account', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do
         = current_user.name

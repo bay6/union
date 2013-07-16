@@ -1,0 +1,25 @@
+- model_class = Message
+div class="page-header"
+  h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+  = link_to "清空", clear_messages_path, method: "post", class: "btn pull-right"
+table class="table table-striped"
+  thead
+    tr
+      th= model_class.human_attribute_name(:notice_name)
+      th= model_class.human_attribute_name(:notice_content)
+      th= model_class.human_attribute_name(:status)
+      th= model_class.human_attribute_name(:category)
+      th= model_class.human_attribute_name(:created_at)
+      th=t '.actions', :default => t("helpers.actions")
+  tbody
+    - @messages.each do |message|
+      tr
+        td= link_to message.try(:notice).try(:title), message.notice
+        td= truncate message.try(:notice).try(:content)
+        td= message.status
+        td= message.category
+        td= format_date message.created_at
+        td
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), message_path(message), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+
+

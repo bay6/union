@@ -1,7 +1,8 @@
 = simple_form_for @project, :html => { :class => "form-horizontal" } do |f|
   = f.input :name
   = f.input :website
-  = f.input :description, :input_html => {:rows => 12, :class => 'span6'}
+  = f.input :description, :input_html => {:rows => 6, :class => 'span6'}
+  = f.input :content, :input_html => {:rows => 12, :class => 'span6'}
   = f.input :started_at
   = f.input :finished_at
   - if current_user.admin?

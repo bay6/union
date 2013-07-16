@@ -12,7 +12,7 @@ class Project < ActiveRecord::Base
     REQUESTED => '申请完成'
   }
 
-  attr_accessible :description, :finished_at, :name, :started_at, :status, :website, :grade_id, :user_id
+  attr_accessible :description, :finished_at, :name, :started_at, :status, :website, :grade_id, :user_id, :content
 
   belongs_to :grade
   belongs_to :user
@@ -21,7 +21,7 @@ class Project < ActiveRecord::Base
   has_many :completers, through: :participations, source: :user, conditions: ["participations.status = ?", Participation::FINISHED]
   has_one :repository
 
-  validates :name, :description, :status, :presence => true
+  validates :name, :description, :status, :content, :presence => true
 
   after_save :finish_participation
   def finish_participation
