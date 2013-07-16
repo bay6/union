@@ -34,6 +34,7 @@ zh-CN:
         user: "发起人"
         started_at: "开始日期"
         finished_at: "结束日期"
+        content: '具体任务'
       grade:
         name: "名称"
         description: "描述"
