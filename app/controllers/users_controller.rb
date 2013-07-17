@@ -1,5 +1,5 @@
 #encoding: utf-8
-class UsersController < ApplicationController
+class UsersController < InheritedResources::Base
   before_filter :authenticate_user!
 
   def index

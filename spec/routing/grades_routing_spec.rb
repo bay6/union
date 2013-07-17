@@ -30,6 +30,5 @@ describe GradesController do
     it "routes to #destroy" do
       delete("/grades/1").should route_to("grades#destroy", :id => "1")
     end
-
   end
 end
