@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :message do
-    notice nil
-    user nil
+    notice_id
+    user_id
     status "MyString"
   end
 end
