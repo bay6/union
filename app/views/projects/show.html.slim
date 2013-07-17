@@ -6,7 +6,7 @@
       hr
       h3="任务说明"
       p=@project.description
-      = markdown @project.content
+      = markdown @project.content.to_s
   .span4
     .project-sidebar.well
       ul.unstyled
