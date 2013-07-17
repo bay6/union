@@ -11,7 +11,7 @@ class GradesController < InheritedResources::Base
     end
   end
 
-  private 
+  private
   def sort_column
     Grade.column_names.include?(params[:sort]) ? params[:sort] : "id"
   end

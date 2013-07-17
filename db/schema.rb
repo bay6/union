@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20130715155150) do
     t.string   "status"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.text     "content"
   end
 
   add_index "projects", ["grade_id"], :name => "index_projects_on_grade_id"
