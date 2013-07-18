@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :participation do
-    project nil
-    user nil
+    project_id
+    user_id
     role "MyString"
   end
 end

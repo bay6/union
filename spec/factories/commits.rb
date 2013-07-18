@@ -11,5 +11,6 @@ FactoryGirl.define do
     author_date "2013-07-05 08:20:44"
     author_name "MyString"
     author_email "MyString"
+    user_uid "123"
   end
 end

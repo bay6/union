@@ -16,5 +16,4 @@ FactoryGirl.define do
     name "高级"
     weights 4
   end
-
 end

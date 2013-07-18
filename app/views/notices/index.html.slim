@@ -14,8 +14,8 @@ table class="table table-striped"
   tbody
     - @notices.each do |notice|
       tr
-        td= link_to notice.id, notice_path(notice)
-        td= notice.title
+        td= notice.id
+        td= link_to notice.title, notice
         td= truncate notice.content
         td= notice.try(:user).try(:name)
         td= format_date notice.created_at

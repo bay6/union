@@ -10,5 +10,6 @@ FactoryGirl.define do
     started_at "2013-06-26"
     finished_at "2013-06-26"
     status "MyString"
+    content "mystring"
   end
 end
