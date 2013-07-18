@@ -16,8 +16,8 @@ class RecordsController < InheritedResources::Base
   def ranking
     @users = User.all.sort_by { |u| u.scores params[:sort] }.reverse
   end
-  private 
 
+  private
   def sort_column
     Record.column_names.include?(params[:sort]) ? params[:sort] : "id"
   end
@@ -25,5 +25,4 @@ class RecordsController < InheritedResources::Base
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
-
 end

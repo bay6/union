@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :notice do
     title "MyString"
     content "MyText"
-    user nil
+    user_id
   end
 end
