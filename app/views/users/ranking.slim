@@ -1,26 +1,28 @@
-- model_class = Record
+- model_class = User
 div class="page-header"
   h1= t("menu.ranking_list")
 div.ranking
   table class="table table-striped"
     thead
       tr
-        th= t("menu.rank")
-        th= t("menu.name")
-        th= t("menu.email")
-        th= t("menu.grade")
+        th= sortable "id", model_class.human_attribute_name(:id)
+        th= sortable "name", model_class.human_attribute_name(:name)
+        th= sortable "email", model_class.human_attribute_name(:email)
+        th= sortable "grades.weights", model_class.human_attribute_name(:grade)
         th= sortable "total", t("menu.total_score")
         th= sortable "month", t("menu.month_score")
         th= sortable "week", t("menu.week_score")
-        th= t("menu.latest_commit_date")
+        th= sortable "first_commit_date", t("menu.first_commit_date")
     tbody
       - @users.each_with_index do |user, index|
         tr
-          td= index + 1
+          td= link_to user.id, user_path(user)
           td= link_to user.name, user
           td= user.email
           td= user.grade.try(:name)
           td= user.scores
           td= user.scores('month')
           td= user.scores('week')
-          td= first_commit_date(user) 
+          td= user.first_commit_date
+
+  = paginate @users
