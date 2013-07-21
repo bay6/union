@@ -2,6 +2,8 @@ class Activity < ActiveRecord::Base
   attr_accessible :description, :start_at, :summary, :title, :status
 
   has_and_belongs_to_many :users
+  validates :title, :start_at, presence: true
+  validate :start_at_should_be_future 
 
   STATUS = {
     0 => "准备中",
@@ -42,5 +44,12 @@ class Activity < ActiveRecord::Base
 
   def completed?
     self.status == 2
+  end
+
+  private
+  def start_at_should_be_future
+    if start_at.present? && start_at < Time.now
+      errors.add(:start_at, "can't be in the past")
+    end
   end
 end
