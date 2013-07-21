@@ -77,3 +77,11 @@ zh-CN:
     grade: "级别"
     latest_commit_date: "最近一次提交时间"
     first_commit_date: "最早提交时间"
+  activity:
+    title: "主题"
+    description: "活动详情"
+    start_at: "开始时间"
+    status: "状态"
+    summary: "总结"
+    registered_count: "已报名人数"
+    registered_user: "已报名会员"

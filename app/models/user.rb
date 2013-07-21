@@ -155,6 +155,10 @@ class User < ActiveRecord::Base
     users
   end
 
+  def github_homepage
+    "https://github.com/" + nickname.to_s
+  end
+
   private
   def default_user_grade
     self.grade = Grade.find_by_weights(1)

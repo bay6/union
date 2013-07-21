@@ -1,5 +1,5 @@
-source 'https://rubygems.org'
-#source 'http://ruby.taobao.org'
+#source 'https://rubygems.org'
+source 'http://ruby.taobao.org'
 
 gem 'mysql2'
 gem 'rails', '3.2.13'
@@ -26,6 +26,7 @@ gem 'lazy_high_charts'
 gem 'newrelic_rpm'
 gem 'inherited_resources'
 gem 'redcarpet'
+gem 'jquery-ui-rails'
 
 group :assets do
   gem "twitter-bootstrap-rails"

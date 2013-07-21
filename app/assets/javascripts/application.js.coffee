@@ -1,10 +1,15 @@
 #= require jquery
+#= require jquery.ui.datepicker
+#= require jquery.ui.slider
+#= require jquery-ui-timepicker-addon
+#= require jquery-ui-timepicker-zh-CN
 #= require jquery_ujs
 #= require twitter/bootstrap
 #= require rails.validations
 #= require rails.validations.simple_form
 #= require highcharts
 #= require projects
+#= require activities
 #= require_self
 
 $ ->
