@@ -3,10 +3,10 @@
 
   .form-inputs
     = f.input :title
-    = f.input :start_at
-    = f.input :description
+    = f.input :start_at, :as => "string"
+    = f.input :description, :input_html => { :class => "span6" }
     = f.input :status, collection: Activity::STATUS.map{|k,v| [v, k]}
-    = f.input :summary
+    = f.input :summary, :input_html => { :class => "span6" }
 
   .form-actions
     = f.button :submit, class: 'btn-primary'

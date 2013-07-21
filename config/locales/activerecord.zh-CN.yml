@@ -13,7 +13,7 @@ zh-CN:
         login: "登录名"
         name: "用户名"
         avatar: "头像"
-        email: "Email"
+        email: "邮箱"
         password: "密码"
         admin: "管理员"
         score: "总成长值"

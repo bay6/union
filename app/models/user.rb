@@ -136,6 +136,25 @@ class User < ActiveRecord::Base
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=100"
   end
 
+  def first_commit_date
+    first_commit = records.reorder("commit_date").first
+    first_commit.nil? ? '不存在' : first_commit.commit_date
+  end
+
+  def self.cuscom_sort(sort_column, sort_direction)
+    if %w(total month week).include? sort_column
+      users = User.all.sort_by { |u| u.scores sort_column }
+      users = users.reverse if sort_direction != "asc"
+    elsif sort_column == 'first_commit_date'
+      users = User.all.sort_by { |u| u.first_commit_date }
+      users = users.reverse if sort_direction != "asc"
+    else
+      users = User.joins(:grade).order(sort_column + " " + sort_direction)
+    end
+
+    users
+  end
+
   def github_homepage
     "https://github.com/" + nickname.to_s
   end

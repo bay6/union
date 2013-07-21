@@ -76,6 +76,7 @@ zh-CN:
     name: "用户"
     grade: "级别"
     latest_commit_date: "最近一次提交时间"
+    first_commit_date: "最早提交时间"
   activity:
     title: "主题"
     description: "活动详情"
