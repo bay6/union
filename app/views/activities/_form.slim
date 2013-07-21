@@ -1,0 +1,12 @@
+= simple_form_for(@activity) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :start_at
+    = f.input :description
+    = f.input :status
+    = f.input :summary
+
+  .form-actions
+    = f.button :submit

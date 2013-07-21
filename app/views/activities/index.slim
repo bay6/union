@@ -1,0 +1,21 @@
+h1 Listing Activities
+
+- can? :manage, Activity
+  = link_to 'New Activity', new_activity_path
+
+table
+  tr
+    th Title
+    th Start time
+    th status
+    th
+    th
+
+  - @activities.each do |activity|
+    tr
+      td = activity.title
+      td = activity.start_at.to_s(:db)
+      td = activity.status
+      td = link_to 'Show', activity
+      - can? :manage, Activity
+        td = link_to 'Edit', [:edit, activity]

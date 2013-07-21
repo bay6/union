@@ -1,0 +1,11 @@
+h1 = @activity.title
+
+label start at
+span = @activity.start_at.to_s(:db)
+
+label status
+span = @activity.status
+
+p = @activity.description.html_safe
+
+p = @activity.summary.html_safe

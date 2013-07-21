@@ -17,6 +17,8 @@ Union::Application.routes.draw do
 
   resources :grades
 
+  resources :activities
+
   resources :projects do
     member do
       post 'join'
