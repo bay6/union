@@ -1,11 +1,24 @@
 h1 = @activity.title
 
-label start at
+h3= t "activity.start_at"
 span = @activity.start_at.to_s(:db)
 
-label status
-span = @activity.status
+h3= t "activity.status"
+span = @activity.human_status
 
+- if @activity.going? && !@activity.has_registered(current_user)
+  span = link_to "我要报名", register_activity_path(@activity), method: "post", class: "btn btn-danger"
+- elsif @activity.has_registered(current_user)
+  span.label.label-success = "已经报名"
+
+h3= t "activity.description"
 p = @activity.description.html_safe
 
-p = @activity.summary.html_safe
+- if @activity.users.size > 0
+  h3= t "activity.registered_user"
+  - @activity.users.each do |user|
+    .avatar_box= link_to image_tag(user.avatar_url), user.github_homepage
+
+- if @activity.completed?
+  h3= t "activity.summay"
+  p = @activity.summary.html_safe

@@ -7,6 +7,7 @@ zh-CN:
       record: "得分记录"
       notice: "系统公告"
       participation: "项目人员关系"
+      activity: "活动"
     attributes:
       user:
         login: "登录名"
@@ -65,3 +66,9 @@ zh-CN:
         status: "状态"
         category: "类型"
         created_at: "发布时间"
+      activity:
+        title: "主题"
+        description: "详细说明"
+        start_at: "开始时间"
+        status: "状态"
+        summary: "总结"

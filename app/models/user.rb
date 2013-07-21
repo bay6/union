@@ -136,6 +136,10 @@ class User < ActiveRecord::Base
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=100"
   end
 
+  def github_homepage
+    "https://github.com/" + nickname.to_s
+  end
+
   private
   def default_user_grade
     self.grade = Grade.find_by_weights(1)
