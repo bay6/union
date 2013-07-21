@@ -16,6 +16,12 @@ Union::Application.routes.draw do
   resources :participations
 
   resources :grades
+  resources :activities do
+
+    member do
+      post :register
+    end
+  end
 
   resources :projects do
     member do
