@@ -1,5 +1,5 @@
 class ActivitiesController < InheritedResources::Base
-  actions except: [:destroy]
+  actions :all, except: [:destroy]
   authorize_resource only: [:new, :create, :update, :edit]
   load_resource
 
