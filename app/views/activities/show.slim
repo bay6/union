@@ -12,7 +12,7 @@ span = @activity.human_status
   span.label.label-success = "已经报名"
 
 h3= t "activity.description"
-p = @activity.description.html_safe
+p = markdown @activity.description.html_safe
 
 - if @activity.users.size > 0
   h3= t "activity.registered_user"
