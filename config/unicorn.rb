@@ -3,8 +3,8 @@ worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
 timeout 240
 preload_app true
 
-listen 8080, :tcp_nopush => false
-listen "/tmp/unicorn.union.sock"
+listen 8081, :tcp_nopush => false
+listen "#{RAILS_ROOT}/tmp/socket/union.socket"
 pid "#{RAILS_ROOT}/tmp/pids/unicorn.pid"
 stderr_path "#{RAILS_ROOT}/log/unicorn.err.log"
 stdout_path "#{RAILS_ROOT}/log/unicorn.out.log"

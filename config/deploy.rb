@@ -8,7 +8,7 @@ require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
 
 set :application, "union"
-set :repository,  "https://github.com/bay6/union.git"
+set :repository,  "https://github.com/mouse-lin/union.git"
 set :scm, :git
 set :user, "bay6"
 set :runner, "bay6"
