@@ -1,28 +1,33 @@
- # config/unicorn.rb
- worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
- timeout 240
- preload_app true
- 
- listen 8080, :tcp_nopush => false
- listen "/tmp/unicorn.union.sock"
+# config/unicorn.rb
+RAILS_ROOT = File.expand_path("../..", __FILE__)
 
- before_fork do |server, worker|
+worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
+timeout 240
+preload_app true
 
-   Signal.trap 'TERM' do
-     puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
-     Process.kill 'QUIT', Process.pid
-   end
+listen 8080, :tcp_nopush => false
+listen "#{RAILS_ROOT}/tmp/sockets/union.socket"
+pid "#{RAILS_ROOT}/tmp/pids/unicorn.pid"
+stderr_path "#{RAILS_ROOT}/log/unicorn.err.log"
+stdout_path "#{RAILS_ROOT}/log/unicorn.out.log"
 
-   defined?(ActiveRecord::Base) and
-     ActiveRecord::Base.connection.disconnect!
- end 
+before_fork do |server, worker|
 
- after_fork do |server, worker|
+  Signal.trap 'TERM' do
+    puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
+    Process.kill 'QUIT', Process.pid
+  end
 
-   Signal.trap 'TERM' do
-     puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
-   end
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.connection.disconnect!
+end 
 
-   defined?(ActiveRecord::Base) and
-     ActiveRecord::Base.establish_connection
- end
+after_fork do |server, worker|
+
+  Signal.trap 'TERM' do
+    puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
+  end
+
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.establish_connection
+end
