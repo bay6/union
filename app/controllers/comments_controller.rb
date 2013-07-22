@@ -4,8 +4,6 @@ class CommentsController < ApplicationController
     @comment = @activity.comments.build(params[:comment])
     @comment.user_id = current_user.id
 
-    if @comment.save
-      redirect_to activity_path(@activity), :notice => "发布评论成功"
-    end
+    @comment.save
   end
 end

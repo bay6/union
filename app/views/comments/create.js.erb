@@ -1,0 +1,6 @@
+<% if @comment.errors.any? %>
+  $(".create_comment textarea").focus()
+<% else %>
+  $(".comments").append("<%= j (render @comment, :index => @activity.comments.count-1) %>");
+  $(".create_comment textarea").val('')
+<% end %>
