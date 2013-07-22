@@ -86,3 +86,5 @@ zh-CN:
     registered_count: "已报名人数"
     registered_user: "已报名会员"
     comment: "用户评论"
+    submit_comment: "提交评论"
+    create_comment: "发表评论"
