@@ -16,6 +16,12 @@ Union::Application.routes.draw do
   resources :participations
 
   resources :grades
+  resources :activities do
+
+    member do
+      post :register
+    end
+  end
 
   resources :projects do
     member do
@@ -41,7 +47,7 @@ Union::Application.routes.draw do
     get 'account' => 'registrations#edit', :as => 'account'
   end
 
-  get "/ranking" => "records#ranking", as: "rankings"
+  get "/ranking" => "users#ranking", as: "rankings"
   get "/users" => "users#index", as: "users"
   get "/user/:id/edit" => "users#edit", as: "edit_user"
   get "search" => "projects#ongoing"
