@@ -1,0 +1,10 @@
+= simple_form_for(@badge) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name_zh
+    = f.input :name_en
+    = f.input :description
+
+  .form-actions
+    = f.button :submit

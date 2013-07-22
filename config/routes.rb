@@ -1,4 +1,8 @@
 Union::Application.routes.draw do
+  
+  resources :badges, :except =>[:show] 
+  get 'badges/:name_en', to: 'badges#show', as: 'show'
+
   resources :messages, :only => [:index, :destroy] do
     collection do
       post 'clear'

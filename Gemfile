@@ -56,6 +56,10 @@ end
 group :test do
   gem 'capybara'
   gem 'simplecov', require: false
+  gem 'spork-rails', :git => 'http://github.com/rdd-giga/spork-rails.git', :require => false
+
+  gem 'database_cleaner', '>= 0.7.0'
+  gem 'shoulda-matchers', '>= 1.4.2'
 end
 
 group :production do

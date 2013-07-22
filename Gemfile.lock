@@ -1,4 +1,12 @@
 GIT
+  remote: http://github.com/rdd-giga/spork-rails.git
+  revision: b55f59910e0e7ab52bc5f41d9ade9deb8c2c7ab9
+  specs:
+    spork-rails (3.2.0)
+      rails (>= 3.0.0, < 3.3.0)
+      spork (>= 1.0rc0)
+
+GIT
   remote: https://github.com/mcasimir/devise-i18n-views.git
   revision: 35987ea588c0741c3fcab15ccd8baa07a9a61b39
   specs:
@@ -75,6 +83,7 @@ GEM
     commonjs (0.2.6)
     daemons (1.1.9)
     dalli (2.6.4)
+    database_cleaner (1.0.1)
     debug_inspector (0.0.2)
     debugger (1.6.0)
       columnize (>= 0.3.1)
@@ -260,6 +269,8 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    shoulda-matchers (2.2.0)
+      activesupport (>= 3.0.0)
     simple_form (2.1.0)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -276,6 +287,7 @@ GEM
       railties (>= 3.0, < 4.1)
       slim (~> 2.0)
     slop (3.4.5)
+    spork (1.0.0rc3)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -333,6 +345,7 @@ DEPENDENCIES
   client_side_validations-simple_form
   coffee-rails (~> 3.2.1)
   dalli
+  database_cleaner (>= 0.7.0)
   delayed_job_active_record
   devise
   devise-i18n
@@ -363,9 +376,11 @@ DEPENDENCIES
   rest-client
   rspec-rails
   sass-rails (~> 3.2.3)
+  shoulda-matchers (>= 1.4.2)
   simple_form
   simplecov
   slim-rails
+  spork-rails!
   therubyracer
   thin
   turbo-sprockets-rails3

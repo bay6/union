@@ -1,0 +1,25 @@
+h1 Listing badges
+
+table
+  tr
+    th Name zh
+    th Name en
+    th Award number
+    th Description
+    th
+    th
+    th
+
+  - @badges.each do |badge|
+    tr
+      td = badge.name_zh
+      td = badge.name_en
+      td = badge.award_number
+      td = badge.description
+      td = link_to 'Show', badge
+      td = link_to 'Edit', edit_badge_path(badge)
+      td = link_to 'Destroy', badge, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Badge', new_badge_path
