@@ -1,3 +1,4 @@
+#encoding: utf-8
 class ActivitiesController < InheritedResources::Base
   actions :all, except: [:destroy]
   authorize_resource only: [:new, :create, :update, :edit]

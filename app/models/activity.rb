@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Activity < ActiveRecord::Base
   attr_accessible :description, :start_at, :summary, :title, :status
 
@@ -6,9 +7,9 @@ class Activity < ActiveRecord::Base
   validate :start_at_should_be_future 
 
   STATUS = {
-    0 => "准备中",
-    1 => "报名中",
-    2 => "已结束"
+    0 => '准备中',
+    1 => '报名中',
+    2 => '已结束'
   }
 
   def human_status
