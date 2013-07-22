@@ -58,6 +58,22 @@ body {padding-top: 60px;}
   width: 80px;
 }
 
+.face img {
+  width: 48px;
+  height: 48px;
+}
+
+.comment {
+  border-bottom: 1px solid #DDD;
+  padding: 8px 10px;
+  margin: 0 -10px;
+  background: #FFF;
+}
+
+.infos {
+  padding-left: 10px;
+}
+
 .message-box {
   font-size: 12.025px;         
   font-weight: bold;           
