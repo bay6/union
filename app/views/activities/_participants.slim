@@ -1,0 +1,8 @@
+.activity-participants.well.center.clearfix
+  h5 = t "activity.registered_user"
+  hr
+  - if @activity.users.size > 0
+    - @activity.users.each do |user|
+      .avatar_box
+        = link_to image_tag(user.avatar_url),
+          user.github_homepage
