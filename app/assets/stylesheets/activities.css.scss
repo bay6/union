@@ -16,5 +16,15 @@
 
   .infos {
     padding-left: 10px;
+    .info {
+      color: #BBB;
+      a {
+        color: #BBB;
+        margin-right: 10px;
+      }
+      .time_ago {
+        margin-left: 10px;
+      }
+    }
   }
 }

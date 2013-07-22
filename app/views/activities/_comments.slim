@@ -2,13 +2,6 @@
   hr
   h4 = t("activity.comment")
   .comments
-    - @activity.comments.each do |comment|
-      .comment.clearfix
-        .face.pull-left
-          = link_to image_tag(comment.user.avatar_url),
-            comment.user.github_homepage
-        .infos.pull-left
-          .info
-            = link_to comment.user.nickname, comment.user.github_homepage
-          .content
-            = comment.content
+    - @activity.comments.each_with_index do |comment, index|
+      = render :partial => 'comment',
+        :locals => { :comment => comment, :index => index }
