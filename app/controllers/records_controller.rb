@@ -15,6 +15,7 @@ class RecordsController < InheritedResources::Base
 
   def ranking
     @users = User.all.sort_by { |u| u.scores params[:sort] }.reverse
+    authorize! :update, @users
   end
 
   private

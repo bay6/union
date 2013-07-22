@@ -5,6 +5,7 @@ class Ability
     user ||= User.new # guest user (not logged in)
     can :read, :all
     can [:create, :join, :quit, :finish], Project if user.id
+    can [:create, :join, :quit, :finish, :update], User if user.id
     can :update, Project do |project|
       #todo 负责人也可以改
       project.user_id == user.id
