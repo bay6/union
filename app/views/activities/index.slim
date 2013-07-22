@@ -1,0 +1,26 @@
+h1 Listing Activities
+
+- if can? :manage, @activity
+  = link_to 'New Activity', new_activity_path
+
+table.table.table-hover
+  tr
+    th id
+    th= t "activity.title"
+    th= t "activity.start_at"
+    th= t "activity.registered_count"
+    th= t "activity.status"
+    th
+    - if can? :manage, @activity
+      th
+
+  - @activities.each do |activity|
+    tr
+      td = activity.id
+      td = activity.title
+      td = activity.start_at.to_s(:db)
+      td = activity.users.count
+      td = activity.human_status
+      td = link_to 'Show', activity
+      - if can? :manage, @Activity
+        td = link_to 'Edit', [:edit, activity]

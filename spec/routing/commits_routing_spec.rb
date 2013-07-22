@@ -30,6 +30,5 @@ describe CommitsController do
     it "routes to #destroy" do
       delete("/commits/1").should route_to("commits#destroy", :id => "1")
     end
-
   end
 end

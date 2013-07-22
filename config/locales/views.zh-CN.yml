@@ -53,6 +53,16 @@ zh-CN:
   participations:
     index:
       title: "参与项目人员"
+  notices:
+    index:
+      title: "系统公告"
+    new:
+      title: "新建系统公告"
+    edit:
+      title: "编辑系统公告"
+  messages:
+    index:
+      title: "通知"
   menu:
     ranking_list: "得分排行榜"
     rank: "排名"
@@ -66,3 +76,12 @@ zh-CN:
     name: "用户"
     grade: "级别"
     latest_commit_date: "最近一次提交时间"
+    first_commit_date: "最早提交时间"
+  activity:
+    title: "主题"
+    description: "活动描述"
+    start_at: "开始时间"
+    status: "当前状态"
+    summary: "总结"
+    registered_count: "已报名人数"
+    registered_user: "已报名会员"

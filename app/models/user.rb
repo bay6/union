@@ -12,11 +12,14 @@ class User < ActiveRecord::Base
 
   attr_accessor :login
 
+  has_many :notices, dependent: :destroy
+  has_many :messages, dependent: :destroy
   has_many :participations
   has_many :records, dependent: :destroy
   has_many :projects, through: :participations
   has_many :finished_projects, through: :participations, source: :project, conditions: ["participations.status = ?", Participation::FINISHED]
   has_many :ongoing_projects, through: :participations, source: :project, conditions: ["participations.status = ?", Participation::ONGOING]
+  has_many :unread_messages, class_name: 'Message', conditions: {status: Message::UNREAD}
   belongs_to :grade
 
   validates :name, uniqueness: true
@@ -131,6 +134,29 @@ class User < ActiveRecord::Base
   def avatar_url
     gravatar_id = Digest::MD5::hexdigest(email).downcase
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=100"
+  end
+
+  def first_commit_date
+    first_commit = records.reorder("commit_date").first
+    first_commit.nil? ? '不存在' : first_commit.commit_date
+  end
+
+  def self.cuscom_sort(sort_column, sort_direction)
+    if %w(total month week).include? sort_column
+      users = User.all.sort_by { |u| u.scores sort_column }
+      users = users.reverse if sort_direction != "asc"
+    elsif sort_column == 'first_commit_date'
+      users = User.all.sort_by { |u| u.first_commit_date }
+      users = users.reverse if sort_direction != "asc"
+    else
+      users = User.joins(:grade).order(sort_column + " " + sort_direction)
+    end
+
+    users
+  end
+
+  def github_homepage
+    "https://github.com/" + nickname.to_s
   end
 
   private

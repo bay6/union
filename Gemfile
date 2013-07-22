@@ -24,6 +24,9 @@ gem 'whenever', :require => false
 gem 'delayed_job_active_record'
 gem 'lazy_high_charts'
 gem 'newrelic_rpm'
+gem 'inherited_resources'
+gem 'redcarpet'
+gem 'jquery-ui-rails'
 
 group :assets do
   gem "twitter-bootstrap-rails"

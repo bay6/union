@@ -1,0 +1,9 @@
+header
+  h2= @notice.title
+  p.text-right
+    =link_to @notice.try(:user).try(:name), @notice.user
+    = "于#{time_ago_in_words @notice.created_at}前发布"
+p
+.notice-content
+  .well
+    = simple_format @notice.content

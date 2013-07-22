@@ -11,7 +11,38 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130713154402) do
+ActiveRecord::Schema.define(:version => 20130721063558) do
+
+  create_table "activities", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "start_at"
+    t.text     "summary"
+    t.integer  "status"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "activities_users", :id => false, :force => true do |t|
+    t.integer "activity_id"
+    t.integer "user_id"
+  end
+
+  create_table "ckeditor_assets", :force => true do |t|
+    t.string   "data_file_name",                  :null => false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    :limit => 30
+    t.string   "type",              :limit => 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
   create_table "commits", :force => true do |t|
     t.datetime "commit_date"
@@ -52,6 +83,28 @@ ActiveRecord::Schema.define(:version => 20130713154402) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "messages", :force => true do |t|
+    t.integer  "notice_id"
+    t.integer  "user_id"
+    t.string   "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "category"
+  end
+
+  add_index "messages", ["notice_id"], :name => "index_messages_on_notice_id"
+  add_index "messages", ["user_id"], :name => "index_messages_on_user_id"
+
+  create_table "notices", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "notices", ["user_id"], :name => "index_notices_on_user_id"
+
   create_table "participations", :force => true do |t|
     t.integer  "project_id"
     t.integer  "user_id"
@@ -75,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20130713154402) do
     t.string   "status"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.text     "content"
   end
 
   add_index "projects", ["grade_id"], :name => "index_projects_on_grade_id"

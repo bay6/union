@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :record do
-    project nil
-    user nil
+    project_id
+    user_id
     category "MyString"
   end
 end
