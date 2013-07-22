@@ -1,4 +1,6 @@
 Union::Application.routes.draw do
+  get "comments/create"
+
   resources :messages, :only => [:index, :destroy] do
     collection do
       post 'clear'
@@ -16,11 +18,13 @@ Union::Application.routes.draw do
   resources :participations
 
   resources :grades
-  resources :activities do
 
+  resources :activities do
     member do
       post :register
     end
+
+    resources :comments
   end
 
   resources :projects do
