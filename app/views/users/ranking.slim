@@ -17,7 +17,7 @@ div.ranking
       - @users.each_with_index do |user, index|
         tr
           td= link_to user.id, user_path(user)
-          td= link_to user.name, user
+          td= link_to "#{user.name}(#{user.try(:nickname)})", user
           td= user.email
           td= user.grade.try(:name)
           td= user.scores
