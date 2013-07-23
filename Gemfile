@@ -29,6 +29,11 @@ gem 'redcarpet'
 gem 'jquery-ui-rails'
 gem 'font-awesome-rails'
 
+# Attachment
+gem 'carrierwave'
+gem 'rmagick'
+gem 'mime-types'
+
 group :assets do
   gem "twitter-bootstrap-rails"
   gem 'sass-rails',   '~> 3.2.3'

@@ -13,10 +13,10 @@ describe "User" do
       it{ should be_able_to(:manage, :all) }
     end
 
-    context "when is an account normal user" do 
+    context "when is an account normal user" do
       let(:user){ FactoryGirl.create(:user) }
 
-      context Project do 
+      context Project do
         it{ should be_able_to(:create, Project) }
         it{ should be_able_to(:join, Project) }
         it{ should be_able_to(:quit, Project) }
@@ -28,6 +28,7 @@ describe "User" do
     context "when is an guest" do
       let(:user){ User.new }
       it{ should be_able_to(:show, Badge) }
+      it{ should be_able_to(:index, Badge) }
       it{ should_not be_able_to(:update, Badge)}
     end
   end

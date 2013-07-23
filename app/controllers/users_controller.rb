@@ -1,6 +1,7 @@
 #encoding: utf-8
 class UsersController < InheritedResources::Base
-  before_filter :authenticate_user!
+
+  load_and_authorize_resource
   helper_method :sort_column,:sort_direction
 
   def index

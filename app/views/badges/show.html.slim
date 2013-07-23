@@ -1,4 +1,3 @@
-p#notice = notice
 
 p
   strong Name zh:
@@ -13,6 +12,8 @@ p
   strong Description:
   = @badge.description
 
-= link_to 'Edit', edit_badge_path(@badge)
-'|
-= link_to 'Back', badges_path
+- if can? :manage, Badge
+
+    = link_to 'Edit', edit_badge_path(@badge)
+    '|
+    = link_to 'Back', badges_path
