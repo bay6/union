@@ -61,6 +61,8 @@ group :test do
 
   gem 'database_cleaner', '>= 0.7.0'
   gem 'shoulda-matchers', '>= 1.4.2'
+  gem 'selenium-webdriver'
+  gem 'capybara'
 end
 
 group :production do
