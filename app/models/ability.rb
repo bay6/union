@@ -19,6 +19,7 @@ class Ability
   def normal_user(user)
     guest(user)
     can [:create, :join, :quit, :finish], Project if user.id
+    can [:create, :join, :quit, :finish, :update], User if user.id
     can :update, Project do |project|
       project.user_id == user.id
     end

@@ -31,3 +31,6 @@ zh-CN:
 
   unauthorized:
       default: "你没有权限访问此页面。"
+  common:
+    floor: "楼"
+    login: "登录"

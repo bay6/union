@@ -18,6 +18,6 @@
           li= link_to "得分排行", rankings_path
           li= link_to '工会成长情况', union_path
           li= link_to '新手入职指南', instruction_path
-          li= link_to '活动报名', activities_path
+          -#li= link_to '活动报名', activities_path
           li= link_to '公会成员', users_path if can? :manage, User
           li= link_to '系统公告', notices_path if can? :manage, Notice

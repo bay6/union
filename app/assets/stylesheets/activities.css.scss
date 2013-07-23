@@ -1,0 +1,39 @@
+.comments {
+  .face img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .comment {
+    border-bottom: 1px solid #DDD;
+    padding: 8px 10px;
+    margin: 0 -10px;
+    background: #FFF;
+    .content {
+      width: 649px;
+    }
+  }
+
+  .infos {
+    padding-left: 10px;
+    .info {
+      color: #BBB;
+      a {
+        color: #BBB;
+        margin-right: 10px;
+      }
+      .time_ago {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+.create_comment {
+  position: relative;
+  input {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+}

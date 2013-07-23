@@ -1,0 +1,10 @@
+- if current_user
+  h4 = t("activity.create_comment")
+  .create_comment.form
+    = form_for(Comment.new, :remote => true, :url => activity_comments_path(@activity)) do |f|
+      = f.text_area :content, :class => "span10",
+        :rows => "4", :tabindex => "1"
+      = f.submit t("activity.submit_comment"),
+        :class => "btn btn-primary", :tabindex => "2"
+- else
+  = render "need_login_to_comment"

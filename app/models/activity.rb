@@ -1,14 +1,17 @@
+#encoding: utf-8
 class Activity < ActiveRecord::Base
   attr_accessible :description, :start_at, :summary, :title, :status
 
   has_and_belongs_to_many :users
+  has_many :comments, :as => :commentable
+
   validates :title, :start_at, presence: true
   validate :start_at_should_be_future 
 
   STATUS = {
-    0 => "准备中",
-    1 => "报名中",
-    2 => "已结束"
+    0 => '准备中',
+    1 => '报名中',
+    2 => '已结束'
   }
 
   def human_status

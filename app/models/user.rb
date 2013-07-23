@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   has_many :finished_projects, through: :participations, source: :project, conditions: ["participations.status = ?", Participation::FINISHED]
   has_many :ongoing_projects, through: :participations, source: :project, conditions: ["participations.status = ?", Participation::ONGOING]
   has_many :unread_messages, class_name: 'Message', conditions: {status: Message::UNREAD}
+  has_many :comments
   belongs_to :grade
 
   validates :name, uniqueness: true
