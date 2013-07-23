@@ -29,6 +29,11 @@ gem 'redcarpet'
 gem 'jquery-ui-rails'
 gem 'font-awesome-rails'
 
+# Attachment
+gem 'carrierwave'
+gem 'rmagick'
+gem 'mime-types'
+
 group :assets do
   gem "twitter-bootstrap-rails"
   gem 'sass-rails',   '~> 3.2.3'
@@ -57,6 +62,12 @@ end
 group :test do
   gem 'capybara'
   gem 'simplecov', require: false
+  gem 'spork-rails', :git => 'http://github.com/rdd-giga/spork-rails.git', :require => false
+
+  gem 'database_cleaner', '>= 0.7.0'
+  gem 'shoulda-matchers', '>= 1.4.2'
+  gem 'selenium-webdriver'
+  gem 'capybara'
 end
 
 group :production do
