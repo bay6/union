@@ -15,14 +15,8 @@
           p= project.description
 
   .span3
-    .well
-      .avatar_box= link_to image_tag(@user.avatar_url), "https://github.com/#{@user.try(:nickname)}"
-      p 个人信息
-      ul.user-info.unstyled.muted
-        li
-        li = "姓名: #{@user.name}"
-        li = "邮箱: #{@user.email}"
-        li = "等级: #{@user.grade.try(:name)}"
+    = render :partial => 'user_info', :locals => {:user => @user}
+
     .well
       p 个人成长情况
       ul.user-info.unstyled.muted
