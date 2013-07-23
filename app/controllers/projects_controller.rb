@@ -1,5 +1,5 @@
 class ProjectsController < InheritedResources::Base
-  load_and_authorize_resource :except => [:ongoing]
+  load_and_authorize_resource
 
   def index
     #@projects = Project.cached_all_projects

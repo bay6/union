@@ -1,5 +1,6 @@
 Union::Application.routes.draw do
-  get "comments/create"
+
+  resources :badges, :except =>[:show]
 
   resources :messages, :only => [:index, :destroy] do
     collection do
@@ -35,11 +36,14 @@ Union::Application.routes.draw do
     end
   end
 
+
   get "home/index"
   get :instruction, to: 'home#instruction', as: 'instruction'
   get :union_report, to: 'home#union_report', as: 'union'
   get 'ongoing', to: 'projects#ongoing', as: 'ongoing'
 
+
+  get 'users/sign_up' => redirect("/")
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   authenticated :user do
@@ -55,5 +59,8 @@ Union::Application.routes.draw do
   get "/users" => "users#index", as: "users"
   get "/user/:id/edit" => "users#edit", as: "edit_user"
   get "search" => "projects#ongoing"
+  get 'badges/:name_en', to: 'badges#show', as: 'show_badge'
+  get "comments/create"
+
   resources :users, :path => '', :only => [:show, :update]
 end
