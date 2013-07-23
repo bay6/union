@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130722142214) do
+ActiveRecord::Schema.define(:version => 20130723153355) do
 
   create_table "activities", :force => true do |t|
     t.string   "title"
@@ -26,6 +26,17 @@ ActiveRecord::Schema.define(:version => 20130722142214) do
   create_table "activities_users", :id => false, :force => true do |t|
     t.integer "activity_id"
     t.integer "user_id"
+  end
+
+  create_table "attachments", :force => true do |t|
+    t.string   "file_name"
+    t.string   "content_type"
+    t.string   "file_size"
+    t.string   "attachmentable_type"
+    t.integer  "attachmentable_id"
+    t.string   "attachment"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "badge_users", :force => true do |t|
@@ -43,22 +54,7 @@ ActiveRecord::Schema.define(:version => 20130722142214) do
     t.text     "description"
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
-
-  create_table "ckeditor_assets", :force => true do |t|
-    t.string   "data_file_name",                  :null => false
-    t.string   "data_content_type"
-    t.integer  "data_file_size"
-    t.integer  "assetable_id"
-    t.string   "assetable_type",    :limit => 30
-    t.string   "type",              :limit => 30
-    t.integer  "width"
-    t.integer  "height"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
   end
-
-  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
-  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
   create_table "comments", :force => true do |t|
     t.text     "content"
