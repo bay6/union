@@ -109,6 +109,8 @@ GEM
       multipart-post (~> 1.1)
     faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
+    font-awesome-rails (3.2.1.2)
+      railties (>= 3.2, < 5.0)
     has_scope (0.5.1)
     hash-deep-merge (0.1.1)
     hashie (2.0.5)
@@ -339,6 +341,7 @@ DEPENDENCIES
   devise-i18n-views!
   exception_notification
   factory_girl_rails
+  font-awesome-rails
   inherited_resources
   jquery-rails
   jquery-ui-rails

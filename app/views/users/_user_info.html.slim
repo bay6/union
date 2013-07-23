@@ -1,0 +1,15 @@
+.well
+  .avatar_box.big_avatar_box
+    = link_to image_tag(user.avatar_url), "https://github.com/#{user.try(:nickname)}"
+  hr
+  ul.user-info.unstyled
+    li
+    li
+      em.icon-user
+      = user.name
+    li
+      em.icon-envelope
+      = user.email
+    li
+      em.icon-gear
+      = user.grade.try(:name)
