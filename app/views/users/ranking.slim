@@ -7,7 +7,6 @@ div.ranking
       tr
         th= sortable '排名'
         th= sortable "name", model_class.human_attribute_name(:name)
-        th= sortable "email", model_class.human_attribute_name(:email)
         th= sortable "grades.weights", model_class.human_attribute_name(:grade)
         th= sortable "total", t("menu.total_score")
         th= sortable "month", t("menu.month_score")
@@ -18,7 +17,6 @@ div.ranking
         tr
           td= index + 1
           td= link_to "#{user.name}(#{user.try(:nickname)})", user
-          td= user.email
           td= user.grade.try(:name)
           td= user.scores
           td= user.scores('month')
