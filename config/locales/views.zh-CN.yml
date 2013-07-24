@@ -75,8 +75,8 @@ zh-CN:
     email: "邮箱"
     name: "用户"
     grade: "级别"
-    latest_commit_date: "最近一次提交时间"
-    first_commit_date: "最早提交时间"
+    latest_commit_date: "最近一次提交日期"
+    first_commit_date: "最早提交日期"
   activity:
     title: "主题"
     description: "活动描述"
