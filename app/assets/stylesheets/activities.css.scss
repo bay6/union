@@ -1,5 +1,5 @@
 .comments {
-  margin: 50px 0 50px 0;
+  margin-top: 50px;
   .face img {
     width: 48px;
     height: 48px;
@@ -11,6 +11,7 @@
     margin: 0 -10px;
     background: #FFF;
     .content {
+      margin-top: 3px;
       width: 649px;
     }
   }
@@ -21,17 +22,18 @@
       color: #BBB;
       a {
         color: #BBB;
-        margin-right: 10px;
-      }
-      .time_ago {
-        margin-left: 10px;
+        margin: 0 10px 0 10px;
+        text-decoration: underline;
       }
     }
   }
 }
 
 .create_comment {
-  position: relative;
+  margin-top: 50px;
+  form {
+    position: relative;
+  }
   input {
     position: absolute;
     top: 10px;

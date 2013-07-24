@@ -1,5 +1,5 @@
 div class=(@activity.has_comments? ? "comments" : "comments hidden")
   h4 = t("activity.comment")
   - @activity.comments.each_with_index do |comment, index|
-    = render :partial => 'comment',
+    = render :partial => 'comments/comment',
       :locals => { :comment => comment, :index => index }

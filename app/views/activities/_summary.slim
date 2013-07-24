@@ -1,4 +1,4 @@
 - if @activity.completed?
   .summary
     h4= t "activity.summary"
-    = @activity.summary.html_safe
+    = markdown @activity.summary.html_safe
