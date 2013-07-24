@@ -160,6 +160,10 @@ class User < ActiveRecord::Base
     "https://github.com/" + nickname.to_s
   end
 
+  def name_with_nickname
+    name + (nickname.blank? ? "" : "(#{nickname})")
+  end
+
   private
   def default_user_grade
     self.grade = Grade.find_by_weights(1)

@@ -3,8 +3,8 @@ class RecordsController < InheritedResources::Base
   helper_method :sort_column,:sort_direction
 
   def index
-    @records = params[:user_id].blank? ? Record: Record.where(user_id: params[:user_id])
-    @records = params[:commit_date].blank? ? @records: @records.where(commit_date: params[:commit_date])
+    @records = params[:user_id].blank? ? Record : Record.where(user_id: params[:user_id])
+    @records = params[:commit_date].blank? ? @records : @records.where(commit_date: params[:commit_date])
     @records = @records.unscoped.order(sort_column + " " + sort_direction).page params[:page]
 
     respond_to do |format|
