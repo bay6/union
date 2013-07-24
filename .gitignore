@@ -29,6 +29,8 @@ tags
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+db/backup/*.sql.gz
+
 
 # Ignore other unneeded files.
 doc/
