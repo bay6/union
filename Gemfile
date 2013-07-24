@@ -26,6 +26,7 @@ gem 'lazy_high_charts'
 gem 'newrelic_rpm'
 gem 'inherited_resources'
 gem 'redcarpet'
+gem 'md_emoji'
 gem 'jquery-ui-rails'
 gem 'font-awesome-rails'
 

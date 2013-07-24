@@ -4,9 +4,9 @@
       comment.user.github_homepage
   .infos.pull-left
     .info
+      = (index+1).to_s + t("common.floor")
       = link_to comment.user.nickname, comment.user.github_homepage
-      = index.to_s + t("common.floor")
       span.time_ago
-        = time_ago_in_words comment.created_at
+        = "#{time_ago_in_words comment.created_at}前"
     .content
-      = comment.content
+      = markdown comment.content.html_safe
