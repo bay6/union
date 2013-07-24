@@ -1,7 +1,10 @@
-h1 Listing Activities
+- model_class = Activity
+
+div class="page-header"
+  h1=t'activity.index'
 
 - if can? :manage, @activity
-  = link_to 'New Activity', new_activity_path
+  = link_to t("activity.new"), new_activity_path
 
 table.table.table-hover
   tr
@@ -17,10 +20,9 @@ table.table.table-hover
   - @activities.each do |activity|
     tr
       td = activity.id
-      td = activity.title
+      td = link_to activity.title, activity_path(activity)
       td = activity.start_at.to_s(:db)
       td = activity.users.count
       td = activity.human_status
-      td = link_to 'Show', activity
       - if can? :manage, @Activity
-        td = link_to 'Edit', [:edit, activity]
+        td = link_to t('activity.edit'), [:edit, activity]
