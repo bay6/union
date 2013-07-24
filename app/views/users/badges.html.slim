@@ -1,0 +1,22 @@
+.row-fluid
+  .span9
+    h3.top_slider ="#{@user.name} 的徽章列表"
+
+    - @badges.each_slice(3).to_a.each do |row_data|
+      hr
+      .row-fluid.badges
+        - row_data.each do |badge|
+          .span4
+            .badge-img
+              a href=show_badge_path(:name_en => badge.name_en)
+                img src=badge.image
+
+            .badge-info
+              h3=link_to badge.name_zh, show_badge_path(:name_en => badge.name_en)
+              p.desc=badge.description
+              p.count
+                = badge.award_info
+
+  .span3
+    = render :partial => 'user_info', :locals => {:user => @user}
+
