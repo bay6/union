@@ -163,6 +163,9 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    md_emoji (0.0.6)
+      rails (>= 3.1.0)
+      redcarpet (>= 2.0)
     meta_request (0.2.7)
       callsite
       rack-contrib
@@ -377,6 +380,7 @@ DEPENDENCIES
   kaminari
   lazy_high_charts
   less-rails
+  md_emoji
   meta_request
   mime-types
   mini_magick
