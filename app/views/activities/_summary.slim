@@ -1,4 +1,4 @@
 - if @activity.completed?
-  hr
-  h3= t "activity.summary"
-  p = @activity.summary.html_safe
+  .summary
+    h4= t "activity.summary"
+    = @activity.summary.html_safe

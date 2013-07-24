@@ -36,7 +36,7 @@ class Activity < ActiveRecord::Base
   def to_complete
     self.status = 2
   end
-  
+
   def perpare?
     self.status == 0
   end
@@ -47,6 +47,10 @@ class Activity < ActiveRecord::Base
 
   def completed?
     self.status == 2
+  end
+
+  def has_comments?
+    (comments.count == 0) ? false : true
   end
 
   private
