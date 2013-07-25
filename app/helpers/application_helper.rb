@@ -57,6 +57,17 @@ module ApplicationHelper
     raw $markdown.render(text)
   end
 
+  def format_labels(labels)
+    html = ''
+    labels.each do |label|
+      html += content_tag :span, :class => "label label-info" do
+        label
+      end
+      html += '&nbsp;'
+    end
+    html.html_safe
+  end
+
   private
   def format_year(time)
     (time.year == Time.zone.now.year) ? :stamp : :stamp_with_year
