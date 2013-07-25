@@ -16,6 +16,9 @@ class BadgesController < InheritedResources::Base
   end
 
   def load_award_modal
+    respond_to do |format|
+      format.js
+    end
   end
 
   def award
