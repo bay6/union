@@ -1,4 +1,4 @@
-#encoding:utf-8
+#encoding: utf-8
 class Project < ActiveRecord::Base
   GRADING   = 'grading'
   ONGOING   = 'ongoing'

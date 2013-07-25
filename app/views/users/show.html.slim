@@ -24,12 +24,6 @@
   .span3
     = render :partial => 'user_info', :locals => {:user => @user}
 
-    .well
-      p 个人成长情况
-      ul.user-info.unstyled.muted
-        li 总成长值: #{link_to @user.score, records_path(user_id: @user.id)}
-        li = "本月成长值: #{@user.month_exp}"
-        li = "本周成长值: #{@user.week_exp}"
-
-  .span12
+  .span9
     = high_chart("my_id4", @chart)
+

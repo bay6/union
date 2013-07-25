@@ -9,7 +9,7 @@
   - if @activity.going? && !@activity.has_registered(current_user)
     = link_to "我要报名",
       register_activity_path(@activity), method: "post",
-      class: "btn btn-success btn-large btn-block"
+      class: "registry-activity btn btn-success btn-large btn-block #{'disabled' unless current_user}"
   - elsif @activity.has_registered(current_user)
     = link_to "已经报名", '#',
       class: "btn btn-success btn-large btn-block",

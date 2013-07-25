@@ -10,6 +10,7 @@
 #= require highcharts
 #= require projects
 #= require activities
+#= require select2
 #= require_self
 
 $ ->

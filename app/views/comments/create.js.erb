@@ -1,6 +1,7 @@
 <% if @comment.errors.any? %>
   $(".create_comment textarea").focus()
 <% else %>
-  $(".comments").append("<%= j (render @comment, :index => @activity.comments.count-1) %>");
+  $(".comments").removeClass("hidden")
+  $(".comments").append("<%= j (render @comment, :index => @activity.comments.count) %>");
   $(".create_comment textarea").val('')
 <% end %>

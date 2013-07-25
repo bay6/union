@@ -1,5 +1,4 @@
-h4 = t("activity.create_comment")
 span 需要
-= link_to(t("common.login"), "/users/sign_in", :class => "btn btn-primary")
+= link_to(t("common.login"), user_omniauth_authorize_path(:github), :class => "btn btn-primary")
 span 才可以回复
 

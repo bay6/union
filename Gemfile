@@ -26,9 +26,12 @@ gem 'lazy_high_charts'
 gem 'newrelic_rpm'
 gem 'inherited_resources'
 gem 'redcarpet'
+gem 'md_emoji'
 gem 'jquery-ui-rails'
 gem 'font-awesome-rails'
 gem 'acts-as-taggable-on',   '~> 2.3.3'
+gem "select2-rails"
+gem 'coffee-rails', '~> 3.2.1'
 
 # Attachment
 gem 'carrierwave'
@@ -38,7 +41,6 @@ gem 'mime-types'
 group :assets do
   gem "twitter-bootstrap-rails"
   gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-rails'
   gem "turbo-sprockets-rails3"
