@@ -4,6 +4,7 @@
  *= require jquery.ui.slider
  *= require jquery-ui-timepicker-addon
  *= require font-awesome
+ *= require select2
  *= require_tree .
  *= require_self
  */

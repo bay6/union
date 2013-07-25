@@ -29,6 +29,7 @@ class Ability
     can [:show,:index], Badge
     can :ranking, User
     can :ongoing, Project
+    can :badges, User
   end
 
 end

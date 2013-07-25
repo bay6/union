@@ -1,6 +1,15 @@
 Union::Application.routes.draw do
 
-  resources :badges, :except =>[:show]
+  resources :badges, :except =>[:show] do
+    member do
+      get 'load_award_modal'
+    end
+
+    collection do
+      post 'award'
+      get 'users'
+    end
+  end
 
   resources :messages, :only => [:index, :destroy] do
     collection do
@@ -62,5 +71,10 @@ Union::Application.routes.draw do
   get 'badges/:name_en', to: 'badges#show', as: 'show_badge'
   get "comments/create"
 
+  resources :users, :only => [] do
+    member do
+      get 'badges'
+    end
+  end
   resources :users, :path => '', :only => [:show, :update]
 end

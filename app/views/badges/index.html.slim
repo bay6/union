@@ -12,8 +12,26 @@ h3.top_slider
         .badge-img
           a href=show_badge_path(:name_en => badge.name_en)
             img src=badge.image
+
         .badge-info
           h3=link_to badge.name_zh, show_badge_path(:name_en => badge.name_en)
           p.desc=badge.description
-          p.count= badge.award_info
+          p.count
+            = badge.award_info
+            -if can? :manage, Badge
+              = link_to '站长颁发', load_award_modal_badge_path(badge), :remote => true, :class=>'award-action'
+
+
+
+-if can? :manage, Badge
+  #award-form-modal.modal.hide.fade
+    .modal-header
+      a.close  data-dismiss="modal"  ×
+      h3 颁发徽章
+    .modal-body
+      = form_tag award_badges_path, class:'form-inline'
+        = hidden_field_tag 'badge_id'
+        = select_tag 'users', options_for_select(User.all.collect {|p| [ p.name, p.id ] }), id:'award-users', data: { delimiter: ',', placeholder: "选择颁发人员", style:'width:200px;'}, multiple: true
+        = submit_tag '立即颁发' , class:'btn btn-info'
+
 

@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   has_many :ongoing_projects, through: :participations, source: :project, conditions: ["participations.status = ?", Participation::ONGOING]
   has_many :unread_messages, class_name: 'Message', conditions: {status: Message::UNREAD}
   has_many :comments
+  has_many :badge_users, class_name: 'BadgeUsers'
+  has_many :badges, :through => :badge_users
   belongs_to :grade
 
   validates :name, uniqueness: true
@@ -82,7 +84,7 @@ class User < ActiveRecord::Base
 
   def update_records_by_commits
     self.ongoing_projects.each do |project|
-      user_join_date = Participation.find_by_user_id_and_project_id(self.id, project.id).created_at - 20.days #dirty fixed to added those scores before project 
+      user_join_date = Participation.find_by_user_id_and_project_id(self.id, project.id).created_at - 20.days #dirty fixed to added those scores before project
       commits_date_hash = project.repository.commits.where('commit_date >= :user_join_date and user_uid = :user_uid', user_join_date: user_join_date,  user_uid: self.uid).group('date(commit_date)').count
       commits_date_hash.each{|date, commits_count| Record.generate_or_update(self, date, commits_count, project)}
     end

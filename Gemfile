@@ -29,6 +29,7 @@ gem 'redcarpet'
 gem 'md_emoji'
 gem 'jquery-ui-rails'
 gem 'font-awesome-rails'
+gem "select2-rails"
 
 # Attachment
 gem 'carrierwave'
