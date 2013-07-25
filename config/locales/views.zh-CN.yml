@@ -36,6 +36,8 @@ zh-CN:
   users:
     show:
       title: "个人资料"
+    edit:
+      title: "编辑资料"
   home:
     index:
       title: "我的主页"

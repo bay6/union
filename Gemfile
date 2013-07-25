@@ -28,7 +28,7 @@ gem 'inherited_resources'
 gem 'redcarpet'
 gem 'jquery-ui-rails'
 gem 'font-awesome-rails'
-gem 'acts-as-taggable-on'
+gem 'acts-as-taggable-on',   '~> 2.3.3'
 
 # Attachment
 gem 'carrierwave'

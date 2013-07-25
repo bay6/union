@@ -8,9 +8,12 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :password_confirmation,
                   :remember_me, :login, :name, :provider,
-                  :uid, :grade_id, :admin, :grade, :nickname
+                  :uid, :grade_id, :admin, :grade, :nickname, :label_list
 
-  attr_accessor :login
+  attr_accessor :login, :label_list
+
+  acts_as_taggable
+  acts_as_taggable_on :labels
 
   has_many :notices, dependent: :destroy
   has_many :messages, dependent: :destroy
