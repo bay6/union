@@ -12,12 +12,16 @@
       = user.email
     li
       em.icon-gear
-      = user.grade.try(:name)
+      = user.try(:grade).try(:name)
+    - unless user.label_list.blank?
+      li
+        em.icon-bookmark
+        = format_labels user.label_list
 
 .well
   p 个人成长情况
   ul.user-info.unstyled.muted
-    li 总成长值: #{link_to @user.score, records_path(user_id: @user.id)}
-    li 徽章个数: #{link_to @user.badges.count, badges_user_path(@user) }
-    li = "本月成长值: #{@user.month_exp}"
-    li = "本周成长值: #{@user.week_exp}"
+    li 总成长值: #{link_to user.score, records_path(user_id: user.id)}
+    li 徽章个数: #{link_to user.badges.count, badges_user_path(user) }
+    li = "本月成长值: #{user.month_exp}"
+    li = "本周成长值: #{user.week_exp}"

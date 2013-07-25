@@ -29,6 +29,7 @@ gem 'redcarpet'
 gem 'md_emoji'
 gem 'jquery-ui-rails'
 gem 'font-awesome-rails'
+gem 'acts-as-taggable-on',   '~> 2.3.3'
 gem "select2-rails"
 gem 'coffee-rails', '~> 3.2.1'
 

@@ -1,3 +1,4 @@
+#encoding:utf-8
 class BadgeUsers < ActiveRecord::Base
   attr_accessible :content, :badge_id, :user_id, :user, :badge
 

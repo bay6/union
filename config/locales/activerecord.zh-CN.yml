@@ -26,6 +26,7 @@ zh-CN:
         updated_at: "更新时间"
         last_sign_in_at: "上次登录时间"
         grade: "等级"
+        label_list: "称谓"
       project:
         name: "名称"
         description: "描述"
