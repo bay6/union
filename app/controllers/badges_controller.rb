@@ -13,6 +13,23 @@ class BadgesController < InheritedResources::Base
     else
       render action: 'new'
     end
-
   end
+
+  def load_award_modal
+  end
+
+  def award
+    badge = Badge.find(params[:badge_id])
+    redirect_to badges_path, :notice => 'Award faild with some error.' unless badge
+    params[:users].each  do |id|
+      user = User.find(id)
+      BadgeUsers.create(:badge => badge, :user=> user)
+    end
+    redirect_to badges_path, :notice => 'Award successfully.'
+  end
+
+  def users
+    render json: @users
+  end
+
 end

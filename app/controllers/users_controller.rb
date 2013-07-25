@@ -32,6 +32,10 @@ class UsersController < InheritedResources::Base
     @users = Kaminari.paginate_array(@users).page params[:page]
   end
 
+  def badges
+    @badges = @user.badges
+  end
+
   private
 
   def sort_column
