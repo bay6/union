@@ -89,3 +89,6 @@ zh-CN:
     submit_comment: "提交评论"
     create_comment: "发表评论"
     submitting: "正在提交..."
+    new: "新建活动"
+    index: "活动列表"
+    edit: "编辑活动"
