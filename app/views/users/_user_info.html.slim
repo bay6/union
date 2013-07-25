@@ -13,6 +13,10 @@
     li
       em.icon-gear
       = user.try(:grade).try(:name)
+    - unless user.label_list.blank?
+      li
+        em.icon-bookmark
+        = format_labels user.label_list
 
 .well
   p 个人成长情况
