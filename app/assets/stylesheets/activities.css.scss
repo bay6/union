@@ -39,6 +39,41 @@
     top: 10px;
     right: 10px;
   }
+
+  .editor_toolbar {
+    font-size: 13px;
+    ul {
+      margin: 0 0 2px 0;
+      li {
+        margin-right: 10px;
+        list-style: none;
+        a {
+          padding: 0 6px;
+          color: #666;
+        }
+      }
+      li.active a {
+        padding: 0 5px;
+        border: 1px solid #ddd;
+        -moz-border-radius: 8px;
+        -webkit-border-radius: 8px;
+        border-radius: 8px;
+      }
+    }
+  }
+  #preview {
+    margin-top: 0px;
+    border: 1px solid #ccc;
+    padding: 4px;
+    min-height: 400px;
+    overflow: hidden;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    width: 579px;
+    margin-bottom: 10px;
+    min-height: 80px;
+  }
 }
 
 .summary {
