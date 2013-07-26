@@ -1,0 +1,6 @@
+.editor_toolbar
+  ul.pills.clearfix
+    li.edit.active.pull-left
+      = link_to t("common.edit"), "#"
+    li.preview.pull-left
+      = link_to t("common.preview"), "/comment/preview", :remote => true

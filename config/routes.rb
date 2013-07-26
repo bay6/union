@@ -37,6 +37,8 @@ Union::Application.routes.draw do
     resources :comments
   end
 
+  post 'comment/preview', to: 'comments#preview', as: 'comment_preview'
+
   resources :projects do
     member do
       post 'join'
