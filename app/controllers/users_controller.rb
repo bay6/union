@@ -41,7 +41,7 @@ class UsersController < InheritedResources::Base
   def sort_column
     extra_columns = %w(total month week first_commit_date grades.weights)
     columns = User.column_names + extra_columns
-    columns.include?(params[:sort]) ? params[:sort] : "total"
+    columns.include?(params[:sort]) ? params[:sort] : "month"
   end
 
   def sort_direction
