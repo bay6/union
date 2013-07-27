@@ -1,34 +1,29 @@
 .row-fluid
   .span9
     h2 正进行中的项目(#{@user.ongoing_projects.count})
-    .row-fluid
-      - @user.ongoing_projects.each do |project|
-        .span4
-          h4= link_to project.name, project
-          p= project.description
+    -@user.ongoing_projects.each_slice(3) do |projects|
+      ul.thumbnails
+        - projects.each do |project|
+          li.span4
+            .thumbnail
+              .caption
+                h4= link_to project.name, project
+                p= project.description
     hr
-    h2 已完成的项目(#{@user.finished_projects.count})
-    .row-fluid
-      - @user.finished_projects.each do |project|
-        .span4
-          h4= link_to project.name, project
-          p= project.description
+    - if @user.finished_projects.count > 0
+      h2 已完成的项目(#{@user.finished_projects.count})
+      -@user.finished_projects.each_slice(3) do |projects|
+        ul.thumbnails
+          - projects.each do |project|
+            li.span4
+              .thumbnail
+                .caption
+                  h4= link_to project.name, project
+                  p= project.description
 
   .span3
-    .well
-      .avatar_box= link_to image_tag(@user.avatar_url), "https://github.com/#{@user.try(:nickname)}"
-      p 个人信息
-      ul.user-info.unstyled.muted
-        li
-        li = "姓名: #{@user.name}"
-        li = "邮箱: #{@user.email}"
-        li = "等级: #{@user.grade.try(:name)}"
-    .well
-      p 个人成长情况
-      ul.user-info.unstyled.muted
-        li 总成长值: #{link_to @user.score, records_path(user_id: @user.id)}
-        li = "本月成长值: #{@user.month_exp}"
-        li = "本周成长值: #{@user.week_exp}"
+    = render :partial => "user_info", :locals => {:user => @user}
 
-  .span12
+  .span9
     = high_chart("my_id4", @chart)
+

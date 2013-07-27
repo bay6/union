@@ -1,6 +1,7 @@
 #encoding: utf-8
 class UsersController < InheritedResources::Base
-  before_filter :authenticate_user!
+
+  load_and_authorize_resource
   helper_method :sort_column,:sort_direction
 
   def index
@@ -31,12 +32,16 @@ class UsersController < InheritedResources::Base
     @users = Kaminari.paginate_array(@users).page params[:page]
   end
 
+  def badges
+    @badges = @user.badges
+  end
+
   private
 
   def sort_column
     extra_columns = %w(total month week first_commit_date grades.weights)
     columns = User.column_names + extra_columns
-    columns.include?(params[:sort]) ? params[:sort] : "total"
+    columns.include?(params[:sort]) ? params[:sort] : "month"
   end
 
   def sort_direction

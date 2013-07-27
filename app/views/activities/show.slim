@@ -5,35 +5,11 @@
       h2 = @activity.title
       hr
     .activity-body
-      .activity-description.span8
-        h4 = t("activity.description")
-        = markdown @activity.description.html_safe
-
-        - if @activity.completed?
-          h3= t "activity.summary"
-          p = @activity.summary.html_safe
+      .span8.activity-main
+        = render 'description'
+        = render 'summary'
+        = render 'comments'
+        = render "create_comment"
       .sider-right.span4
-        .activity-info.well
-          h5
-            = t("activity.start_at") + ": "
-            span.alert-success = @activity.start_at.to_s(:db)
-          h5
-            = t("activity.status") + ": "
-            span.alert-success = @activity.human_status
-
-          - if @activity.going? && !@activity.has_registered(current_user)
-            = link_to "我要报名",
-              register_activity_path(@activity), method: "post",
-              class: "btn btn-success btn-large btn-block"
-          - elsif @activity.has_registered(current_user)
-            = link_to "已经报名", '#',
-              class: "btn btn-success btn-large btn-block",
-              disabled: true
-        .activity-participants.well.center.clearfix
-          h5 = t "activity.registered_user"
-          hr
-          - if @activity.users.size > 0
-            - @activity.users.each do |user|
-              .avatar_box
-                = link_to image_tag(user.avatar_url),
-                  user.github_homepage
+        = render 'info'
+        = render 'participants'

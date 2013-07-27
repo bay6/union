@@ -1,0 +1,10 @@
+<% if @comment.errors.any? %>
+  $(".create_comment textarea").focus()
+<% else %>
+  $(".comments").removeClass("hidden")
+  $(".comments").append("<%= j (render @comment, :index => @activity.comments.count-1) %>");
+  $(".create_comment textarea").val('')
+  $(".create_comment #preview").html('')
+  $(".editor_toolbar .preview").removeClass("active")
+  $(".editor_toolbar .edit").addClass("active")
+<% end %>

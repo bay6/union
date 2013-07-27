@@ -3,14 +3,33 @@ class Ability
 
   def initialize(user)
     user ||= User.new # guest user (not logged in)
-    can :read, :all
-    can [:create, :join, :quit, :finish], Project if user.id
-    can [:create, :join, :quit, :finish, :update], User if user.id
+    if user.new_record?
+      guest(user)
+    elsif user.admin
+      admin(user)
+    else
+      normal_user(user)
+    end
+  end
+
+  def admin(user)
+    can :manage, :all
+  end
+
+  def normal_user(user)
+    guest(user)
+    can [:create, :join, :quit, :finish], Project
     can :update, Project do |project|
-      #todo 负责人也可以改
       project.user_id == user.id
     end
-    can :manage, :all if user.admin?
+  end
+
+  def guest(user)
+    can :read, :all
+    can [:show,:index], Badge
+    can :ranking, User
+    can :ongoing, Project
+    can :badges, User
   end
 
 end

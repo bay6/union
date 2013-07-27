@@ -18,12 +18,4 @@
               h4= link_to project.name, project
               p= project.description
   .span3
-    .well
-      .avatar_box= link_to image_tag(@user.avatar_url), @user
-      p 个人信息
-      ul.user-info.unstyled.muted
-        li 姓名: #{link_to @user.name, @user}
-        li = "邮箱: #{@user.email}"
-        li = "积分: #{@user.score}"
-        li = "等级: #{@user.grade.try(:name)}"
-
+    = render 'users/user_info', :user => @user

@@ -48,13 +48,24 @@ module ApplicationHelper
   def sortable(column, title = nil)
       title ||= column.titleize
       css_class = column == sort_column ? "#{sort_direction + "_sortable"}" : nil
-      direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+      direction = column == sort_column && sort_direction == "desc" ? "asc" : "desc"
       link_to title, {:sort => column, :direction => direction}, {:class => css_class}
   end
 
 
   def markdown(text)
     raw $markdown.render(text)
+  end
+
+  def format_labels(labels)
+    html = ''
+    labels.each do |label|
+      html += content_tag :span, :class => "label label-info" do
+        label
+      end
+      html += '&nbsp;'
+    end
+    html.html_safe
   end
 
   private

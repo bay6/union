@@ -1,0 +1,38 @@
+.badges{
+  .span4{
+    height: 130px;
+    width: 70px;
+    .badge-img img{
+      border-radius:25px;
+      width: 64px;
+      height: 64px;
+      margin: 30px 10px;
+    }
+
+    .award-action{
+      margin-left: 18px;
+    }
+
+    .badge-info{
+      width: 240px;
+      height: 130px;
+      float: left;
+      margin-left: 100px;
+      margin-top: -130px;
+      background-color: #fff;
+      h3 {font-size: 24px;}
+      .desc {
+        height: 3em;
+        overflow: hidden;
+        margin-left: 0px;
+      }
+     .count{color: #999; margin-top: -10px;}
+    }
+  }
+}
+
+.top_slider a{
+  font-size: 12px;
+  text-align: center;
+  margin-left: 10px;
+}

@@ -3,6 +3,8 @@
  *= require jquery.ui.datepicker
  *= require jquery.ui.slider
  *= require jquery-ui-timepicker-addon
+ *= require font-awesome
+ *= require select2
  *= require_tree .
  *= require_self
  */
@@ -58,10 +60,19 @@ body {padding-top: 60px;}
   width: 80px;
 }
 
+.big_avatar_box {
+  float: none;
+  padding: 0 25%;
+}
+
+.big_avatar_box img {
+  width: 120px;
+}
+
 .message-box {
-  font-size: 12.025px;         
-  font-weight: bold;           
-  white-space: nowrap;         
+  font-size: 12.025px;
+  font-weight: bold;
+  white-space: nowrap;
   color: #ffffff;
   background-color: #999999;
   -webkit-border-radius: 3px;
@@ -93,5 +104,15 @@ body {padding-top: 60px;}
 
 .message-notice:hover{
   color: #fff;
-  text-decoration:none;        
+  text-decoration:none;
 }
+
+hr { margin: 10px 0; }
+
+em { margin-right: 7px; }
+
+.icon-envelope { margin-right: 5px; }
+
+.icon-github { float:left; margin-top:-3px;}
+
+

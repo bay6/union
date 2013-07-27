@@ -8,9 +8,12 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :password_confirmation,
                   :remember_me, :login, :name, :provider,
-                  :uid, :grade_id, :admin, :grade, :nickname
+                  :uid, :grade_id, :admin, :grade, :nickname, :label_list
 
-  attr_accessor :login
+  attr_accessor :login, :label_list
+
+  acts_as_taggable
+  acts_as_taggable_on :labels
 
   has_many :notices, dependent: :destroy
   has_many :messages, dependent: :destroy
@@ -20,6 +23,9 @@ class User < ActiveRecord::Base
   has_many :finished_projects, through: :participations, source: :project, conditions: ["participations.status = ?", Participation::FINISHED]
   has_many :ongoing_projects, through: :participations, source: :project, conditions: ["participations.status = ?", Participation::ONGOING]
   has_many :unread_messages, class_name: 'Message', conditions: {status: Message::UNREAD}
+  has_many :comments
+  has_many :badge_users, class_name: 'BadgeUsers'
+  has_many :badges, :through => :badge_users
   belongs_to :grade
 
   validates :name, uniqueness: true
@@ -81,7 +87,7 @@ class User < ActiveRecord::Base
 
   def update_records_by_commits
     self.ongoing_projects.each do |project|
-      user_join_date = Participation.find_by_user_id_and_project_id(self.id, project.id).created_at - 20.days #dirty fixed to added those scores before project 
+      user_join_date = Participation.find_by_user_id_and_project_id(self.id, project.id).created_at - 20.days #dirty fixed to added those scores before project
       commits_date_hash = project.repository.commits.where('commit_date >= :user_join_date and user_uid = :user_uid', user_join_date: user_join_date,  user_uid: self.uid).group('date(commit_date)').count
       commits_date_hash.each{|date, commits_count| Record.generate_or_update(self, date, commits_count, project)}
     end
@@ -157,6 +163,10 @@ class User < ActiveRecord::Base
 
   def github_homepage
     "https://github.com/" + nickname.to_s
+  end
+
+  def name_with_nickname
+    (name.nil?? '' : name) + (nickname.blank? ? "" : "(#{nickname})")
   end
 
   private

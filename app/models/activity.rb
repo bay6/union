@@ -3,6 +3,8 @@ class Activity < ActiveRecord::Base
   attr_accessible :description, :start_at, :summary, :title, :status
 
   has_and_belongs_to_many :users
+  has_many :comments, :as => :commentable
+
   validates :title, :start_at, presence: true
   validate :start_at_should_be_future 
 
@@ -34,7 +36,7 @@ class Activity < ActiveRecord::Base
   def to_complete
     self.status = 2
   end
-  
+
   def perpare?
     self.status == 0
   end
@@ -45,6 +47,10 @@ class Activity < ActiveRecord::Base
 
   def completed?
     self.status == 2
+  end
+
+  def has_comments?
+    (comments.count == 0) ? false : true
   end
 
   private
