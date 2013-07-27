@@ -166,7 +166,7 @@ class User < ActiveRecord::Base
   end
 
   def name_with_nickname
-    name + (nickname.blank? ? "" : "(#{nickname})")
+    (name.nil?? '' : name) + (nickname.blank? ? "" : "(#{nickname})")
   end
 
   private
