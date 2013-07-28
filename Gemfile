@@ -14,7 +14,6 @@ gem "client_side_validations-simple_form"
 gem "rails-i18n"
 gem "devise-i18n"
 gem "devise-i18n-views", :git => "https://github.com/mcasimir/devise-i18n-views.git"
-gem "mini_magick"
 gem 'omniauth-github'
 gem 'octokit'
 gem 'rest-client'
@@ -35,7 +34,7 @@ gem 'coffee-rails', '~> 3.2.1'
 
 # Attachment
 gem 'carrierwave'
-gem 'rmagick'
+gem "mini_magick"
 gem 'mime-types'
 
 group :assets do
