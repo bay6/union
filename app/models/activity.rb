@@ -11,7 +11,8 @@ class Activity < ActiveRecord::Base
   STATUS = {
     0 => '准备中',
     1 => '报名中',
-    2 => '已结束'
+    2 => '已结束',
+    3 => '隐藏'
   }
 
   def human_status
@@ -35,6 +36,15 @@ class Activity < ActiveRecord::Base
   # change status to 已结束
   def to_complete
     self.status = 2
+  end
+  
+  # change status to hide
+  def to_hide
+    self.status = 3
+  end
+
+  def hided?
+    self.status == 3
   end
 
   def perpare?

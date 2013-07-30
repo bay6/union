@@ -4,6 +4,15 @@ class ActivitiesController < InheritedResources::Base
   authorize_resource only: [:new, :create, :update, :edit]
   load_resource
 
+  def index
+    @activities = Activity.where('status != 3')
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @activities }
+    end
+  end
+
   def register
     if current_user
       @activity.users << current_user
