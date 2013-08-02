@@ -7,11 +7,11 @@ class Commit < ActiveRecord::Base
   class << self
     #also would like a average grow
     def month_exp
-      where('commit_date >= :month', month: Date.today.at_beginning_of_month).count.to_s
+      where('commit_date >= :month', month: 30.days.ago.to_date).count.to_s
     end
 
     def week_exp
-      where('commit_date >= :week', week: Date.today.at_beginning_of_week).count.to_s
+      where('commit_date >= :week', week: 7.days.ago.to_date).count.to_s
     end
 
     def all_exp
@@ -19,9 +19,9 @@ class Commit < ActiveRecord::Base
     end
 
     def this_month_commit_details
-      this_month_dates = (Date.today.at_beginning_of_month..Date.today).map(&:to_s)
+      this_month_dates = (30.days.ago.to_date..Date.today).map(&:to_s)
       everyday_commits = Array.new(this_month_dates.size,0)
-      select(:id).where('commit_date >= :month', month: Date.today.at_beginning_of_month).group('date(commit_date)').count.each do |k,v|
+      select(:id).where('commit_date >= :month', month: 30.days.ago.to_date).group('date(commit_date)').count.each do |k,v|
         everyday_commits[k.day-1] = v
       end
       return this_month_dates,everyday_commits
