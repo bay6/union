@@ -129,9 +129,9 @@ class User < ActiveRecord::Base
   def scores(period = nil)
     case period
     when 'month'
-      records.where("commit_date between ? and ?", Date.today.at_beginning_of_month, Date.today).sum(&:value)
+      records.where("commit_date between ? and ?", 30.days.ago.to_date, Date.today).sum(&:value)
     when 'week'
-      records.where("commit_date between ? and ?", Date.today.at_beginning_of_week, Date.today).sum(&:value)
+      records.where("commit_date between ? and ?", 7.days.ago.to_date, Date.today).sum(&:value)
     else
       records.sum(&:value)
     end
