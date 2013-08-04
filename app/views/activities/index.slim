@@ -2,27 +2,29 @@
 
 div class="page-header"
   h1=t'activity.index'
+  = link_to t("activity.new"), new_activity_path, :class => 'btn btn-primary pull-right'  if can? :create, Activity
 
-- if can? :manage, @activity
-  = link_to t("activity.new"), new_activity_path
-
-table.table.table-hover
-  tr
-    th id
-    th= t "activity.title"
-    th= t "activity.start_at"
-    th= t "activity.registered_count"
-    th= t "activity.status"
-    th
-    - if can? :manage, @activity
-      th
-
-  - @activities.each do |activity|
+table.table.table-striped
+  thead
     tr
-      td = activity.id
-      td = link_to activity.title, activity_path(activity)
-      td = activity.start_at.to_s(:db)
-      td = activity.users.count
-      td = activity.human_status
-      - if can? :manage, @Activity
-        td = link_to t('activity.edit'), [:edit, activity]
+      th id
+      th= t "activity.title"
+      th= t "activity.start_at"
+      th= t "activity.registered_count"
+      th= t "activity.status"
+      - if can? :manage, Activity
+        th=t '.actions', :default => t("helpers.actions")
+  tbody
+    - @activities.each do |activity|
+      tr
+        td = activity.id
+        td = link_to activity.title, activity_path(activity)
+        td = activity.start_at.to_s(:db)
+        td = activity.users.count
+        td = activity.human_status
+        td
+          = link_to t('activity.edit'), [:edit, activity], :class => 'btn btn-mini' if can? :manage, activity
+          '
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), activity_path(activity), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger' if can? :destroy, activity
+
+= paginate @activities

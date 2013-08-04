@@ -5,7 +5,7 @@ class ActivitiesController < InheritedResources::Base
   load_resource
 
   def index
-    @activities = Activity.where('status != 3')
+    @activities = Activity.where('status != 3').page params[:page]
 
     respond_to do |format|
       format.html # index.html.erb
