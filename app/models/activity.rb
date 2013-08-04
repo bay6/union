@@ -5,8 +5,8 @@ class Activity < ActiveRecord::Base
   has_and_belongs_to_many :users
   has_many :comments, :as => :commentable
 
-  validates :title, :start_at, presence: true
-  validate :start_at_should_be_future 
+  validates :title, :start_at, :status, presence: true
+  validate :start_at_should_be_future
 
   STATUS = {
     0 => '准备中',
@@ -37,7 +37,7 @@ class Activity < ActiveRecord::Base
   def to_complete
     self.status = 2
   end
-  
+
   # change status to hide
   def to_hide
     self.status = 3
