@@ -53,7 +53,7 @@ class Project < ActiveRecord::Base
         :grade_id => 1,
         :user_id => 1,
         :status => Project::GRADING
-      ) unless p.newrecord?
+      ) unless p.persisted?
       p.save! :validate => false
     end
   end
