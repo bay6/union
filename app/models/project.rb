@@ -39,6 +39,25 @@ class Project < ActiveRecord::Base
     Project.cached_ongoing_projects.pluck(:name).include? repo.name
   end
 
+
+  # project init
+  def self.get_bay6_repos
+    @client = Octokit::Client.new(:login => "ken0", :password => "password9")
+    brepos = @client.repos( 'bay6')
+    brepos.each do |repo|
+      p = Project.find_or_initialize_by_name(repo.name,
+                                         :website => repo.html_url,
+                                         :description => repo.description,
+                                        )
+      p.update_attributes(
+        :grade_id => 1,
+        :user_id => 1,
+        :status => Project::GRADING
+      ) unless p.newrecord?
+      p.save! :validate => false
+    end
+  end
+
   private :finish_participation
 
   def self.cached_ongoing_projects
