@@ -21,8 +21,8 @@ class Commit < ActiveRecord::Base
     def this_month_commit_details
       this_month_dates = (30.days.ago.to_date..Date.today).map(&:to_s)
       everyday_commits = Array.new(this_month_dates.size,0)
-      select(:id).where('commit_date >= :month', month: 30.days.ago.to_date).group('date(commit_date)').count.each do |k,v|
-        everyday_commits[k.day-1] = v
+      where('commit_date >= :month', month: 30.days.ago.to_date).group('date(commit_date)').count.values.each_with_index do |v,i|
+        everyday_commits[i] = v
       end
       return this_month_dates,everyday_commits
     end
