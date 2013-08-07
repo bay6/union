@@ -144,7 +144,7 @@ class User < ActiveRecord::Base
 
   def first_commit_date
     first_commit = records.reorder("commit_date").first
-    first_commit.nil? ? '不存在' : first_commit.commit_date
+    first_commit.nil? ? "0" : first_commit.commit_date
   end
 
   def self.cuscom_sort(sort_column, sort_direction)
@@ -152,7 +152,7 @@ class User < ActiveRecord::Base
       users = User.all.sort_by { |u| u.scores sort_column }
       users = users.reverse if sort_direction != "asc"
     elsif sort_column == 'first_commit_date'
-      users = User.all.sort_by { |u| u.first_commit_date }
+      users = User.all.sort_by { |u| u.first_commit_date.to_s }
       users = users.reverse if sort_direction != "asc"
     else
       users = User.joins(:grade).order(sort_column + " " + sort_direction)
