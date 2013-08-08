@@ -4,6 +4,8 @@ namespace :union do
     `ps aux | grep unicorn | grep -v grep | awk '{print $2}' | xargs kill -9`
     puts 'stoped unicorn'
     `bundle exec unicorn_rails -c config/unicorn.rb -D -E production`
+    #`cd /home/bay6/www/preunion && RAILS_ENV=production /home/bay6/.rbenv/shims/bundle exec unicorn_rails -c /home/bay6/www/preunion/config/unicorn.rb -D -E production`
+    `cd /home/bay6/www/preunion && bundle exec unicorn_rails -c config/unicorn.rb -D -E production`
     puts 'started unicorn'
   end
 
