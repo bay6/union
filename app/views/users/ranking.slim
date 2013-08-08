@@ -23,6 +23,6 @@ div.ranking
           td= user.scores
           td= user.scores('month')
           td= user.scores('week')
-          td= user.first_commit_date
+          td= format_date user.first_commit_date
 
   = paginate @users
